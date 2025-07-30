@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package IVDCT.LIGHTS.HAZARD_SIG;
+
+enum Hazard_sig {	// 비상등 상태
+	LIGHT_HAZARD_SIG_OFF  									= 0; 	// 꺼짐
+  LIGHT_HAZARD_SIG_FLASHING 							= 1;	// 깜빡임
+  LIGHT_HAZARD_SIG_ERROR 								= 2;	// 오류
+	LIGHT_HAZARD_SIG_NOT_AVAILABLE_CHANGE  = 3;	// 사용불가(변화없음)
+	LIGHT_HAZARD_SIG_UNKNOWN  							= 4;	// 알수없음
+}

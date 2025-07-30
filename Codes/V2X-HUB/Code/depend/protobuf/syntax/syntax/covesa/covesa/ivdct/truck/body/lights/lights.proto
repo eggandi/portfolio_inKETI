@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/body/lights/hazard/hazard.proto";
+
+package COVESA.IVDCT.TRUCK.BODY.LIGHTS;
+
+message Lights {
+	repeated COVESA.IVDCT.TRUCK.BODY.LIGHTS.HAZARD.Hazard hazard = 1; // Hazard lights.
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ADS_HF.DECISION;
+
+import "validate/validate.proto";
+import "ads_hf/decision/goal/goal.proto";
+import "ads_hf/decision/cipo/cipo.proto";
+
+message Decision {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 판단 시점 (Unit:ms, Range:0..2^64-1)
+  optional uint32 seq = 2 [(validate.rules).uint32 = {gte: 0}];       // 데이터 순번 (Unit:—, Range:0..2^32-1)
+
+  enum Plan { STOP = 0; LANE_CHANGE_LEFT = 1; LANE_CHANGE_RIGHT = 2; KEEP_LANE = 3; }
+  optional Plan plan = 3 [(validate.rules).enum = {defined_only: true}]; // 행위 계획 (Unit:—, Range:defined values)
+
+  optional GOAL.Goal goal = 4; // 목표 정보 (Unit:—, Range:—)
+  optional CIPO.Cipo cipo = 5; // CIPO 정보 (Unit:—, Range:—)
+}

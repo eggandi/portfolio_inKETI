@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ADS_HF.LANE.INCLINATION;
+
+import "validate/validate.proto";
+
+message Inclination {
+  optional int32 lateral = 1 [(validate.rules).int32 = {gte: -9000, lte: 9000}]; // 횡단면 경사 (Unit:0.01deg, Range:-9000..9000)
+  optional int32 longitudinal = 2 [(validate.rules).int32 = {gte: -9000, lte: 9000}]; // 종방향 경사 (Unit:0.01deg, Range:-9000..9000)
+}

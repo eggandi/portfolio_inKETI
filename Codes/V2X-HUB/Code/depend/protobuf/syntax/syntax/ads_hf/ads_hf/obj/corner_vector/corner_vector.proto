@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ADS_HF.OBJ.CORNER_VECTOR;
+
+message CornerVector {
+  optional int32 x1 = 1; // 첫 번째 벡터 X (Unit:1mm, Range:—)
+  optional int32 y1 = 2; // 첫 번째 벡터 Y (Unit:1mm, Range:—)
+  optional int32 z1 = 3; // 첫 번째 벡터 Z (Unit:1mm, Range:—)
+  optional int32 x2 = 4; // 두 번째 벡터 X (Unit:1mm, Range:—)
+  optional int32 y2 = 5; // 두 번째 벡터 Y (Unit:1mm, Range:—)
+  optional int32 z2 = 6; // 두 번째 벡터 Z (Unit:1mm, Range:—)
+  optional int32 x3 = 7; // 세 번째 벡터 X (Unit:1mm, Range:—)
+  optional int32 y3 = 8; // 세 번째 벡터 Y (Unit:1mm, Range:—)
+  optional int32 z3 = 9; // 세 번째 벡터 Z (Unit:1mm, Range:—)
+}

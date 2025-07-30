@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.IVDCT.TRUCK.CHASSIS.STEERINGWHEEL;
+
+message Steeringwheel {
+	optional int32 angle = 1 [(validate.rules).int32 = {gte: -32768, lte: 32767}];  // Steering wheel angle. Positive = degrees to the left. Negative = degrees to the right. (Unit:degrees)
+}

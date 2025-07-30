@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.IVDCT.TRUCK.CHASSIS.BRAKE;
+
+message Brake {
+	optional uint32 pedalposition = 1 [(validate.rules).uint32 = {gte: 0, lte: 100}];  // Brake pedal position as percent. 0 = Not depressed. 100 = Fully depressed. (Unit:%)
+}

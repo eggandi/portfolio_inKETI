@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\sed_upload_keti.dir/objects.a
+C:\MinGW\mingw64\bin\ar.exe qc CMakeFiles\sed_upload_keti.dir/objects.a @CMakeFiles\sed_upload_keti.dir\objects1.rsp
+C:\MinGW\mingw64\bin\gcc.exe -shared -o libsed_upload_keti.dll -Wl,--out-implib,libsed_upload_keti.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\sed_upload_keti.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\sed_upload_keti.dir\linkLibs.rsp

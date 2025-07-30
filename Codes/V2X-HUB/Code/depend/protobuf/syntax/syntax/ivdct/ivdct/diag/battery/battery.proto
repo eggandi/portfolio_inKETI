@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package IVDCT.DIAG.BATTERY;
+
+message Battery { // 배터리 정보
+	optional uint64 voltage_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; // 배터리 전압 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32 voltage = 2 [(validate.rules).uint32 = {gte: 0, lte: 64256}]; 									// 배터리 전압(Unit:0.05[V], Over:64255(3212.75) ,Unavaiable:64256)
+}

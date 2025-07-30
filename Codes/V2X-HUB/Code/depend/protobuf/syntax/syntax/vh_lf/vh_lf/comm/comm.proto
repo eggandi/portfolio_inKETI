@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package VH_LF.COMM;
+
+import "validate/validate.proto";
+import "vh_lf/comm/status/status.proto";
+
+// 무선통신 관련 정보
+message Comm {
+  repeated STATUS.Status status = 1 [(validate.rules).repeated = {min_items: 0, max_items: 15}]; // 통신매체별 상태 (Unit:—, Range:—)
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+import "ivdct/lights/hazard_sig/hazard_sig.proto"; 
+
+package IVDCT.LIGHTS;
+
+message Lights {	// 외부등 정보
+	optional uint64 hazard_sig_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 	// 비상등 상태 수집시간(Unit:1[ms], 0..(2^64-1))
+  optional IVDCT.LIGHTS.HAZARD_SIG.Hazard_sig hazard_sig = 2 [(validate.rules).enum = {defined_only: true}]; 			// 비상등 상태(enumeration:0..4)
+}

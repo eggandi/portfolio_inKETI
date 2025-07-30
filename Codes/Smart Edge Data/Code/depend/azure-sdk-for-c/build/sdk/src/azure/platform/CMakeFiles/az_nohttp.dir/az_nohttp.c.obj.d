@@ -1,0 +1,25 @@
+sdk/src/azure/platform/CMakeFiles/az_nohttp.dir/az_nohttp.c.obj: \
+ C:\Works\Jobs\SED\Code\for_win\depend\azure-sdk-for-c\sdk\src\azure\platform\az_nohttp.c \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_http_transport.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_http.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_config.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg_prefix.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg_suffix.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_context.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_result.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_span.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h

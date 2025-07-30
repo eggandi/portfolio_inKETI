@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC  -g  -shared -Wl,-soname,libprotobufabs.so -o libprotobufabs.so CMakeFiles/protobufabs.dir/src/protobuf.pb-c.c.o CMakeFiles/protobufabs.dir/src/protobufabs.c.o   -L/home/root/Project_Relayserver/ouput/lib  -Wl,-rpath,/home/root/Project_Relayserver/ouput/lib -lprotobuf-c 

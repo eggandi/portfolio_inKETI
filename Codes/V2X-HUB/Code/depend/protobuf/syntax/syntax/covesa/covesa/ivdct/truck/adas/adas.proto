@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/adas/abs/abs.proto";
+import "covesa/ivdct/truck/adas/tcs/tcs.proto";
+
+package COVESA.IVDCT.TRUCK.ADAS;
+
+message Adas {
+	repeated COVESA.IVDCT.TRUCK.ADAS.ABS.Abs abs = 1; // Antilock Braking System signals.
+	repeated COVESA.IVDCT.TRUCK.ADAS.TCS.Tcs tcs = 2; // Traction Control System signals.
+}

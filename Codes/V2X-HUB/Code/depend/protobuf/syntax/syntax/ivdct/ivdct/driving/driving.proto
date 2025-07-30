@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "ivdct/driving/speed/speed.proto";
+import "ivdct/driving/engine/engine.proto";
+import "ivdct/driving/gear/gear.proto";
+import "ivdct/driving/steering_wheel/steering_wheel.proto";
+import "ivdct/driving/brake/brake.proto";
+
+package	IVDCT.DRIVING;
+
+message Driving {	// 주행 데이터
+  optional IVDCT.DRIVING.SPEED.Speed speed = 1;										// 속도 정보
+	optional IVDCT.DRIVING.ENGINE.Engine engine = 2;									// 엔진 정보
+	optional IVDCT.DRIVING.GEAR.Gear gear = 3;											// 기어 정보
+	optional IVDCT.DRIVING.STEERING_WHEEL.Steering_wheel steering_wheel = 4;	// 조향 정보
+	optional IVDCT.DRIVING.BRAKE.Brake brake = 5;										// 브레이크 정보(brake는 변수명으로 사용 불가)
+}
+

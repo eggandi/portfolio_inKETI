@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package	IVDCT.WEIGHT.AXLE_WEIGHT;
+ 
+message Axle_weight { // 차축 무게
+	optional uint64 location_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 	// 차축 위치 수집시간(Unit:1[ms], 0..(2^64-1))
+  optional int32 	location = 2 [(validate.rules).int32 = {gte: 0, lte: 256}]; 											// 차축 위치(Unit:1[states/bit] ,Unknown:256)
+	optional uint64 weight_ct = 3 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 		// 차축 중량 수집시간(Unit:1[ms] 0..(2^64-1))
+	optional uint32 weight = 4 [(validate.rules).uint32 = {gte: 0, lte: 64256}]; 											// 차축 중량(Unit:0.5[kg], Over:64255(32125.5) ,Unknown:64256)
+}

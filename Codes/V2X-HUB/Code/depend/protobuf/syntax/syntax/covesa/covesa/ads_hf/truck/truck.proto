@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "covesa/ads_hf/truck/adas/adas.proto";
+import "covesa/ads_hf/truck/vehicle/vehicle.proto";
+
+package COVESA.ADS_HF.TRUCK;
+
+message Truck {
+	repeated COVESA.ADS_HF.TRUCK.ADAS.Adas adas = 1; // All Advanced Driver Assist Systems data.
+	repeated COVESA.ADS_HF.TRUCK.VEHICLE.Vehicle vehicle = 2; // High-level generic vehicle data.
+}

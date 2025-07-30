@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ADS_HF.CONTROL;
+
+import "validate/validate.proto";
+
+message Control {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}];          // 제어 명령 생성 시각 (Unit:ms, Range:0..2^64-1)
+  optional uint32 seq = 2 [(validate.rules).uint32 = {gte: 0}];                // 명령 순번 (Unit:—, Range:0..2^32-1)
+  optional int64 lat = 3 [(validate.rules).int64 = {gte: -900000000, lte: 900000001}];   // 위도 (Unit:0.1µdeg, Range:-900000000..900000001, unknown:900000001)
+  optional int64 lon = 4 [(validate.rules).int64 = {gte: -1799999999, lte: 1800000001}];  // 경도 (Unit:0.1µdeg, Range:-1799999999..1800000001, unknown:1800000001)
+  optional uint32 speed = 5 [(validate.rules).uint32 = {gte: 0, lte: 8191}];     // 속도 (Unit:0.02m/s, Range:0..8191, unknown:8191)
+  optional int32 accel_lon = 6 [(validate.rules).int32 = {gte: -2000, lte: 2001}]; // 종방향 가속도 (Unit:0.01m/s², Range:-2000..2001, unknown:2001)
+  optional int32 accel_lat = 7 [(validate.rules).int32 = {gte: -2000, lte: 2001}]; // 횡방향 가속도 (Unit:0.01m/s², Range:-2000..2001, unknown:2001)
+  optional int32 dist = 8 [(validate.rules).int32 = {gte: -32767, lte: 32767}];    // 거리 (Unit:0.1m, Range:-32767..32767, unknown:32767)
+  optional int32 angle = 9 [(validate.rules).int32 = {gte: -126, lte: 127}];        // 조향각 (Unit:1.5deg, Range:-126..127, unknown:127)
+  optional uint32 ttc = 10 [(validate.rules).uint32 = {gte: 1, lte: 65535}];        // Time To Collision (Unit:ms, Range:1..65535, unknown:65535)
+}

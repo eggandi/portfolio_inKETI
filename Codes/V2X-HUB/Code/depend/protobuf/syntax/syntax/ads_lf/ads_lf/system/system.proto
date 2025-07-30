@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ADS_LF.SYSTEM;
+
+import "ads_lf/system/supported/supported.proto";
+
+// 시스템 정보
+message System {
+  optional SUPPORTED.Supported supported = 1; // 지원 기능 (Unit:—, Range:—)
+}

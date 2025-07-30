@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package ADS_HF.LANE_BONDARY.DIST;
+
+message Dist {
+  optional int32 x = 1; // X 좌표 (Unit:1mm, Range:—)
+  optional int32 y = 2; // Y 좌표 (Unit:1mm, Range:—)
+  optional int32 z = 3; // Z 좌표 (Unit:1mm, Range:—)
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package VH_LF.COMM.STATUS;
+
+import "validate/validate.proto";
+
+// 통신매체 상태 정보
+message Status {
+  optional string id = 1 [(validate.rules).string = {min_len:1, max_len:32}]; // 통신매체 식별자 (Unit:—, Range:1..32 bytes)
+  enum Type { COMMON_STATUS_UNKNOWN=0; COMMON_STATUS_DSRC_V2X=1; COMMON_STATUS_LTE_V2X=2; COMMON_STATUS_NR_V2X=3; COMMON_STATUS_LTE=4; COMMON_STATUS_FIVE_G=5; }
+  optional Type type = 2 [(validate.rules).enum = {defined_only: true}]; // 통신매체 유형 (Unit:—, Range:defined only)
+  optional int32 quality = 3; // 통신 품질 (Unit:—, Range:—)
+}

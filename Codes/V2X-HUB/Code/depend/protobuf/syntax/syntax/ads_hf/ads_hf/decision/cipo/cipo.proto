@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ADS_HF.DECISION.CIPO;
+
+import "validate/validate.proto";
+
+message Cipo {
+  enum Present { CIPO_PRESENT_NONE = 0; CIPO_PRESENT = 1; }
+  optional Present present = 1 [(validate.rules).enum = {defined_only: true}]; // CIPO 존재 여부 (Unit:—, Range:defined values)
+  optional int32 dist = 2 [(validate.rules).int32 = {gte: -32767, lte: 32767}];   // CIPO 거리 (Unit:0.1m, Range:-32767..32767)
+  optional uint32 speed = 3 [(validate.rules).uint32 = {gte: 0, lte: 8191}];      // CIPO 속도 (Unit:0.02m/s, Range:0..8191)
+  enum Predict { CIPO_PREDICT_NONE = 0; CIPO_PREDICT_CUTIN = 1; CIPO_PREDICT_CUTOUT = 2; }
+  optional Predict predict = 4 [(validate.rules).enum = {defined_only: true}];    // CIPO 예측 (Unit:—, Range:defined values)
+}

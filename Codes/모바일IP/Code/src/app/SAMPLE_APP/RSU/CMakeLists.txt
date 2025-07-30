@@ -1,0 +1,30 @@
+set(TARGET_APP mobileip_rsu)
+add_executable(${TARGET_APP})
+
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Router)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Router/lib/iproute2/lib)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Router/lib/iproute2/include)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Router/lib/iproute2/include/uapi)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Agent)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Agent/Advertisements)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Agent/Registration_Reply)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Node)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Node/Solicitation)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/Node/Registration_Request)
+target_include_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/v2x_sw/include)
+
+target_compile_options(${TARGET_APP} PRIVATE -Wall -Werror)
+
+target_link_directories(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/lib/v2x_sw/lib/condor5)
+target_link_libraries(${TARGET_APP} PRIVATE pthread)
+target_link_libraries(${TARGET_APP} PRIVATE V2XHO_Agent V2XHO_Router)
+target_link_libraries(${TARGET_APP} PRIVATE dot2 dot3)
+target_link_libraries(${TARGET_APP} PRIVATE ffasn1-base ffasn1-dot2-2021 ffasn1-dot3-2016 ffasn1-j2735-2016)
+target_link_libraries(${TARGET_APP} PRIVATE j29451)
+target_link_libraries(${TARGET_APP} PRIVATE lteaccess wlanaccess)
+
+target_sources(${TARGET_APP} PRIVATE ${PROJECT_ROOT}/src/app/RSU/src/${TARGET_APP}.c)
+
+set(OUTPUT_DIR ${PROJECT_ROOT}/output/bin/)
+add_custom_command(TARGET ${TARGET_APP} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${TARGET_APP} ${OUTPUT_DIR})

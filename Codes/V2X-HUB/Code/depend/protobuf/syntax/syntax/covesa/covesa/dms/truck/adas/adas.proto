@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/dms/truck/adas/dms/dms.proto";
+
+package COVESA.DMS.TRUCK.ADAS;
+
+message Adas {
+	repeated COVESA.DMS.TRUCK.ADAS.DMS.Dms dms = 1;
+}

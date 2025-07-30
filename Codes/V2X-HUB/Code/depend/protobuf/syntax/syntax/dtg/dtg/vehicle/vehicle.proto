@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package DTG.VEHICLE;
+
+import "validate/validate.proto";
+
+// 차량 정보
+message Vehicle {
+  optional string vin  = 1 [(validate.rules).string = {min_len: 17, max_len: 17}]; // 차대번호 (Unit:—, Range:17 bytes)
+  optional string type = 2 [(validate.rules).string = {min_len: 2, max_len: 2}];  // 자동차유형 (Unit:—, Range:defined values)
+  optional string vrn  = 3 [(validate.rules).string = {min_len: 12, max_len: 12}]; // 자동차등록번호 (Unit:—, Range:12 bytes)
+}

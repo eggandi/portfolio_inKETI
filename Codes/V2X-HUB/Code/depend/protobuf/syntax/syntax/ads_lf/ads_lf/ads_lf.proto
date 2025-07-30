@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ADS_LF;
+
+import "validate/validate.proto";
+import "ads_lf/system/system.proto";
+import "ads_lf/sensor/sensor.proto";
+import "ads_lf/controller/controller.proto";
+import "ads_lf/vehicle/vehicle.proto";
+
+// Low-Frequency ADS Data
+message AdsLf {
+  optional ADS_LF.SYSTEM.System system = 1;         // 시스템 정보 (Unit:—, Range:—)
+  repeated ADS_LF.SENSOR.Sensor sensor = 2 [(validate.rules).repeated = {min_items: 1}]; // 센서 정보 (Unit:—, Range:—)
+  repeated ADS_LF.CONTROLLER.Controller controller = 3 [(validate.rules).repeated = {min_items: 1}]; // 제어기 정보 (Unit:—, Range:—)
+  optional ADS_LF.VEHICLE.Vehicle vehicle = 4;      // 차량 제원 (Unit:—, Range:—)
+}

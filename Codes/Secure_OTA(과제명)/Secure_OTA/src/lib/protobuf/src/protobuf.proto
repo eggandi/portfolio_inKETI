@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message FileData {
+    bytes content_1 = 1;  // 바이너리 데이터를 담을 필드
+    bytes content_2 = 2;  // 바이너리 데이터를 담을 필드
+    bytes content_3 = 3;  // 바이너리 데이터를 담을 필드
+}

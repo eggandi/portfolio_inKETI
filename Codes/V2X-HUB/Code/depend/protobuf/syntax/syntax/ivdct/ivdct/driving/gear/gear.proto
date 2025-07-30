@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package IVDCT.DRIVING.GEAR;
+
+message Gear {	// 기어 정보
+	optional uint64 ratio_ct = 2 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 		// 기어비 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	ratio = 1 [(validate.rules).uint32 = {gte: 0, lte: 64256}];											// 기어비(Unit:0.001, Over:64255(64.255) ,Unknown:64256)
+	optional uint64 current_ct = 4 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; // 기어 단수 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional int32	current = 3 [(validate.rules).int32 = {gte: -125, lte: 126}]; 									// 기어 단수(Unit:1[gear], Reverse gear:-125..-1, Neutral:0, Forward gear:1..125, Unknown:126)
+}
+

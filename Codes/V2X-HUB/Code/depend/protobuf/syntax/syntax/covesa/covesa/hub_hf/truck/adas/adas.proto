@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.HUB_HF.TRUCK.ADAS;
+
+message Adas {
+	// Indicates the currently active level of driving automation 
+	// according to the SAE J3016 (Taxonomy and Definitions for Terms 
+	// Related to Driving Automation Systems for On-Road Motor Vehicles).
+	optional string activeautonomylevel = 1  [(validate.rules).string = {in: ['SAE_0', 'SAE_1', 'SAE_2_DISENGAGING', 'SAE_2', 'SAE_3_DISENGAGING', 'SAE_3', 'SAE_4_DISENGAGING', 'SAE_4', 'SAE_5_DISENGAGING', 'SAE_5']}]; 
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package IVDCT.DRIVING.ENGINE;
+
+message Engine {	// 엔진 정보
+	optional uint64 torque_1_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 		// 엔진 토크 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional int32	torque_1 = 2 [(validate.rules).int32 = {gte: -125, lte: 126}]; 										// 엔진 토크(Unit:1[%], Above:-125, Over:125 ,Unknown:126)	
+	optional uint64	torque_2_ct = 3 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 	// 엔진 토크(소수점) 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	torque_2 = 4 [(validate.rules).uint32 = {gte: 0, lte: 8}]; 												// 엔진 토크(소수점)(Unit:0.125[%], Max:7(0.875) ,Unknown:8)
+	optional uint64	rpm_ct = 5 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 			// 엔진 분당 회전 수 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	rpm = 6 [(validate.rules).uint32 = {gte: 0, lte: 64256}]; 												// 엔진 분당 회전 수(Unit:0.125[rpm], Over:64255(8031.875) ,Unknown:64256)
+}

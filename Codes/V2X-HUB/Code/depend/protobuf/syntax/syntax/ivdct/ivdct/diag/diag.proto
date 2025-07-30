@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "ivdct/diag/battery/battery.proto";
+import "ivdct/diag/engine/engine.proto";
+import "ivdct/diag/fuel/fuel.proto";
+
+package IVDCT.DIAG;	// IVDCT 진단 데이터
+
+message Diag {	// 진단 데이터
+  optional IVDCT.DIAG.BATTERY.Battery battery = 1;	// 배터리 정보
+	optional IVDCT.DIAG.ENGINE.Engine engine = 2;		// 엔진 정보
+	optional IVDCT.DIAG.FUEL.Fuel fuel = 3;				// 연료 정보
+}

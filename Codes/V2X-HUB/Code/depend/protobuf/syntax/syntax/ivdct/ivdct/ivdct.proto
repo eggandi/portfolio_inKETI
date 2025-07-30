@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "ivdct/system/system.proto"; 
+import "ivdct/driving/driving.proto";
+import "ivdct/diag/diag.proto";
+import "ivdct/lights/lights.proto";
+import "ivdct/weight/weight.proto"; 
+
+package IVDCT;
+
+message Ivdct {	// IVDCT 데이터
+  optional IVDCT.SYSTEM.System system = 1;		// 시스템 정보
+	optional IVDCT.DRIVING.Driving driving = 2;	// 주행 데이터
+  optional IVDCT.DIAG.Diag diag = 3;		 		// 진단 데이터
+  optional IVDCT.LIGHTS.Lights lights = 4; 		// 외부등 정보
+	optional IVDCT.WEIGHT.Weight weight = 5; 		// 무게 데이터
+}

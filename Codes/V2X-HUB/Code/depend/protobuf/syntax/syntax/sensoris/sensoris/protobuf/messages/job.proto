@@ -1,0 +1,314 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.messages.job;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.messages.job";
+option java_outer_classname = "SensorisJobMessages";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/messages/job";
+
+// Import Google message types.
+import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+import "sensoris/protobuf/types/collection.proto";
+import "sensoris/protobuf/types/job.proto";
+import "sensoris/protobuf/types/job_validity.proto";
+import "sensoris/protobuf/types/logical_expression.proto";
+import "sensoris/protobuf/types/map.proto";
+
+//
+// Job message envelope.
+//
+
+// Envelope for job message.
+message JobMessageEnvelope {
+  // Job identifiers.
+  sensoris.protobuf.types.job.Ids job_ids = 1;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}
+
+//
+// Job request message.
+//
+
+// Job request message.
+message JobRequestMessage {
+  // Provides additional information about the requested data collection.
+  message Metadata {
+    // The job priority defines the relative priority of a job request to all other job request issued by the same submitter.
+    //
+    // The priority indicates which jobs are less important than other jobs and could e.g. be used to terminate first jobs with low priority in case of resource limitations. However, there is no general scheme to evaluate the priority of the job request.
+    //
+    // A priority = 1 indicates a job request with the highest priority, whereas priority = 256 indicates a job request with the lowest priority.
+    //
+    // @unit 1
+    // @resolution 1
+    // @range [1, 256]
+    google.protobuf.Int64Value priority = 1;
+
+    // Defines the maximum latency in the normal data transmission case.
+    //
+    // Latency is defined as the time between the last position in the SENSORIS data message and the time at which the last byte of the data message has arrived at the submitter's server.
+    //
+    // Given that the clocks between the collector and the submitter might not be perfectly in sync, the latency cannot be calculated precisely. In consequence, SENSORIS recommends planning for a buffer if this field is used.
+    //
+    // This field shall be used as a guideline for the collector to plan an prioritize the transmission of the data messages. A data message with a latency exceeding the value of requested_submit_before shall be still accepted by the submitter.
+    //
+    // @unit Second
+    // @resolution 1
+    // @range [0, )
+    google.protobuf.Int64Value requested_submit_before = 2;
+
+    // Defines the maximum latency after which the requested data is not valid anymore from the submitter's point of view.
+    //
+    // Latency is defined as the time between the last position in the SENSORIS data message and the time at which the last byte of the data message has arrived at the submitter's server.
+    //
+    // Given that the clocks between the collector and the submitter might not be perfectly in sync, the latency cannot be calculated precisely. In consequence, SENSORIS recommends planning for a buffer when using this field.
+    //
+    // A data message with a latency exceeding the value of invalidate_message_after shall not be accepted by the submitter. The collector, vehicle or vehicle cloud, may therefore decide to drop some messages if they are unlikely to arrive on time at the submitter.
+    //
+    // @unit Second
+    // @resolution 1
+    // @range (0, )
+    google.protobuf.Int64Value invalidate_message_after = 3;
+
+    // If true, the job is required to run also during accessory off (e.g. while parking). If vehicle does not support job collection during accessory off mode, the job request may be terminated by the vehicle.
+    google.protobuf.BoolValue collect_when_accessory_is_turned_off = 4;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // The capability requirements define supported format versions of SENSORIS message types.
+  //
+  // Data collectors shall reject job requests that require versions other than the ones they support.
+  message CapabilityRequirements {
+    // Supported versions of SENSORIS DataMessages and proprietary extensions.
+    message DataMessagesVersion {
+      // Supported SENSORIS DataMessages format versions.
+      repeated sensoris.protobuf.types.base.VersionRange version_range = 1;
+
+      // Proprietary extension type URL and supported format versions of the extension.
+      repeated sensoris.protobuf.types.base.ExtensionTypeUrlAndVersionRanges extension_type_url_and_version_ranges = 2;
+    }
+
+    // Minimum supported version of SENSORIS JobMessages required to be able to interpret the job request. Applies to versions within the provided major version only.
+    //
+    // Data collectors (vehicle cloud and vehicles) shall reject job requests that require versions higher than the ones they support.
+    //
+    // @example Value of 1.2.0 supports all versions from 1.2.0 up to the next major version, e.g. versions 1.2.3 and 1.4.0 would be supported, whereas version 2.0.0 would not be supported.
+    sensoris.protobuf.types.base.Version minimum_supported_job_request_messages_version = 1;
+
+    // Supported versions of SENSORIS DataMessages and proprietary extensions.
+    DataMessagesVersion supported_data_messages_versions = 2;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // The overall restrictions define collection restrictions of the entire job request as a whole.
+  //
+  // @example A service cloud may restrict the overall number of data messages that is expecting to receive. The vehicle cloud shall ensure that the requested number of data messages (and no more) are submitted to the service cloud.
+  message OverallRestrictions {
+    // Time based submission restrictions.
+    message TimeRestrictions {
+      // Time unit and value define a time range.
+      message TimeUnitAndValue {
+        // Time unit.
+        sensoris.protobuf.types.base.TimeUnit unit = 1;
+
+        // Time value of the time unit.
+        //
+        // @unit 1
+        // @resolution 1
+        // @range (0, )
+        google.protobuf.Int64Value value = 2;
+      }
+
+      // Time unit and value define a time range.
+      //
+      // @example Time unit of HOUR and value of 1, sets the restriction to be checked for the time range of 1 hour.
+      TimeUnitAndValue time_unit_and_value = 1;
+
+      // Maximum number of data message submissions per time_unit_and_value.
+      //
+      // @unit 1
+      // @resolution 1
+      // @range [1, )
+      google.protobuf.Int64Value submissions_per_time_unit = 2;
+    }
+
+    // Map tile based submission restrictions.
+    message MapTileRestrictions {
+      // Map tiling scheme used by the restriction.
+      sensoris.protobuf.types.map.MapTilingScheme tiling_scheme = 1;
+
+      // Number of data message submissions per tile defined by tiling_scheme.
+      //
+      // @unit 1
+      // @resolution 1
+      // @range (0, )
+      google.protobuf.Int64Value submissions_per_tile = 2;
+    }
+
+    // Time based submission restrictions to allow for requesting regular data message submissions.
+    //
+    // @example Restriction to maximum 10 DataMessages every 2 hours.
+    TimeRestrictions max_submissions_per_time = 1;
+
+    // Restricts data message submission number spatially.
+    //
+    // It indicates how submissions shall be restricted per spatial area. It allows to evenly distribute data message submissions across a collection area.
+    oneof spatial_restrictions {
+      // Number of submissions per each single spatial restriction in the JobValidityRestrictions.
+      //
+      // It is the responsibility of the submitter to ensure that e.g. the sizes of the requested areas are dimensioned equally distributed.
+      //
+      // For example, a spatial restriction of 1 x 1 m and another 1000 m x 1000 m shall not be defined if the submitter wants to achieve even distribution of data message submissions.
+      google.protobuf.Int64Value max_submissions_per_spatial_restriction = 2;
+
+      // Map tile based submission restrictions.
+      //
+      // @example Restriction to maximum 10 DataMessages per tile on defined timing schema and zoom level.
+      MapTileRestrictions max_submission_per_map_tile = 3;
+    }
+
+    // Total extent for the entire collection.
+    //
+    // It defines the desired collection extent that the submitter intends to receive. The collector shall use the best of its ability to achieve these extents. However, it may not guarantee the delivery of the totality of the extents.
+    sensoris.protobuf.types.collection.CollectionExtents total_collection_extent = 4;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // The collection trigger defines defines in what moment the action (data collection) becomes active.
+  message CollectionTrigger {
+    // Based on logical expressions, the collection condition defines under which conditions data collection shall start.
+    //
+    // If the result of the logical expression is TRUE, the data collection shall start and be executed until collection condition is FALSE or maximum extents per collection event is reached.
+    sensoris.protobuf.types.logicalexpression.LogicalExpression collection_condition = 1;
+
+    // Defines the maximum extents for a collection event.
+    //
+    // In normal operation, reaching these extents shall stop the collection event. Exceeding the extents over one collection event (started by a collection condition) shall be interpreted as a sign for faulty data collection.
+    sensoris.protobuf.types.collection.CollectionExtents max_extents_per_collection_event = 2;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // Defines what action shall be performed when the CollectionTrigger is TRUE.
+  message Actions {
+    // Defines the data structure for the action that is performed after the data collection has started. It defines which data shall be collected, how often, how much, how the data shall be aggregated, and others.
+    sensoris.protobuf.types.collection.CollectionAction collection_action = 1;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // Envelope.
+  JobMessageEnvelope envelope = 1;
+
+  // Metadata.
+  Metadata metadata = 2;
+
+  // Capability requirements.
+  CapabilityRequirements capability_requirements = 3;
+
+  // Overall restrictions.
+  OverallRestrictions overall_restrictions = 4;
+
+  // Job validity restrictions.
+  sensoris.protobuf.types.jobvalidity.JobValidityRestrictions validity_restrictions = 5;
+
+  // Collection trigger.
+  CollectionTrigger collection_trigger = 6;
+
+  // Actions.
+  Actions actions = 7;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}
+
+//
+// Job status message.
+//
+
+// Job status message.
+message JobStatusMessage {
+  // The status details the reason of termination of a job request message.
+  enum Status {
+    // Unknown.
+    UNKNOWN_STATUS = 0;
+    // Termination due to any reason.
+    TERMINATION = 1;
+    // Termination due to successful completion of the job.
+    TERMINATION_SUCCESS = 2;
+    // Termination due to request is not supported because of technical limitations, e.g. contains events or event fields which cannot be provided or logical expressions that cannot be evaluated.
+    TERMINATION_UNSUPPORTED_REQUEST = 3;
+    // Termination due to collected data size is out of the max requested extends or is over maximum size supported by the collector.
+    TERMINATION_OVERSIZED_REQUEST = 4;
+    // Termination due to collection of some or all events or event fields are not allowed because of legal reason.
+    TERMINATION_NOT_ALLOWED_EVENT_OR_EVENT_FIELD = 5;
+    // Termination due to collection is not allowed within requested location because of legal reason.
+    TERMINATION_NOT_ALLOWED_LOCATION = 6;
+    // Termination due to executing of the request is failing in the collection device.
+    TERMINATION_COLLECTION_FAILING_IN_COLLECTION_DEVICE = 7;
+    // Termination due to quota exceeded.
+    TERMINATION_QUOTA_EXCEEDED = 8;
+    // Termination due to quota of job requests exceeded.
+    TERMINATION_QUOTA_EXCEEDED_JOB_REQUESTS = 9;
+    // Termination due to quota of data exceeded.
+    TERMINATION_QUOTA_EXCEEDED_DATA = 10;
+    // Acknowledgement, i.e. job is accepted by receiver, e.g. after a successful validation.
+    ACKNOWLEDGEMENT = 11;
+  }
+
+  // Envelope.
+  JobMessageEnvelope envelope = 1;
+
+  // Timestamp.
+  sensoris.protobuf.types.base.Timestamp timestamp = 2;
+
+  // Status.
+  Status status = 3;
+
+  // Provides additional details regarding the status of the job.
+  google.protobuf.StringValue details = 4;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}
+
+//
+// Job messages.
+//
+
+// Job messages for transport, i.e. the root message type that is exchanged between Service Cloud, Vehicle Cloud and Vehicle Fleet.
+message JobMessages {
+  // Envelope.
+  sensoris.protobuf.types.base.MessagesEnvelope envelope = 1;
+
+  // Job request message.
+  repeated JobRequestMessage job_request_message = 2;
+
+  // Job status message.
+  repeated JobStatusMessage job_status_message = 3;
+}

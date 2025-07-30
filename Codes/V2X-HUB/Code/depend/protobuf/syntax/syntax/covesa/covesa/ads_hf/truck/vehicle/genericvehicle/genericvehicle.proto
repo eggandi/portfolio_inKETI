@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "covesa/ads_hf/truck/vehicle/genericvehicle/acceleration/acceleration.proto";
+
+package COVESA.ADS_HF.TRUCK.VEHICLE.GENERICVEHICLE;
+
+message Genericvehicle {
+	repeated COVESA.ADS_HF.TRUCK.VEHICLE.GENERICVEHICLE.ACCELERATION.Acceleration acceleration = 1; // Spatial acceleration. Axis definitions according to ISO 8855.
+	optional float speed = 2; // Vehicle speed. (Unit:km/h)
+}

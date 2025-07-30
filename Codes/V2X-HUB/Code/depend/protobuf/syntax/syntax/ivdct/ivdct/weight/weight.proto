@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+import "ivdct/weight/axle_weight/axle_weight.proto"; // 차축 무게는 weight.proto에 포함되어 있음
+
+package IVDCT.WEIGHT;
+
+message Weight { // 무게 데이터
+  repeated IVDCT.WEIGHT.AXLE_WEIGHT.Axle_weight axle_weight = 1 [(validate.rules).repeated = {min_items: 0, max_items: 17}]; // 차축 무게(Array:0..16)
+}

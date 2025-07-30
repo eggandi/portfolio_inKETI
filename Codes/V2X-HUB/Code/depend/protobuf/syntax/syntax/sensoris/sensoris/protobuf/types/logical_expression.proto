@@ -1,0 +1,193 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.types.logicalexpression;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.types.logicalexpression";
+option java_outer_classname = "SensorisLogicalExpressionTypes";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/types/logicalexpression";
+
+// Import Google message types.
+import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+
+// Defines constituents for boolean expressions which consists of an operator applied on multiple operands.
+//
+// The operands may include boolean expressions, arithmetic expressions as well as sensor, map, or system parameters.
+message LogicalExpression {
+  // Logical boolean operator.
+  enum LogicalOperator {
+    // Unknown.
+    UNKNOWN_LOGICAL_OPERATOR = 0;
+    // Conjunction operator logical AND.
+    AND = 1;
+    // Conjunction operator logical OR.
+    OR = 2;
+  }
+
+  // Logical operand with a boolean result of TRUE or FALSE, resulting either out of a comparison expression or a boolean function.
+  message LogicalOperand {
+    // Comparison expression with a boolean result of TRUE or FALSE.
+    //
+    // Only data types that are comparable can be evaluated:
+    // - int64 to int64 including the interpretation of exponent usage, also used for enum value to enum value
+    // - bool to bool
+    // - string to string
+    // - bytes to bytes
+    //
+    // @example Vehicle speed > 2 [m/s].
+    message ComparisonExpression {
+      // Operation.
+      message Operation {
+        // Operand as part of an operation, which can be either a constant value or a field value of a SENSORIS event.
+        message Operand {
+          oneof operand {
+            // Int64 value and exponent.
+            sensoris.protobuf.types.base.Int64ValueAndExponent int64_value_and_exponent = 1;
+
+            // Boolean value.
+            google.protobuf.BoolValue bool_value = 2;
+
+            // String value.
+            google.protobuf.StringValue string_value = 3;
+
+            // Bytes value.
+            google.protobuf.BytesValue bytes_value = 4;
+
+            // Field value of a SENSORIS event, referenced by it's path in SENSORIS DataMessages.
+            //
+            // Actual event field value has to be one of the supported operands, see alternatives in oneof.
+            //
+            // @example A path of 2.2.2.4.2.1.1 references the data_message = 2 > event_group = 2 > localization_category = 2 > vehicle_speed = 4 > value_and_accuracy = 2 > metric_vehicle = 1 > x = 1.
+            sensoris.protobuf.types.base.AbsoluteOrExtensionPath event_field_value = 5;
+          }
+
+          // Proprietary extension.
+          repeated google.protobuf.Any extension = 15;
+        }
+
+        // Operation type.
+        enum OperationType {
+          // Unknown.
+          UNKNOWN_OPERATION_TYPE = 0;
+          // No operation.
+          //
+          // The value of first_operand is returned.
+          NO_OPERATION = 1;
+          // Addition operation. Only defined if both operands are of type int64.
+          //
+          // The value of (first_operand + second_operand) is returned.
+          SUM = 2;
+          // Subtraction operation. Only defined if both operands are of type int64.
+          //
+          // The value of (first_operand - second_operand) is returned.
+          SUBTRACTION = 3;
+          // Multiplication operation. Only defined if both operands are of type int64.
+          //
+          // The value of (first_operand * second_operand) is returned.
+          MULTIPLICATION = 4;
+          // Division operation. Only defined if both operands are of type int64.
+          //
+          // The value of (first_operand / second_operand) is returned.
+          DIVISION = 5;
+        }
+
+        // First operand.
+        Operand first_operand = 1;
+
+        // Operator.
+        //
+        // If the operator is a binary operator, then the field second_operand shall be set.
+        OperationType operator = 2;
+
+        // Second operand.
+        Operand second_operand = 3;
+
+        // Proprietary extension.
+        repeated google.protobuf.Any extension = 15;
+      }
+
+      // Comparison operator type.
+      enum ComparisonOperatorType {
+        // Unknown.
+        UNKNOWN_COMPARISON_OPERATOR_TYPE = 0;
+        // Returns TRUE if first_operation is equal to second_operation.
+        EQUAL = 1;
+        // Returns TRUE if first_operation is not equal to second_operation.
+        NOT_EQUAL = 2;
+        // Returns TRUE if first_operation is greater than second_operation. Only defined if both operations are of type int64.
+        GREATER = 3;
+        // Return TRUE if first_operation is less than second_operation. Only defined if both operations are of type int64.
+        LESS = 4;
+        // Returns TRUE if first_operation is greater than or equal to second_operation. Only defined if both operations are of type int64.
+        GREATER_OR_EQUAL = 5;
+        // Returns TRUE if first_operation is less than or equal to second_operation. Only defined if both operations are of type int64.
+        LESS_OR_EQUAL = 6;
+      }
+
+      // Negates the overall boolean result.
+      //
+      // If field is set to TRUE, the result of the boolean expression changes from TRUE to FALSE and respectively from FALSE to TRUE. If not set, the result is not negated.
+      google.protobuf.BoolValue not = 1;
+
+      // Left side value of the boolean expression.
+      Operation first_operation = 2;
+
+      // Operator for comparison of the two boolean expressions.
+      ComparisonOperatorType operator = 3;
+
+      // Right side value of the boolean expression.
+      Operation second_operation = 4;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // Negates the overall boolean result.
+    //
+    // If field is set to TRUE, the result of the boolean expression or function changes from TRUE to FALSE and respectively from FALSE to TRUE. If not set, the result is not negated.
+    google.protobuf.BoolValue not = 1;
+
+    oneof expression_function {
+      // Comparison expression with a boolean result of TRUE or FALSE.
+      ComparisonExpression comparison_expression = 2;
+    }
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // Negates the overall boolean result.
+  //
+  // If set to TRUE, the boolean result changes from TRUE to FALSE and respectively from FALSE to TRUE. If not set, the boolean result is not negated.
+  google.protobuf.BoolValue not = 1;
+
+  // Logical boolean operator for all elements of the field operand.
+  //
+  // The usage of the operator follows the rules:
+  // - If the field operand has more than one element, UNKNOWN_LOGICAL_OPERATOR shall not be used. If the field operand has exactly one element, then the operand is not evaluated.
+  // - Applying the operator AND to a list of elements [A, B, C] returns TRUE if every element is TRUE and FALSE otherwise. Evaluation of the operator can return early with FALSE for the first element being FALSE.
+  // - Applying the operator OR to a list of elements [A, B, C] returns FALSE if every element is FALSE and TRUE otherwise. Evaluation of the operator can return early with TRUE for the first element being TRUE.
+  LogicalOperator operator = 2;
+
+  // Operand.
+  //
+  // If no operand is set, the logical expression is FALSE by definition.
+  repeated LogicalOperand operand = 3;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}

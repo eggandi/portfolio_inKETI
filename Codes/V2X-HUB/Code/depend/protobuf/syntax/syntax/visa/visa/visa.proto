@@ -1,0 +1,10 @@
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+import "visa/testmessage00/testmessage00.proto";
+
+// Package name.
+package VISA;
+
+message Visa {	// VISA(V2X Infrastructure Stability Assessment) 데이터
+  repeated VISA.TestMessage00.TestMessage00 testmessage00 = 1;		// 안전성 평가 메시지(testmessage00:1800 ASN을 사용하기 위한 SAE-J2735의 예약 필드명)
+}

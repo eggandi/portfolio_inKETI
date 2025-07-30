@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package DTG.SYSTEM;
+
+import "validate/validate.proto";
+
+// 시스템 정보
+message System {
+  optional string model_name = 1 [(validate.rules).string = {min_len: 20, max_len: 20}]; // 운행기록장치 모델명 (Unit:—, Range:20 bytes)
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package IVDCT.DRIVING.STEERING_WHEEL;	
+
+message Steering_wheel {	// 조향 정보
+	optional uint64 angle_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; // 조향각 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	angle = 2 [(validate.rules).uint32 = {gte: 0, lte: 64256}]; 									// 조향각(Unit:1/1024[rad], Min:0(-31.374), Max:64255(31.31.3750234375) ,Unknown:64256)
+}

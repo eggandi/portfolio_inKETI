@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package ADS_HF.ROAD;
+
+import "validate/validate.proto";
+import "ads_hf/road/inclination/inclination.proto";
+
+message Road {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 도로 인지 시각 (Unit:ms, Range:0..2^64-1)
+  optional uint32 no = 2 [(validate.rules).uint32 = {gte: 1, lte: 128}]; // 도로 번호 (Unit:—, Range:1..128)
+  optional INCLINATION.Inclination inclination = 3; // 도로 기울기 (Unit:0.01deg, Range:-9000..9000)
+  optional int32 curvature = 4; // 도로 곡률 (Unit:0.001/km, Range:—)
+}

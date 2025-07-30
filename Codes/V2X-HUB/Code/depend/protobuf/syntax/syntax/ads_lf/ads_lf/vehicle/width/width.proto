@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ADS_LF.VEHICLE.WIDTH;
+
+import "validate/validate.proto";
+
+// 차량 전폭
+message Width {
+  optional uint32 total = 1 [(validate.rules).uint32 = {gte: 0, lte: 1023}]; // 총 (Unit:cm, Range:0..1023)
+  optional uint64 left = 2 [(validate.rules).uint64 = {gte: 0}];            // 좌 (Unit:mm, Range:0..)
+  optional uint64 right = 3 [(validate.rules).uint64 = {gte: 0}];           // 우 (Unit:mm, Range:0..)
+}

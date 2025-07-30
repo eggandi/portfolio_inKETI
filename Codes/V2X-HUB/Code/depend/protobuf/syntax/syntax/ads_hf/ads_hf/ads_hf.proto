@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ADS_HF;
+
+import "ads_hf/driving/driving.proto";
+import "ads_hf/obj/obj.proto";
+import "ads_hf/lane_bondary/lane_bondary.proto";
+import "ads_hf/lane/lane.proto";
+import "ads_hf/road/road.proto";
+import "ads_hf/traffic_sign/traffic_sign.proto";
+import "ads_hf/decision/decision.proto";
+import "ads_hf/control/control.proto";
+
+// Top-level ADS High-Frequency Data message
+message AdsHf {
+  optional ADS_HF.DRIVING.Driving driving = 1;                      // Driving info (Unit:—, Range:—)
+  repeated ADS_HF.OBJ.Obj obj = 2;                     // Surrounding objects (Unit:—, Range:—)
+  repeated ADS_HF.LANE_BONDARY.LaneBondary lane_bondary = 3;    // Lane boundaries (Unit:—, Range:—)
+  repeated ADS_HF.LANE.Lane lane = 4;                   // Lanes (Unit:—, Range:—)
+  repeated ADS_HF.ROAD.Road road = 5;                   // Roads (Unit:—, Range:—)
+  repeated ADS_HF.TRAFFIC_SIGN.TrafficSign traffic_sign = 6;    // Traffic signs (Unit:—, Range:—)
+  repeated ADS_HF.DECISION.Decision decision = 7;           // Decisions (Unit:—, Range:—)
+  repeated ADS_HF.CONTROL.Control control = 8;             // Control commands (Unit:—, Range:—)
+}

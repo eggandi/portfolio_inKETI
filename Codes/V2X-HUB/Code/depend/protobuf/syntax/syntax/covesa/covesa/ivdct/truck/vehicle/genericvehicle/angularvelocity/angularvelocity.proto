@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package COVESA.IVDCT.TRUCK.VEHICLE.GENERICVEHICLE.ANGULARVELOCITY;
+
+message Angularvelocity {
+	optional float yaw = 1; // Vehicle rotation rate along Z (vertical). (Unit:degrees/s)
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package HMI;
+
+import "hmi/system/system.proto";
+import "hmi/transport/transport.proto";
+
+// 설치 각 (오일러 각)
+message Hmi {
+  optional HMI.SYSTEM.System system = 1; // 시스템 정보 (Unit:—, Range:—)
+  optional HMI.TRANSPORT.Transport transport = 2; // 운송 정보 (Unit:—, Range:—)
+}

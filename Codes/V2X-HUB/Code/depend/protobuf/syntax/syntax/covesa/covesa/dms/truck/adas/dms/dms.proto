@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package COVESA.DMS.TRUCK.ADAS.DMS;
+
+message Dms {
+	optional bool isenabled = 1; // Indicates if DMS is enabled. True = Enabled. False = Disabled.
+	optional bool iserror = 2; // Indicates if DMS incurred an error condition. True = Error. False = No Error.
+	optional bool isengaged = 3; // Indicates if DMS is currently regulating brake pressure. True = Engaged. False = Not Engaged.
+}

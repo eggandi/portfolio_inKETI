@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/root/Project_Relayserver/src/lib/protobuf/src/protobuf.pb-c.c
+protobuf.pb-c.h
+/home/root/Project_Relayserver/src/lib/protobuf/src/protobuf.pb-c.h
+
+/home/root/Project_Relayserver/src/lib/protobuf/src/protobuf.pb-c.h
+protobuf-c/protobuf-c.h
+-
+
+/home/root/Project_Relayserver/src/lib/protobuf/src/protobufabs.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+protobuf-c/protobuf-c.h
+-
+protobuf.pb-c.h
+/home/root/Project_Relayserver/src/lib/protobuf/src/protobuf.pb-c.h
+

@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/chassis/axle/wheel/wheel.proto";
+
+package COVESA.IVDCT.TRUCK.CHASSIS.AXLE;
+
+message Axle {
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.AXLE.WHEEL.Wheel wheel = 1; // Wheel signals for axle
+}

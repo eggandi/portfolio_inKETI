@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package ADS_HF.DECISION.GOAL;
+
+import "validate/validate.proto";
+
+message Goal {
+  optional uint32 speed = 1 [(validate.rules).uint32 = {gte: 0, lte: 8191}];     // 목표 속도 (Unit:0.02m/s, Range:0..8191, unknown:8191)
+  optional int32 acc = 2 [(validate.rules).int32 = {gte: -2000, lte: 2001}];     // 목표 가속도 (Unit:0.01m/s², Range:-2000..2001, unknown:2001)
+  optional int64 lat = 3 [(validate.rules).int64 = {gte: -900000000, lte: 900000001}];  // 목표 위도 (Unit:0.1µdeg, Range:-900000000..900000001, unknown:900000001)
+  optional int64 lon = 4 [(validate.rules).int64 = {gte: -1799999999, lte: 1800000001}]; // 목표 경도 (Unit:0.1µdeg, Range:-1799999999..1800000001, unknown:1800000001)
+  optional int32 angle = 5 [(validate.rules).int32 = {gte: -126, lte: 127}];         // 목표 조향각 (Unit:1.5deg, Range:-126..127, unknown:127)
+}

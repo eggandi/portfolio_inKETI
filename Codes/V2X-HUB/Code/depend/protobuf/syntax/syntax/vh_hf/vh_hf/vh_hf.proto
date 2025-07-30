@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package VH_HF;
+
+import "vh_hf/gnss/gnss.proto";
+
+// High-Frequency V2X Hub Data
+message VH_hf {
+  optional VH_HF.GNSS.Gnss gnss = 1;               // GNSS 정보
+}

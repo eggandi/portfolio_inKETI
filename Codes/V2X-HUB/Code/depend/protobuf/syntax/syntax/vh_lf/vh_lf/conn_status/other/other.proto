@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package VH_LF.CONN_STATUS.OTHER;
+
+import "validate/validate.proto";
+
+// 기타 장치 연결상태
+message Other {
+  optional string id = 1 [(validate.rules).string = {min_len:1, max_len:32}]; // 장치 식별자 (Unit:—, Range:1..32 bytes)
+  enum ConnectionState { OTHER_CONN_STATUS_UNKNOWN=0; OTHER_CONN_STATUS_OK=1; OTHER_CONN_STATUS_FAIL=2; OTHER_CONN_STATUS_NOT_INSTALLED=3; }
+	optional ConnectionState status = 2 [(validate.rules).enum = {defined_only: true}]; // 연결상태 (Unit:—, Range:defined only)
+}

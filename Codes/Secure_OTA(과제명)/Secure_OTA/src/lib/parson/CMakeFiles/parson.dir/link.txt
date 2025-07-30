@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC  -g  -shared -Wl,-soname,libparson.so -o libparson.so CMakeFiles/parson.dir/src/parson.c.o   -L/home/root/Project_Relayserver/ouput/lib  -Wl,-rpath,/home/root/Project_Relayserver/ouput/lib -lpthread 

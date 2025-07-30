@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package DTG.DRIVER;
+
+import "validate/validate.proto";
+
+// 운전자 정보
+message Driver {
+  optional string business_number = 1 [(validate.rules).string = {min_len: 10, max_len: 10}]; // 운송사업자등록번호 (Unit:—, Range:10 bytes)
+  optional string driver_code      = 2 [(validate.rules).string = {min_len: 18, max_len: 18}]; // 운전자코드 (Unit:—, Range:18 bytes)
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package COVESA.IVDCT.TRUCK.BODY.LIGHTS.HAZARD;
+
+message Hazard {
+	optional bool issignaling = 1; // Indicates if light is signaling or off. True = signaling. False = Off.
+	optional bool isdefect = 2; // Indicates if light is defect. True = Light is defect. False = Light has no defect.
+}

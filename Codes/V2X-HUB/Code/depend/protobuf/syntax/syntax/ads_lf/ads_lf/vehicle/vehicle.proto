@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ADS_LF.VEHICLE;
+
+import "validate/validate.proto";
+import "ads_lf/vehicle/length/length.proto";
+import "ads_lf/vehicle/width/width.proto";
+import "ads_lf/vehicle/height/height.proto";
+
+// 차량 제원
+message Vehicle {
+  optional LENGTH.Length length = 1; // 전장 (Unit:cm, Range:0..4095)
+  optional WIDTH.Width width = 2;    // 전폭 (Unit:cm, Range:0..1023)
+  optional HEIGHT.Height height = 3; // 높이 (Unit:cm, Range:0..1023)
+  optional uint32 weight = 4 [(validate.rules).uint32 = {gte: 0, lte: 65535}]; // 기본무게 (Unit:kg, Range:0..65535)
+}

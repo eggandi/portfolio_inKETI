@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/chassis/accelerator/accelerator.proto";
+import "covesa/ivdct/truck/chassis/axle/axle.proto";
+import "covesa/ivdct/truck/chassis/brake/brake.proto";
+import "covesa/ivdct/truck/chassis/steeringwheel/steeringwheel.proto";
+
+package COVESA.IVDCT.TRUCK.CHASSIS;
+
+message Chassis {
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.ACCELERATOR.Accelerator accelerator = 1; // Accelerator signals
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.AXLE.Axle axle = 2; // Axle signals
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.BRAKE.Brake brake = 3; // Brake system signals
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.STEERINGWHEEL.Steeringwheel steeringwheel = 4; // Steering wheel signals
+}

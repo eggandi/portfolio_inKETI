@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ADS_LF.SENSOR.ORIENTATION;
+
+import "validate/validate.proto";
+
+// 설치 각 (오일러 각)
+message Orientation {
+  optional int64 yaw = 1 [(validate.rules).int64 = {gte: 0, lte: 3600000001}];   // 좌회전:음수/우회전:양수 (Unit:0.1µdeg, Range:0..3600000001)
+  optional int64 pitch = 2 [(validate.rules).int64 = {gte: 0, lte: 3600000001}]; // 좌회전:음수/우회전:양수 (Unit:0.1µdeg, Range:0..3600000001)
+  optional int64 roll = 3 [(validate.rules).int64 = {gte: 0, lte: 3600000001}];  // 좌회전:음수/우회전:양수 (Unit:0.1µdeg, Range:0..3600000001)
+}

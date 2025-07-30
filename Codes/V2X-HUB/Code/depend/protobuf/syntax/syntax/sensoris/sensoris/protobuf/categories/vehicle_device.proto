@@ -1,0 +1,128 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.categories.vehicledevice;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.categories.vehicledevice";
+option java_outer_classname = "SensorisVehicleDeviceCategory";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/categories/vehicledevice";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+
+// Status of the device.
+enum Status {
+  // The device status is unknown.
+  UNKNOWN_STATUS = 0;
+  // The device status is on.
+  ON = 1;
+  // The device status is off.
+  OFF = 2;
+}
+
+// Status of exterior light.
+message ExteriorLightStatus {
+  // Type and status of exterior light.
+  message TypeAndStatus {
+    // Type of exterior light.
+    enum Type {
+      // Unknown light.
+      UNKNOWN_TYPE = 0;
+      // Low beams.
+      LOW_BEAMS = 1;
+      // High beams.
+      HIGH_BEAMS = 2;
+      // Front fog light.
+      FOG_LIGHT_FRONT = 3;
+      // Rear fog light.
+      FOG_LIGHT_REAR = 4;
+      // Hazard lights.
+      HAZARD = 5;
+      // Left turn signal light.
+      LEFT_TURN = 6;
+      // Right turn signal light.
+      RIGHT_TURN = 7;
+      // Brake lights including CHMSL (center high mounted stop light).
+      BRAKE = 8;
+      // Reverse lights.
+      REVERSE = 9;
+      // Parking lights.
+      PARKING = 10;
+      // Daytime running lights.
+      DAYTIME_RUNNING = 11;
+    }
+
+    // Type of exterior light.
+    Type type = 1;
+
+    // Status of exterior light.
+    Status status = 2;
+  }
+
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Light type and status.
+  repeated TypeAndStatus type_and_status = 2;
+}
+
+// Status of the wiper.
+message WiperStatus {
+  // The detected speed type of the wiper.
+  enum SpeedType {
+    // Unknown.
+    UNKNOWN_SPEED_TYPE = 0;
+    // Wiper is off.
+    OFF = 1;
+    // Wiper is on slow setting.
+    SLOW = 2;
+    // Wiper is on medium setting.
+    MEDIUM = 3;
+    // Wiper is on fast setting.
+    FAST = 4;
+    // Wiper is set to a specific speed automatically.
+    AUTOMATIC = 5;
+    // Wiper speed is set to a washing cycle.
+    WASHING = 6;
+    // Wiper speed is set to a single cycle.
+    SINGLE = 7;
+  }
+
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Speed type.
+  SpeedType speed_type = 2;
+
+  // Wiper speed.
+  //
+  // @unit RPM of the wiper where one revolution is one complete cycle.
+  // @resolution 1
+  // @range (0, )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy speed_and_accuracy = 3 [(sensoris.protobuf.types.base.exponent) = 0];
+}
+
+// Vehicle Device category.
+message VehicleDeviceCategory {
+  // Envelope.
+  sensoris.protobuf.types.base.CategoryEnvelope envelope = 1;
+
+  // Status of exterior light.
+  repeated ExteriorLightStatus exterior_light_status = 2;
+
+  // Status of the front wiper.
+  repeated WiperStatus front_wiper_status = 3;
+
+  // Status of the rear wiper.
+  repeated WiperStatus rear_wiper_status = 4;
+}

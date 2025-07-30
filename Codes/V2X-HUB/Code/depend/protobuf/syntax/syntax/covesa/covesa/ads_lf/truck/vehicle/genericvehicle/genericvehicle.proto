@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.ADS_LF.TRUCK.VEHICLE.GENERICVEHICLE;
+
+message Genericvehicle {
+	optional uint32 curbweight = 1 [(validate.rules).uint32 = {gte: 0, lte: 65535}]; // Vehicle curb weight, including all liquids and full tank of fuel, but no cargo or passengers. (Unit:kg)
+	optional uint32 length = 2 [(validate.rules).uint32 = {gte: 0, lte: 65535}]; // Overall vehicle length. (Unit:mm)
+	optional uint32 height = 3 [(validate.rules).uint32 = {gte: 0, lte: 65535}]; // Overall vehicle height. (Unit:mm)
+	optional uint32 width = 4 [(validate.rules).uint32 = {gte: 0, lte: 65535}]; // Overall vehicle width. (Unit:mm)
+}

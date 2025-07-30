@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package DTG;
+
+import "validate/validate.proto";
+import "dtg/system/system.proto";
+import "dtg/vehicle/vehicle.proto";
+import "dtg/driver/driver.proto";
+import "dtg/driving/driving.proto";
+
+// DTG 데이터
+message Dtg {
+  DTG.SYSTEM.System system = 1;     // 시스템 정보 (Unit:—, Range:—)
+  DTG.VEHICLE.Vehicle vehicle = 2;   // 차량 정보 (Unit:—, Range:—)
+  DTG.DRIVER.Driver driver = 3;     // 운전자 정보 (Unit:—, Range:—)
+  DTG.DRIVING.Driving driving = 4;   // 주행 정보 (Unit:—, Range:—)
+}

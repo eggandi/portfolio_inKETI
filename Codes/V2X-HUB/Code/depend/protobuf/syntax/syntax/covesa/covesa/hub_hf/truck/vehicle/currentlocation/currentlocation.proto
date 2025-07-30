@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "validate/validate.proto";
+import "covesa/hub_hf/truck/vehicle/currentlocation/gnssreceiver/gnssreceiver.proto";
+
+package COVESA.HUB_HF.TRUCK.VEHICLE.CURRENTLOCATION;
+
+message Currentlocation {
+	optional double latitude = 1 [(validate.rules).double = {gte: -90, lte: 90}]; // Current latitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. (Unit:degrees)
+	optional double longitude = 2 [(validate.rules).double = {gte: -180, lte: 180}]; // Current longitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. (Unit:degrees)
+	optional double altitude = 3 ; // Current altitude relative to WGS 84 reference ellipsoid, as measured at the position of GNSS receiver antenna. (Unit:m)
+	optional double heading = 4 [(validate.rules).double = {gte: 0, lte: 360}]; // Current heading relative to geographic north. 0 = North, 90 = East, 180 = South, 270 = West. (Unit:degrees)
+	optional double horizontalaccuracy = 5; //  Accuracy of the latitude and longitude coordinates. (Unit:m)
+	optional double verticalaccuracy = 6; // Accuracy of altitude. (Unit:m)
+	repeated COVESA.HUB_HF.TRUCK.VEHICLE.CURRENTLOCATION.GNSSRECEIVER.Gnssreceiver gnssreceiver = 7; // Information on the GNSS receiver used for determining current location.
+}
+

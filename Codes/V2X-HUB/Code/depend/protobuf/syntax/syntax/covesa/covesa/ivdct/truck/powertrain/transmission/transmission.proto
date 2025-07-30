@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.IVDCT.TRUCK.POWERTRAIN.TRANSMISSION;
+
+message Transmission {
+	optional int32 currentgear = 1  [(validate.rules).int32 = {gte: -126, lte: 125}]; // The current gear. 0=Neutral, 1/2/..=Forward, -1/-2/..=Reverse.
+}

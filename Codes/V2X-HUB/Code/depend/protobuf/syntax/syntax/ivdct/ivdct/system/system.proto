@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "validate/validate.proto";
+import "ivdct/system/status/status.proto";
+
+package IVDCT.SYSTEM;	
+
+message System {	// 시스템 정보
+	optional uint64 status_ct = 1  [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; // 장치 동작상태 수집시간(Unit:1[ms], 0..(2^64-1))
+  optional IVDCT.SYSTEM.STATUS.Status status = 2 [(validate.rules).enum = {defined_only: true}];					// 장치 동작상태(enumeration:0..2)
+}

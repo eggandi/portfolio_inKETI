@@ -1,0 +1,141 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.types.job;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.types.job";
+option java_outer_classname = "SensorisJobTypes";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/types/job";
+
+// Import Google message types.
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+
+//
+// Job identifiers.
+//
+
+// Identifiers.
+message Ids {
+  // Information about the submitting entity which may be a fleet, a vehicle manufacturer or a specific service/software.
+  //
+  // The primary id might be the company name whereas the secondary id might be a service reason, a bilateral contract identifier or similar.
+  //
+  // @example Values primary_id: "ABC Vehicle Manufacturer", secondary_id: "ConnectedVehicleSensorDataCollectionUnit", type: "HazardWarning".
+  repeated sensoris.protobuf.types.base.Entity submitter = 1;
+
+  // Job identifier.
+  //
+  // The concatenation of all job identifiers shall be unique for the submitters.
+  repeated google.protobuf.StringValue job_id = 2;
+
+  // Vehicle fleet identifier.
+  repeated google.protobuf.StringValue vehicle_fleet_id = 3;
+
+  // Vehicle identifier.
+  repeated google.protobuf.StringValue vehicle_id = 4;
+
+  // Driver identifier.
+  repeated google.protobuf.StringValue driver_id = 5;
+}
+
+//
+// Numeric job types.
+//
+
+// Bins of a histogram specification.
+message HistogramSpecificationBins {
+  // Bin.
+  //
+  // The range of a bin is defined as [lower_endpoint_inclusive, lower_endpoint_inclusive of following bin).
+  //
+  // The range of the first bin is defined as [lower_endpoint_inclusive of histogram specification, lower_endpoint_inclusive of following bin). The range of the last bin is defined as [lower_endpoint_inclusive, upper_endpoint_inclusive of histogram specification].
+  //
+  // @example Unequal sized bins [0, 10) [10, 40) [40, 50].
+  message Bin {
+    // Lower end point of bin.
+    sensoris.protobuf.types.base.Int64ValueAndExponent lower_endpoint_inclusive = 1;
+  }
+
+  // Bins.
+  repeated Bin bin = 1;
+}
+
+// Specification of an absolute histogram of int64 values, i.e. bins contain absolute number of total number of elements.
+//
+// See also sensoris.protobuf.types.base.AbsoluteInt64Histogram.
+message AbsoluteHistogramSpecification {
+  // Minimum total elements.
+  //
+  // @unit 1
+  // @resolution 1
+  // @range [1, )
+  google.protobuf.Int64Value minimum_total_elements = 1;
+
+  // Lower endpoint of first bin.
+  sensoris.protobuf.types.base.Int64ValueAndExponent lower_endpoint_inclusive = 2;
+
+  oneof bins_number_of_bins {
+    // Bins.
+    HistogramSpecificationBins bins = 3;
+
+    // Number of equal sized bins.
+    //
+    // @unit 1
+    // @resolution 1
+    // @range [1, )
+    google.protobuf.Int64Value number_of_bins = 4;
+  }
+
+  // Upper endpoint of last bin.
+  sensoris.protobuf.types.base.Int64ValueAndExponent upper_endpoint_inclusive = 5;
+}
+
+// Specification of a relative histogram of int64 values, i.e. bins contain relative percentage of total number of elements.
+//
+// See also sensoris.protobuf.types.base.RelativeInt64Histogram.
+message RelativeHistogramSpecification {
+  // Minimum total elements.
+  //
+  // @unit 1
+  // @resolution 1
+  // @range [1, )
+  google.protobuf.Int64Value minimum_total_elements = 1;
+
+  // Lower endpoint of first bin.
+  sensoris.protobuf.types.base.Int64ValueAndExponent lower_endpoint_inclusive = 2;
+
+  oneof bins_number_of_bins {
+    // Bins.
+    HistogramSpecificationBins bins = 3;
+
+    // Number of equal sized bins.
+    //
+    // @unit 1
+    // @resolution 1
+    // @range [1, )
+    google.protobuf.Int64Value number_of_bins = 4;
+  }
+
+  // Upper endpoint of last bin.
+  sensoris.protobuf.types.base.Int64ValueAndExponent upper_endpoint_inclusive = 5;
+
+  // Exponent for relative frequency.
+  //
+  // @unit 1
+  // @resolution 1
+  // @range ( , )
+  google.protobuf.Int64Value relative_frequency_exponent = 6;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package VH_LF.CONN_STATUS;
+
+import "validate/validate.proto";
+import "vh_lf/conn_status/other/other.proto";
+
+// 장치 연결상태 정보
+message ConnStatus {
+  enum ConnectionState { CONN_STATUS_UNKNOWN=0; CONN_STATUS_OK=1; CONN_STATUS_FAIL=2; CONN_STATUS_NOT_INSTALLED=3; }
+  optional ConnectionState hmi   = 1 [(validate.rules).enum = {defined_only: true}]; // HMI 연결상태 (Unit:—, Range:defined only)
+  optional ConnectionState ads   = 2 [(validate.rules).enum = {defined_only: true}]; // ADS 연결상태 (Unit:—, Range:defined only)
+  optional ConnectionState dms   = 3 [(validate.rules).enum = {defined_only: true}]; // DMS 연결상태 (Unit:—, Range:defined only)
+  optional ConnectionState ivdct = 4 [(validate.rules).enum = {defined_only: true}]; // IVDCT 연결상태 (Unit:—, Range:defined only)
+  optional ConnectionState dtg   = 5 [(validate.rules).enum = {defined_only: true}]; // DTG 연결상태 (Unit:—, Range:defined only)
+	repeated OTHER.Other other = 6 [(validate.rules).repeated = {min_items: 0, max_items: 15}]; // 기타 장치 연결상태 (Unit:—, Range:—)
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package IVDCT.DIAG.ENGINE;
+
+message Engine { // 엔진 정보
+	optional uint64 coolant_temp_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 	// 엔진 냉각수 온도 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional int32 coolant_temp = 2 [(validate.rules).int32 = {gte: -40, lte: 211}]; 											// 엔진 냉각수 온도(Unit:1[degree], Above:-40, Over:210 ,Unknown:211)
+}

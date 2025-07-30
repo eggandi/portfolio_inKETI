@@ -1,0 +1,34 @@
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Import Google message types.
+import "google/protobuf/wrappers.proto";
+
+// Import infrasafetymsg message types.
+import "visa/testmessage00/infrasafetymsg/infrasafetymsg.proto";
+
+import "validate/validate.proto"; 
+// Package name.
+package VISA.TestMessage00;
+
+
+message TestMessage00 {	// TestMessage00 
+	message Header {
+		optional int32 year = 1 [(validate.rules).int32 = {gte: 0, lte: 4095}]; // DE_DYear(SAE-J2735)
+		optional int32 timestamp = 2 [(validate.rules).int32 = {gte: 0, lte: 527040}]; // DE_MinuteOfYear(SAE-J2735)
+		optional int32 secmark = 3 [(validate.rules).int32 = {gte: 0, lte: 65535}]; // DE_DSecond(SAE-J2735)
+		optional int32 msgissuerevision = 4 [(validate.rules).int32 = {gte: 0, lte: 65535}]; // DE_MsgCount(SAE-J2735)
+	}
+	message REGION {
+		message Reg_TestMessage00{
+			optional bool isused = 1 [(validate.rules).bool.const = false]; // 사용하려면 (validate.rules).bool.const = true로 수정하고 하위 필드 추가
+		}
+	}
+
+	optional Header header = 1;
+	optional REGION regional = 2;
+  repeated VISA.TestMessage00.InfraSafetyMsg.InfraSafetyMsg infrasafetymsg = 3;		// 안전성 평가 메시지
+	
+}
+
+

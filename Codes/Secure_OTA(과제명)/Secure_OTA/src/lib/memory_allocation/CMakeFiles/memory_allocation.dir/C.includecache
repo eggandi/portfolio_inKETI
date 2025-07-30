@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/root/Project_Relayserver/src/lib/memory_allocation/src/memory_allocation.c
+./memory_allocation_include.h
+-
+./memory_allocation_api.h
+-
+./memory_allocation_param.h
+-
+
+src/lib/memory_allocation/src/memory_allocation_api.h
+./memory_allocation_include.h
+-
+
+src/lib/memory_allocation/src/memory_allocation_include.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stdint.h
+-
+stdbool.h
+-
+pthread.h
+-
+
+src/lib/memory_allocation/src/memory_allocation_param.h
+./memory_allocation_include.h
+-
+

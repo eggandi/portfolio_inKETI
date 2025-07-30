@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ADS_LF.CONTROLLER;
+
+import "validate/validate.proto";
+
+// 제어기 정보
+message Controller {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 체크 시점 (Unit:ms, Range:0..2^64-1)
+  optional string id = 2 [(validate.rules).string = {min_len: 1, max_len: 32}]; // 제어기 식별자 (Unit:—, Range:1..32 bytes)
+  enum Type { TYPE_UNKNOWN = 0; ADS = 1; OTHER = 2; }
+  optional Type type = 3 [(validate.rules).enum = {defined_only: true}]; // 제어기 유형 (Unit:—, Range:defined values)
+  enum Status { STATUS_UNKNOWN = 0; STATUS_OK = 1; STATUS_FAIL = 2; }
+  optional Status status = 4 [(validate.rules).enum = {defined_only: true}]; // 제어기 상태 (Unit:—, Range:defined values)
+}

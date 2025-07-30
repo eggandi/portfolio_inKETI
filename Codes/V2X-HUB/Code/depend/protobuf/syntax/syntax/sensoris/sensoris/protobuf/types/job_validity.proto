@@ -1,0 +1,121 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.types.jobvalidity;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.types.jobvalidity";
+option java_outer_classname = "SensorisJobValidityTypes";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/types/jobvalidity";
+
+// Import Google message types.
+import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+import "sensoris/protobuf/types/map.proto";
+import "sensoris/protobuf/types/spatial.proto";
+
+// JobValidityRestrictions define conditions under which a job request message is valid and data collection shall be possible. If job validity restrictions are not met, data collection shall not happen.
+message JobValidityRestrictions {
+  // The temporal, spatial and map job validity restrictions define if data collection for a job request shall be possible.
+  //
+  // The restrictions are conjuncted by logical AND, i.e. data collection shall be possible if:
+  // - the composite temporal restriction is TRUE AND
+  // - the composite spatial restriction is TRUE AND
+  // - the repeated values of the map restriction conjuncted by logical AND are TRUE.
+  //
+  // If no restrictions are specified, it is assumed that the job request is valid any time and everywhere.
+  message BasicJobValidityRestrictions {
+    // The composite temporal restriction defines when data collection shall be possible.
+    //
+    // The repeated values of the same field are conjuncted by logical OR whereas all field values are conjuncted by logical AND.
+    //
+    // @example The composite temporal restriction with the date_range [[2019-01-01 to 2019-01-10], [2019-02-01 to 2019-02-10]], weekday [Monday, Wednesday], time_of_the_day_range [[8:00 to 9:00], [16:00 to 17:00]], is TRUE if the date restriction AND the weekday restriction AND the time of the day restriction are TRUE. The date restriction is TRUE if the date is within any of the specified ranges, e.g. 2019-01-01 or 2019-02-05. The weekday restriction is TRUE if the weekday is Monday OR Wednesday. The time of the day restriction is TRUE if the time is within any of the provided time ranges, e.g. 8:00, 16:30.
+    message CompositeTimeRange {
+      // Range of dates defined by a [start timestamp inclusive, end timestamp inclusive] with possible coverage of multiple days.
+      repeated sensoris.protobuf.types.base.TimestampInterval date_range = 1;
+
+      // Weekday.
+      repeated sensoris.protobuf.types.base.Weekday weekday = 2;
+
+      // Time of the day range defined by a [start time inclusive, end time inclusive] in vehicle local timezone.
+      //
+      // @unit Seconds since midnight
+      // @resolution 1
+      // @range [0, 86400)
+      //
+      // @example [2:00:00 - 4:59:59] refers to data collection between 2 am and 5 am. [0:00:00 - 23:59:59] refers all day to data collection.
+      repeated sensoris.protobuf.types.base.Int64Interval time_of_the_day_range = 3;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // The composite spatial restrictions defines where data collection shall be possible.
+    //
+    // The repeated values of all fields are conjuncted by logical OR, i.e. if any of the spatial restrictions is TRUE, then the composite spatial restriction is TRUE. If all repeated values of all fields are FALSE, then the composite spatial restrictions is also FALSE.
+    message CompositeLocation {
+      // Circle with geographic or metric center position and metric radius without accuracy.
+      repeated sensoris.protobuf.types.spatial.CircleAndAccuracy circle = 1;
+
+      // Rectangle with geographic or metric minimum and maximum positions without accuracy.
+      repeated sensoris.protobuf.types.spatial.RectangleAndAccuracy rectangle = 2;
+
+      // Polygon of geographic or metric positions without accuracy.
+      repeated sensoris.protobuf.types.spatial.PolygonAndAccuracy polygon = 3;
+
+      // The directed polyline defines the required driving direction from first polyline vertex to last polyline vertex.
+      repeated sensoris.protobuf.types.spatial.DirectedPolylineCorridor directed_polyline_corridor = 4;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // The map restriction defines if data collection shall be possible based on map attribute values.
+    //
+    // The restriction is defined as follows:
+    // - The map restriction is TRUE if the map attribute and value restriction is met and therefore TRUE OR the ignore_if_not_supported flag is TRUE.
+    // - The map restriction is FALSE if the map attribute and value restriction is not met and therefore FALSE AND the ignore_if_not_supported is FALSE.
+    message MapRestriction {
+      // Map attribute and value.
+      sensoris.protobuf.types.map.MapAttributeAndValue map_attribute_and_value = 1;
+
+      // Flag that indicates what to do if the map_attribute_and_value is not supported by the vehicle.
+      google.protobuf.BoolValue ignore_if_not_supported = 2;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // The composite temporal restriction defines when data collection shall be possible.
+    CompositeTimeRange time_restrictions = 1;
+
+    // The composite spatial restriction defines where data collection shall be possible.
+    CompositeLocation spatial_restrictions = 2;
+
+    // The map restriction defines if data collection shall be possible based on map attribute values.
+    repeated MapRestriction map_restriction = 3;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // Contains a set of conditions which enables the evaluation of the BasicJobValidityRestrictions conditions.
+  //
+  // Remark: Upcoming versions of this specification might contain additional definitions for extended conditions.
+  oneof restrictions {
+    // Basic job validity restrictions.
+    BasicJobValidityRestrictions basic_job_validity_restrictions = 1;
+  }
+}  

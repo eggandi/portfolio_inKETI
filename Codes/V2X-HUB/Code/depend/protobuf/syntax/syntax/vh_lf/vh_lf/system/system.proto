@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package VH_LF.SYSTEM;
+
+import "validate/validate.proto";
+
+// 시스템 정보
+message System {
+  optional string version = 1 [(validate.rules).string = {min_len: 1, max_len: 32}]; // 시스템 버전 (Unit:—, Range:1..32 bytes)
+  optional string id      = 2 [(validate.rules).string = {min_len: 1, max_len: 32}]; // 장치 식별자 (Unit:—, Range:1..32 bytes)
+  enum Status { UNKNOWN = 0; OK = 1; FAIL = 2; }
+  optional Status status = 3 [(validate.rules).enum = {defined_only: true}]; // V2X Hub 상태 (Unit:—, Range:defined only)
+}

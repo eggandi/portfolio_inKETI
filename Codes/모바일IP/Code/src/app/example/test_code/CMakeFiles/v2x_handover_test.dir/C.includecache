@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspace/v2x-sw/src/app/test_code/src/v2x_handover_test.c
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+netinet/ip.h
+-
+netinet/tcp.h
+-
+netinet/udp.h
+-
+unistd.h
+-
+pthread.h
+-
+
+src/libs/Router/lib/iproute2/include/netinet/tcp.h
+features.h
+-
+sys/types.h
+-
+

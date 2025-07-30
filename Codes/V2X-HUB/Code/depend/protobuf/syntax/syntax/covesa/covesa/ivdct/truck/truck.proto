@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/adas/adas.proto";
+import "covesa/ivdct/truck/body/body.proto";
+import "covesa/ivdct/truck/chassis/chassis.proto";
+import "covesa/ivdct/truck/powertrain/powertrain.proto";
+import "covesa/ivdct/truck/vehicle/vehicle.proto";
+
+package COVESA.IVDCT.TRUCK;
+
+message Truck {
+	repeated COVESA.IVDCT.TRUCK.ADAS.Adas adas = 1; // All Advanced Driver Assist Systems data.
+	repeated COVESA.IVDCT.TRUCK.BODY.Body body = 2; // All body components.
+	repeated COVESA.IVDCT.TRUCK.CHASSIS.Chassis chassis = 3; // All data concerning steering, suspension, wheels, and brakes.
+	repeated COVESA.IVDCT.TRUCK.POWERTRAIN.Powertrain powertrain = 4; // Powertrain data for battery management, etc.
+	repeated COVESA.IVDCT.TRUCK.VEHICLE.Vehicle vehicle = 5; // High-level generic vehicle data.
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package IVDCT.DRIVING.BRAKE;
+
+enum Temp_warning {	// 브레이크 온도 경고
+	BRAKE_TEMP_WARNING_DEACTIVATE_WARNING  = 0;							// 비활성화(경고)
+  BRAKE_TEMP_WARNING_ACTIVATE_NO_WARNING = 1;							// 활성화(미경고)
+  BRAKE_TEMP_WARNING_NOT_AVAILABLE 			= 3;							// 사용불가
+	BRAKE_TEMP_WARNING_UNKNOWN  						= 4;							// 알수없음
+}
+
+enum Tcs {		// TCS 활성화 상태
+	BRAKE_TCS_ON 											= 0;	// 꺼짐
+  BRAKE_TCS_OFF 											= 1;	// 켜짐
+  BRAKE_TCS_ERROR										= 2;	// 오류
+  BRAKE_TCS_NOT_INSTALLED_AVAILABLE 	= 3;	// 미설치/사용불가
+	BRAKE_TCS_UNKNOWN  								= 4;	// 알수없음
+}
+
+enum Abs {		// ABS 활성화 상태
+	BRAKE_ABS_DEACTIVATE  							= 0;	// 비활성화
+  BRAKE_ABS_ACTIVATE 								= 1;	// 활성화
+  BRAKE_ABS_NOT_INSTALLED_AVAILABLE 	= 3;	// 미설치/사용불가
+	BRAKE_ABS_UNKNOWN  								= 4;	// 알수없음
+}
+
+message Brake {	// 브레이크 정보
+	optional uint64 pedal_pos_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 					// 브레이크 페달 위치 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32 pedal_pos = 2 [(validate.rules).uint32 = {gte: 0, lte: 251}]; 															// 브레이크 페달 위치(Unit:0.04[%], Over:250(100) ,Unavaiable:251)
+	optional uint64 temp_warning_ct = 3 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 				// 브레이크 온도 경고 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional Temp_warning temp_warning = 4 [(validate.rules).enum = {defined_only: true}]; 	// 브레이크 온도 경고(enumeration:0,1,3,4)
+	optional uint64 tcs_ct = 5 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 								// TCS 활성화 상태 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional Tcs tcs = 6 [(validate.rules).enum = {defined_only: true}]; 										// TCS 활성화 상태(enumeration:0..4)
+	optional uint64 abs_ct = 7 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 								// ABS 활성화 상태 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional Abs abs = 8 [(validate.rules).enum = {defined_only: true}]; 										// ABS 활성화 상태(enumeration:0,1,3,4)
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "covesa/ads_lf/ads_lf.proto";
+import "covesa/ads_hf/ads_hf.proto";
+import "covesa/dms/dms.proto";
+import "covesa/hub_hf/hub_hf.proto";
+import "covesa/ivdct/ivdct.proto";
+
+package COVESA;
+
+message Covesa {
+	optional COVESA.ADS_LF.Ads_lf ads_lf = 1;
+	optional COVESA.ADS_HF.Ads_hf ads_hf = 2;
+	optional COVESA.DMS.Dms dms = 3;
+	optional COVESA.HUB_HF.Hub_hf hub_hf = 4;
+	optional COVESA.IVDCT.Ivdct ivdct = 5;
+}

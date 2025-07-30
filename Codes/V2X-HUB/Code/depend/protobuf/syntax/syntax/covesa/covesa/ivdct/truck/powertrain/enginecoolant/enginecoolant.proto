@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package COVESA.IVDCT.TRUCK.POWERTRAIN.ENGINECOOLANT;
+
+message Enginecoolant {
+	optional float temperature = 1; // Engine coolant temperature. (Unit:celsius)
+}

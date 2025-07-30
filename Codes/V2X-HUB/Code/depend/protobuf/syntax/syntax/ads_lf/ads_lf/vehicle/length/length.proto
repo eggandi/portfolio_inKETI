@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ADS_LF.VEHICLE.LENGTH;
+
+import "validate/validate.proto";
+
+// 차량 전장
+message Length {
+  optional uint32 total = 1 [(validate.rules).uint32 = {gte: 0, lte: 4095}]; // 총 (Unit:cm, Range:0..4095)
+  optional uint64 front = 2 [(validate.rules).uint64 = {gte: 0}];           // 전 (Unit:mm, Range:0..)
+  optional uint64 back = 3 [(validate.rules).uint64 = {gte: 0}];            // 후 (Unit:mm, Range:0..)
+}

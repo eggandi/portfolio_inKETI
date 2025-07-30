@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package DTG.DRIVING;
+
+import "validate/validate.proto";
+
+// 주행 정보
+message Driving {
+  optional string dist_day     = 1 [(validate.rules).string = {min_len: 4,  max_len: 4 }]; // 일일주행거리 (Unit:1km, Range:0000..9999)
+  optional string dist_total   = 2 [(validate.rules).string = {min_len: 7,  max_len: 7 }]; // 누적주행거리 (Unit:1km, Range:0000000..9999999)
+  optional string date         = 3 [(validate.rules).string = {min_len: 14, max_len: 14}]; // 정보발생일시 (Unit:—, Range:YYMMDDhhmmss)
+  optional string speed        = 4 [(validate.rules).string = {min_len: 3,  max_len: 3 }]; // 차량속도 (Unit:km/h, Range:000..255)
+  optional string rpm          = 5 [(validate.rules).string = {min_len: 4,  max_len: 4 }]; // 엔진회전수 (Unit:RPM, Range:0000..9999)
+  optional string brake_signal = 6 [(validate.rules).string = {min_len: 1,  max_len: 1 }]; // 브레이크 신호 (Unit:—, Range:0..1)
+  optional string gps_x        = 7 [(validate.rules).string = {min_len: 9,  max_len: 9 }]; // 차량위치 X (Unit:1µdeg, Range:예:037123456)
+  optional string gps_y        = 8 [(validate.rules).string = {min_len: 9,  max_len: 9 }]; // 차량위치 Y (Unit:1µdeg, Range:예:127123456)
+  optional string heading      = 9 [(validate.rules).string = {min_len: 3,  max_len: 3 }]; // GPS 방위각 (Unit:deg, Range:000..360)
+  optional string accel_x     = 10 [(validate.rules).string = {min_len: 6,  max_len: 6 }]; // X축 가속도 (Unit:m/s², Range:-100.0..+100.0)
+  optional string accel_y     = 11 [(validate.rules).string = {min_len: 6,  max_len: 6 }]; // Y축 가속도 (Unit:m/s², Range:-100.0..+100.0)
+}

@@ -1,0 +1,24 @@
+sdk/src/azure/core/CMakeFiles/az_core.dir/az_base64.c.obj: \
+ C:\Works\Jobs\SED\Code\for_win\depend\azure-sdk-for-c\sdk\src\azure\core\az_base64.c \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_base64.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_result.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg_prefix.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/_az_cfg_suffix.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_span.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/internal/az_precondition_internal.h \
+ C:/Works/Jobs/SED/Code/for_win/depend/azure-sdk-for-c/sdk/inc/azure/core/az_precondition.h

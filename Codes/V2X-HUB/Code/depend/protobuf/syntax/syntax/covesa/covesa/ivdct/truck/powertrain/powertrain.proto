@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/powertrain/enginecoolant/enginecoolant.proto";
+import "covesa/ivdct/truck/powertrain/transmission/transmission.proto";
+
+package COVESA.IVDCT.TRUCK.POWERTRAIN;
+
+message Powertrain {
+	repeated COVESA.IVDCT.TRUCK.POWERTRAIN.ENGINECOOLANT.Enginecoolant enginecoolant = 1; // Signals related to the engine coolant (if applicable).
+	repeated COVESA.IVDCT.TRUCK.POWERTRAIN.TRANSMISSION.Transmission transmission = 2; // Transmission-specific data, stopping at the drive shafts.
+}

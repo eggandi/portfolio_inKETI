@@ -1,0 +1,32 @@
+src/lib/sed_upload_keti/CMakeFiles/sed_upload_keti.dir/src/cJSON/cJSON.c.obj: \
+ C:\Works\Jobs\SED\Code\for_win\src\lib\sed_upload_keti\src\cJSON\cJSON.c \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdio.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdlib.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/limits.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/malloc.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/errno.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/ctype.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/float.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/float.h \
+ C:/Works/Jobs/SED/Code/for_win/src/lib/sed_upload_keti/include/cJSON/cJSON.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h

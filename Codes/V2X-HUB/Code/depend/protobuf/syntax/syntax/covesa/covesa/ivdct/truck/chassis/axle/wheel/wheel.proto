@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package COVESA.IVDCT.TRUCK.CHASSIS.AXLE.WHEEL;
+
+message Wheel {
+	optional float speed = 1; // Linear speed of a vehicle's wheel. (Unit:km/h)
+}

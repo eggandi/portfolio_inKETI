@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "validate/validate.proto";
+
+package COVESA.HUB_HF.TRUCK.VEHICLE.CURRENTLOCATION.GNSSRECEIVER;
+
+message Gnssreceiver {
+	// Fix status of GNSS receiver.
+	optional string fixtype = 1 [(validate.rules).string = 
+  {in:['NONE', 'TWO_D', 'TWO_D_SATELLITE_BASED_AUGMENTATION', 'TWO_D_GROUND_BASED_AUGMENTATION', 'TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION', 'THREE_D', 'THREE_D_SATELLITE_BASED_AUGMENTATION', 'THREE_D_GROUND_BASED_AUGMENTATION', 'THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION']
+	}];
+}
+

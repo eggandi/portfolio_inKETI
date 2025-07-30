@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-gcc CMakeFiles/udp_sender.dir/udp_sender.c.o -o udp_sender   -L/workspace/v2x-sw/src/libs/v2x-sw/lib/condor5  -Wl,-rpath,/workspace/v2x-sw/src/libs/v2x-sw/lib/condor5 -lpthread -lcurl -lzip -lgps -ldot2 -ldot3 -lffasn1-base -lffasn1-dot2-2016 -lffasn1-dot3-2016 -lffasn1-j2735-2016 -lj29451 -llteaccess -lwlanaccess 

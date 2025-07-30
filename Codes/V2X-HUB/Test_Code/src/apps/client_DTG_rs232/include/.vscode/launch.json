@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Works/Jobs/새만금 통합단말/Code_Dev/V2X_HUB_PROJECT/src/apps/client_DTG_rs232/include",
+      "program": "c:/Works/Jobs/새만금 통합단말/Code_Dev/V2X_HUB_PROJECT/src/apps/client_DTG_rs232/include/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

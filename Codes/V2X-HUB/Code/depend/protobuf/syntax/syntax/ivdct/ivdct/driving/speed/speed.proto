@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "validate/validate.proto"; 
+
+package IVDCT.DRIVING.SPEED;
+
+message Speed {	// 속도 정보
+	optional uint64 wheel_speed_ct = 1 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 		// 휠 속도 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	wheel_speed	= 2 [(validate.rules).uint32 = {gte: 0, lte: 64256}]; 											// 휠 속도(Unit:1/256[km/h], Over:64255(250.250.99609375) ,Unknown:64256)
+	optional uint64 yawrate_ct = 3 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; 				// 수직 축 각속도 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional int32	yawrate = 4 [(validate.rules).int32 = {gte: 0, lte: 64256}]; 														// 수직 축 각속도(Unit:1/8192[rad/s], Min:0(-3.92), Max:64255(3.9236279296875) ,Unknown:64256)	
+	optional uint64 accel_pedal_pos_ct = 5 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}]; // 가속 페달 위치 수집시간(Unit:1[ms], 0..(2^64-1))
+	optional uint32	accel_pedal_pos = 6 [(validate.rules).uint32 = {gte: 0, lte: 251}]; 										// 가속 페달 위치(Unit:0.4[%], Max:250(100) ,Unknown:251)	
+}

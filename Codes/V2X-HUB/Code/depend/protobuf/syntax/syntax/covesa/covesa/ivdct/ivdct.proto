@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/truck.proto";
+
+package COVESA.IVDCT;
+
+message Ivdct {
+	optional COVESA.IVDCT.TRUCK.Truck truck = 1;
+}

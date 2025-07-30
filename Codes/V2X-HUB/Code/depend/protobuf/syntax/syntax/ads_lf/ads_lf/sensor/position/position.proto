@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ADS_LF.SENSOR.POSITION;
+
+import "validate/validate.proto";
+
+// 설치 위치 (후미 차축 중심 기준)
+message Position {
+  optional int64 x = 1 [(validate.rules).int64 = {gte: -1000000000, lte: 1000000001}]; // 후:음수/전:양수 (Unit:1mm, Range:-1000000000..1000000001)
+  optional int64 y = 2 [(validate.rules).int64 = {gte: -1000000000, lte: 1000000001}]; // 좌:음수/우:양수 (Unit:1mm, Range:-1000000000..1000000001)
+  optional int64 z = 3 [(validate.rules).int64 = {gte: -1000000000, lte: 1000000001}]; // 위:음수/아래:양수 (Unit:1mm, Range:-1000000000..1000000001)
+}

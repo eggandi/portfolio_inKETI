@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package HMI.SYSTEM;
+
+import "validate/validate.proto";
+
+// 설치 각 (오일러 각)
+message System {
+	optional string version = 1 [(validate.rules).string = {min_len: 1, max_len: 32}]; // 시스템 버전 (Unit:—, Range:1..20 bytes)
+	optional string id = 2 [(validate.rules).string = {min_len: 1, max_len: 32}]; // 제조사 (Unit:—, Range:1..20 bytes)
+	enum Status { STATUS_UNKNOWN = 0; STATUS_NORMAL = 1; STATUS_ERROR = 2; }
+	optional Status status = 3 [(validate.rules).enum = {defined_only: true}]; // 시스템 상태 (Unit:—, Range:A defined value)
+}

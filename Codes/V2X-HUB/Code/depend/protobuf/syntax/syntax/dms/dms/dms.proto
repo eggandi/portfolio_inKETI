@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package DMS;
+
+import "validate/validate.proto";
+
+//  DMS Data
+message Dms {
+	enum Status { 
+		DMS_STATUS_UNKNOWN = 0; 
+		DMS_STATUS_DROWSY = 1; 
+		DMS_STATUS_DISTRACTED = 2;
+		DMS_STATUS_YAWNING = 4;
+		DMS_STATUS_PHONE = 8;
+		DMS_STATUS_SMOKING = 16;
+		DMS_STATUS_DRIVER_ABSENT = 32;
+		DMS_STATUS_MASK_ON = 64;
+		DMS_STATUS_SEAT_BELT_OFF = 128;
+	}
+  optional Status status = 1  [(validate.rules).enum = {defined_only: false}]; // DMS 상태 (Unit:—, Range:0 or A defined value or sum of values)
+}

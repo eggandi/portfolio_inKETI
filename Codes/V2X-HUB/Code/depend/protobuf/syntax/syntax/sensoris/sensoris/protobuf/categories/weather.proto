@@ -1,0 +1,260 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.categories.weather;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.categories.weather";
+option java_outer_classname = "SensorisWeatherCategory";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/categories/weather";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+
+// Precipitation describes precipitation type and intensity (either as a percentage or mm/h).
+//
+// @relation 1 sensoris.protobuf.categories.weather.Precipitation IMPACT 1 sensoris.protobuf.categories.trafficevents.Hazard
+message Precipitation {
+  // Type and confidence of type.
+  //
+  // @example Precipitation type identified as RAIN, with 50 % confidence.
+  message TypeAndConfidence {
+    // Type.
+    enum Type {
+      // Unknown.
+      UNKNOWN_TYPE = 0;
+      // No precipitation.
+      NONE = 1;
+      // Rain.
+      RAIN = 2;
+      // Mixed rain and snow.
+      MIXED_RAIN_SNOW = 3;
+      // Snow.
+      SNOW = 4;
+      // Hail, sleet or freezing rain.
+      HAIL = 5;
+    }
+
+    // Type
+    Type type = 1;
+
+    // Confidence of type.
+    sensoris.protobuf.types.base.Confidence confidence = 2;
+  }
+
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Event detection status.
+  sensoris.protobuf.types.base.EventDetectionStatus detection_status = 2;
+
+  // Type and confidence of type.
+  //
+  // If type is NONE, then intensity shall not be set.
+  TypeAndConfidence type_and_confidence = 3;
+
+  oneof intensity {
+    // Intensity as percentage of maximum intensity.
+    //
+    // Intensity as percentage is non-standardized and may vary, e.g. depending on sensor manufacturer, software and hardware version, or mounting position.
+    //
+    // @unit Percent
+    // @resolution 1
+    // @range (0, 100]
+    sensoris.protobuf.types.base.Int64ValueAndAccuracy relative_intensity_and_accuracy = 4 [(sensoris.protobuf.types.base.exponent) = 0];
+
+    // Intensity.
+    //
+    // @unit MilliMeter per Hour
+    // @resolution 0.1
+    // @range (0, )
+    sensoris.protobuf.types.base.Int64ValueAndAccuracy absolute_intensity_and_accuracy = 5 [(sensoris.protobuf.types.base.exponent) = 1];
+  }
+}
+
+// Atmosphere condition.
+message AtmosphereCondition {
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Outside air temperature.
+  //
+  // @unit Degree Celsius
+  // @resolution 1
+  // @range ( , )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy outside_air_temperature = 2 [(sensoris.protobuf.types.base.exponent) = 0];
+
+  // Outside air relative humidity.
+  //
+  // @unit Percent
+  // @resolution 1
+  // @range [0,100]
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy relative_humidity = 3 [(sensoris.protobuf.types.base.exponent) = 0];
+
+  // Static air pressure.
+  //
+  // @unit HectoPascal
+  // @resolution 1
+  // @range [0, )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy static_air_pressure = 4 [(sensoris.protobuf.types.base.exponent) = 0];
+}
+
+// Wind condition.
+//
+// @relation 1 sensoris.protobuf.categories.weather.WindCondition IMPACT 1 sensoris.protobuf.categories.trafficevents.Hazard
+message WindCondition {
+  // Type and confidence of type.
+  //
+  // @example Wind type identified as STRONG_CROSS wind with 50 % confidence.
+  message TypeAndConfidence {
+    // Type.
+    enum Type {
+      // Unknown.
+      UNKNOWN_TYPE = 0;
+      // Variable wind.
+      VARIABLE = 1;
+      // Strong wind.
+      STRONG = 2;
+      // Strong cross wind.
+      STRONG_CROSS = 3;
+      // Stormy wind.
+      STORM = 4;
+    }
+
+    // Type
+    Type type = 1;
+
+    // Confidence of type.
+    sensoris.protobuf.types.base.Confidence confidence = 2;
+  }
+
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Event detection status.
+  sensoris.protobuf.types.base.EventDetectionStatus detection_status = 2;
+
+  // Type and confidence of type.
+  //
+  // If type is NONE, then speed and direction shall not be set.
+  TypeAndConfidence type_and_confidence = 3;
+
+  // Wind speed.
+  //
+  // @unit Meter per Second
+  // @resolution 1
+  // @range ( , )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy speed_and_accuracy = 4 [(sensoris.protobuf.types.base.exponent) = 0];
+
+  // Wind direction.
+  //
+  // @unit Degree
+  // @resolution 1
+  // @range [0, 360)
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy direction_and_accuracy = 5 [(sensoris.protobuf.types.base.exponent) = 0];
+}
+
+// Visibility condition.
+//
+// @relation 1 sensoris.protobuf.categories.weather.VisibilityCondition IMPACT 1 sensoris.protobuf.categories.trafficevents.Hazard
+message VisibilityCondition {
+  // Type and confidence of type.
+  //
+  // @example Low visibility due to FOG with 50 % confidence.
+  message TypeAndConfidence {
+    // Type.
+    enum Type {
+      // Unknown.
+      UNKNOWN_TYPE = 0;
+      // No impact on visibility.
+      CLEAR = 1;
+      // Mist with no impact on visibility.
+      MIST = 2;
+      // Heavy rain with impact on visibility.
+      LOW_HEAVY_RAIN = 3;
+      // Heavy snow with impact on visibility.
+      LOW_HEAVY_SNOW = 4;
+      // Smoke with impact on visibility.
+      LOW_SMOKE = 5;
+      // Fog with impact on visibility.
+      LOW_FOG = 6;
+      // Sun glare with impact on visibility.
+      LOW_SUN_GLARE = 7;
+    }
+
+    // Type
+    Type type = 1;
+
+    // Confidence of type.
+    sensoris.protobuf.types.base.Confidence confidence = 2;
+  }
+
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  // Type and confidence of type.
+  //
+  // If type is NONE, then distances shall not be set.
+  TypeAndConfidence type_and_confidence = 2;
+
+  // Visible light distance and accuracy.
+  //
+  // @unit Meter
+  // @resolution 1
+  // @range [0, )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy visible_distance_and_accuracy = 3 [(sensoris.protobuf.types.base.exponent) = 0];
+
+  // Non visible light (sensor) distance and accuracy.
+  //
+  // @unit Meter
+  // @resolution 1
+  // @range [0, )
+  sensoris.protobuf.types.base.Int64ValueAndAccuracy sensor_detection_distance_and_accuracy = 4 [(sensoris.protobuf.types.base.exponent) = 0];
+}
+
+// Light intensity.
+message LightIntensity {
+  // Event envelope.
+  sensoris.protobuf.types.base.EventEnvelope envelope = 1;
+
+  oneof intensity {
+    // Intensity as percentage of maximum intensity.
+    //
+    // Intensity as percentage is non-standardized and may vary, e.g. depending on sensor manufacturer, software and hardware version, or mounting position.
+    //
+    // @unit Percent
+    // @resolution 1
+    // @range [0, 100]
+    sensoris.protobuf.types.base.Int64ValueAndAccuracy relative_intensity_and_accuracy = 2 [(sensoris.protobuf.types.base.exponent) = 0];
+  }
+}
+
+// Weather category.
+message WeatherCategory {
+  // Envelope.
+  sensoris.protobuf.types.base.CategoryEnvelope envelope = 1;
+
+  // Precipitation.
+  repeated Precipitation precipitation = 2;
+
+  // Atmosphere condition.
+  repeated AtmosphereCondition atmosphere_condition = 3;
+
+  // Wind condition.
+  repeated WindCondition wind_condition = 4;
+
+  // Visibility condition.
+  repeated VisibilityCondition visibility_condition = 5;
+
+  // Outside light intensity.
+  repeated LightIntensity outside_light_intensity = 6;
+}

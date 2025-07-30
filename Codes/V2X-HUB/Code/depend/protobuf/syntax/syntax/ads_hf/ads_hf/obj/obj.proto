@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package ADS_HF.OBJ;
+
+import "validate/validate.proto";
+import "ads_hf/obj/speed/speed.proto";
+import "ads_hf/obj/corner_vector/corner_vector.proto";
+
+message Obj {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 객체 인지 시각 (Unit:ms, Range:0..2^64-1)
+  optional string id        = 2 [(validate.rules).string = {min_len: 1, max_len: 128}]; // 객체 ID (Unit:—, Range:1..128 bytes)
+  enum TypeEnum {
+    TYPE_UNKNOWN = 0;
+    CAR          = 1;
+    TRUCK        = 2;
+    BUS          = 3;
+    TRAILER      = 4;
+    BICYCLE      = 5;
+    MOTORCYCLE   = 6;
+    PERSON       = 7;
+    ANIMAL       = 8;
+    POTHOLE      = 9;
+    GARBAGE      = 10;
+  }
+  optional TypeEnum type = 3 [(validate.rules).enum = {defined_only: true}]; // 객체 유형 (Unit:—, Range:defined values)
+  optional uint32 heading = 4 [(validate.rules).uint32 = {gte: 0, lte: 28800}]; // 이동 방향 (Unit:0.0125deg, Range:0..28800)
+  optional SPEED.Speed speed = 5; // 속도 (Unit:0.02m/s, Range:0..8191)
+  optional CORNER_VECTOR.CornerVector corner_vector = 6; // 꼭지점 벡터 (Unit:1mm, Range:—)
+}

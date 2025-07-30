@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/hub_hf/truck/truck.proto";
+
+package COVESA.HUB_HF;
+
+message Hub_hf {
+	optional COVESA.HUB_HF.TRUCK.Truck truck = 1;
+}

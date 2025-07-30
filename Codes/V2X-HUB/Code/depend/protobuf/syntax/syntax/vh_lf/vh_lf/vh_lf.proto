@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package VH_LF;
+
+import "vh_lf/system/system.proto";
+import "vh_lf/comm/comm.proto";
+import "vh_lf/conn_status/conn_status.proto";
+
+// Low-Frequency V2X Hub Data
+message VH_lf {
+  optional VH_LF.SYSTEM.System system = 1;               // 시스템 정보 (Unit:—, Range:—)
+  optional VH_LF.COMM.Comm comm = 2;                     // 무선통신 관련 정보 (Unit:—, Range:—)
+  optional VH_LF.CONN_STATUS.ConnStatus conn_status = 3; // 장치 연결상태 정보 (Unit:—, Range:—)
+}

@@ -1,0 +1,2 @@
+C:\MinGW\mingw64\bin\ar.exe qc libaz_iot_provisioning.a CMakeFiles/az_iot_provisioning.dir/az_iot_provisioning_client.c.obj CMakeFiles/az_iot_provisioning.dir/az_iot_provisioning_client_sas.c.obj
+C:\MinGW\mingw64\bin\ranlib.exe libaz_iot_provisioning.a

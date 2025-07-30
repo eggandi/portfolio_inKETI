@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/root/Project_Relayserver/src/lib/parson/src/parson.c
+parson.h
+/home/root/Project_Relayserver/src/lib/parson/src/parson.h
+stdarg.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+ctype.h
+-
+math.h
+-
+errno.h
+-
+
+/home/root/Project_Relayserver/src/lib/parson/src/parson.h
+stddef.h
+-
+

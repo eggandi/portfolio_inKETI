@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ADS_LF.SENSOR;
+
+import "ads_lf/sensor/position/position.proto";
+import "ads_lf/sensor/orientation/orientation.proto";
+
+// 센서 정보
+message Sensor {
+  optional POSITION.Position position = 1;     // 설치 위치 (Unit:1mm, Range:-1000000000..1000000001)
+  optional ORIENTATION.Orientation orientation = 2; // 설치 각 (Unit:0.1µdeg, Range:0..3600000001)
+}

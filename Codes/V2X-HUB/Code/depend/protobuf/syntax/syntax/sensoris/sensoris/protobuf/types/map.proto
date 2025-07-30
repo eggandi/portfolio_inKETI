@@ -1,0 +1,78 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.types.map;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.types.map";
+option java_outer_classname = "SensorisMapTypes";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/types/mapping"; // map is a reserved keyword in Go
+
+// Import Google message types.
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+
+//
+// Map tiles.
+//
+
+// Map tiling scheme.
+message MapTilingScheme {
+  // Uniform resource name (URN).
+  //
+  // @syntax urn:map-tiling-scheme:[<map-vendor>]:<tiling-scheme>:[<level>]
+  sensoris.protobuf.types.base.Urn urn = 1;
+}
+
+// Map tiles.
+message MapTiles {
+  // Map tiling scheme.
+  MapTilingScheme tiling_scheme = 1;
+
+  // Tile ids in the map tiling scheme.
+  //
+  // @syntax [<tile-id-type>-]<tile-id-1>[;<tile-id-2>][;<tile-id-n>]
+  google.protobuf.StringValue tile_ids = 2;
+}
+
+//
+// Map attribute.
+//
+
+// Map attribute.
+message MapAttribute {
+  // Uniform resource name (URN).
+  //
+  // @syntax urn:map-attribute:[<map-vendor>]:<map-id>:[<map-version>]:[<publishing-version>]:<attribute-name>
+  //
+  // @example urn:map-attribute:mapmaker:hd-map:::functional_road_class
+  sensoris.protobuf.types.base.Urn urn = 1;
+}
+
+// Map attribute and value.
+message MapAttributeAndValue {
+  // Attribute.
+  MapAttribute attribute = 1;
+
+  // Values.
+  //
+  // @syntax [!]<value> for single value
+  // @syntax [!]<value1>[;<value-2>][;<value-n>] for multiple values
+  // @syntax [!][[(]<value-min>]-[<value-max>[)]] for value range
+  //
+  // @example 5 for value equal 5
+  // @example !5 for value not equal 5
+  // @example 1;3;5 for value 1, 3 or 5
+  // @example 1-4) for value 1, 2 or 3 with value 4 exclusive
+  // @example -4) for value up to 4 exclusive
+  google.protobuf.StringValue values = 2;
+}

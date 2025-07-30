@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ADS_LF.SYSTEM.SUPPORTED;
+
+import "validate/validate.proto";
+
+// 지원 기능
+message Supported {
+  enum HdMap { HDMAP_UNKNOWN = 0; HDMAP_ON = 1; HDMAP_OFF = 2; }
+  optional HdMap hdmap = 1 [(validate.rules).enum = {defined_only: true}]; // 정밀지도 사용 여부 (Unit:—, Range:defined values)
+
+  enum Dr { DR_UNKNOWN = 0; DR_ON = 1; DR_OFF = 2; }
+  optional Dr dr = 2 [(validate.rules).enum = {defined_only: true}]; // DR 기능 지원 여부 (Unit:—, Range:defined values)
+
+  optional int64 mode = 3 [(validate.rules).int64 = {gte: 0, lte: 15}]; // 주행 모드 비트열 (Unit:—, Range:0..15)
+}

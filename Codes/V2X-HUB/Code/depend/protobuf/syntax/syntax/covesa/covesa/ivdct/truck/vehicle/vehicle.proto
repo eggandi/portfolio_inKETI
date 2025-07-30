@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "covesa/ivdct/truck/vehicle/genericvehicle/genericvehicle.proto";
+
+package COVESA.IVDCT.TRUCK.VEHICLE;
+
+message Vehicle {
+	repeated COVESA.IVDCT.TRUCK.VEHICLE.GENERICVEHICLE.Genericvehicle genericvehicle = 1; // Generic vehicle signals.
+}

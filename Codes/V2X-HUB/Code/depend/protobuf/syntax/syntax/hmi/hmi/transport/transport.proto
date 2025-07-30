@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package HMI.TRANSPORT;
+
+import "validate/validate.proto";
+
+// 설치 각 (오일러 각)
+message Transport {
+	enum Phase { 
+		PHASE_UNKNOWN = 0;
+		PHASE_DRIVING_START = 1;
+		PHASE_CUSTOMS_ARRIVAL = 2;
+		PHASE_LOADING_START = 3;
+		PHASE_LOADING_COMPLETE = 4;
+		PHASE_TRANSPORT_START = 5;
+		PHASE_TRANSPORT_ONGOING = 6;
+		PHASE_TRANSPORT_COMPLETE = 7;
+		PHASE_DEFECT_START = 8;
+		PHASE_UNLOADING_COMPLETE = 9;
+		PHASE_DRIVING_END = 10;
+		PHASE_TURNAROUND_START = 11;
+		PHASE_TURNAROUND_END = 12;
+	}
+	optional Phase phase = 1 [(validate.rules).enum = {defined_only: true}]; // 운송 단계 (Unit:—, Range:A defined value)
+}

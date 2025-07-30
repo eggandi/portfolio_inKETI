@@ -1,0 +1,27 @@
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Import Google message types.
+import "google/protobuf/wrappers.proto";
+
+import "validate/validate.proto"; 
+// Package name.
+package VISA.TestMessage00.InfraSafetyMsg;
+
+message infrasafetymsg {	
+	message positionR{
+		optional int32 latitude = 1 [(validate.rules).int32 = {gte: -900000000 , lte: 900000001}]; // V2X 기지국의 위도 (Unit:0.1[udeg], Unavaiable:900000001) 
+		optional int32 longitude = 2 [(validate.rules).int32 = {gte: -1799999999  , lte: 1800000001}]; // V2X 기지국의 경도 (Unit:0.1[udeg], Unavaiable:1800000001);
+	}
+	
+	optional uint32 rsuid = 1 [(validate.rules).uint32 = {gte: 0, lte: 4294967295}];			// StationID,			-- 기지국 고유번호 
+	optional uint32 sequencenumber = 2 [(validate.rules).uint32 = {gte: 0, lte: 127}];		// MsgCount,			-- 메시지 1씩 증가하는 순서 번호 
+	optional positionR position = 3;																											// Position2D,			-- RSU 위치 정보
+	optional int32 cpuload	= 4 [(validate.rules).int32 = {gte: 0, lte: 101}];		// INTEGER (0..101),		-- 기지국 프로세서 사용률 퍼센트 (Unit:1[%], Unknown:101)
+	optional int32 memload	= 5 [(validate.rules).int32 = {gte: 0, lte: 101}];		// INTEGER (0..101),		-- 기지국 메모리 사용률 퍼센트 (Unit:1[%], Unknown:101)
+	optional uint32 rsutemperature = 6 [(validate.rules).uint32 = {gte: 0, lte: 191}];		// DE_AmbientAirTemperature(SAE-J2735),		-- 기지국 프로세서 온도 (Unit:1[deg], Offset: -40, unknown:191);
+	optional uint64 centertimestamp = 7  [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}];		// INTEGER (0..UINT64_MAX),	-- C-ITS 센터에서 메시지를 생성한 시각
+	optional uint64 rsureceivedtimestamp = 8 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}];// INTEGER (0..UINT64_MAX),	-- RSU V2X 수신 시각
+	optional uint64 rsutransmittedtimestamp	= 9 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}];// INTEGER (0..UINT64_MAX),	-- RSU에서 V2X 송출 직전 시각
+	optional uint64 v2xreceivedtimestamp	= 10 [(validate.rules).uint64 = {gte: 0, lte: 18446744073709551615}];// INTEGER (0..UINT64_MAX)	-- 차량 단말기에서 수신한 시각
+}

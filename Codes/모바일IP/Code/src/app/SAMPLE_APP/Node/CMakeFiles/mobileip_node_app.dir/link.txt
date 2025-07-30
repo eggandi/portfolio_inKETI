@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-gcc CMakeFiles/mobileip_node_app.dir/src/mobileip_node_app.c.o -o mobileip_node_app  -Wl,-rpath,/workspace/v2x-sw -lpthread -lm ../../../lV2XHO_Node.so ../../../lV2XHO_Router.so 

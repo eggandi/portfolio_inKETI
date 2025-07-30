@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package VH_HF.GNSS;
+
+import "validate/validate.proto";
+
+message Gnss { // GNSS Data
+	// Timestamp in milliseconds since epoch
+	// (Unit: ms, Range: 0..2^64-1)
+
+	optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // GNSS 정보 획득 시점 (UTC timestamp) (Unit:ms, Range:0..2^64-1)
+
+  optional int64 lat = 2 [(validate.rules).int64 = {gte: -900000000, lte: 900000001}]; // 차량 위도 (Unit:0.1µdeg, Range:-900000000..900000001, unknown:900000001)
+  optional int64 lon = 3 [(validate.rules).int64 = {gte: -1799999999, lte: 1800000001}]; // 차량 경도 (Unit:0.1µdeg, Range:-1799999999..1800000001, unknown:1800000001)
+  optional int32 elev = 4 [(validate.rules).int32 = {gte: -4096, lte: 61439}];          // 차량 고도 (Unit:10cm, Range:-4096..61439, unknown:-4096)
+
+  optional uint32 smajor_axis_acc = 5 [(validate.rules).uint32 = {gte: 0, lte: 255}];    // Semi-Major Axis Accuracy (Unit:5cm, Range:0..255, unknown:255)
+  optional uint32 sminor_axis_acc = 6 [(validate.rules).uint32 = {gte: 0, lte: 255}];    // Semi-Minor Axis Accuracy (Unit:5cm, Range:0..255, unknown:255)
+  optional uint32 smajor_axis_ori = 7 [(validate.rules).uint32 = {gte: 0, lte: 65535}];  // Semi-Major Axis Orientation (Unit:360/65535deg, Range:0..65535, unknown:65535)
+
+  optional uint32 speed = 8  [(validate.rules).uint32 = {gte: 0, lte: 8191}];             // 속도 (Unit:0.02m/s, Range:0..8191, unknown:8191)
+
+  optional uint32 heading = 9 [(validate.rules).uint32 = {gte: 0, lte: 28800}];          // 헤딩 (Unit:0.0125deg, Range:0..28800, unknown:28800)
+  optional int32 accel_lon = 10 [(validate.rules).int32 = {gte: -2000, lte: 2001}];      // 종방향 가속도 (Unit:0.01m/s², Range:-2000..2001, unknown:2001)
+  optional int32 accel_lat = 11 [(validate.rules).int32 = {gte: -2000, lte: 2001}];      // 횡방향 가속도 (Unit:0.01m/s², Range:-2000..2001, unknown:2001)
+  optional int32 accel_vert = 12 [(validate.rules).int32 = {gte: -127, lte: 127}];       // 수직 가속도 (Unit:0.02G, Range:-127..127, unknown:-127)
+  optional int32 yawrate = 13 [(validate.rules).int32 = {gte: -32768, lte: 32767}];      // 요레이트 (Unit:0.01deg/s, Range:-32768..32767, unknown:-32768)
+
+  enum FixType { FIX_UNKNOWN = 0; NOT_FIX = 1; FIX_2D = 2; FIX_3D = 3; }
+  optional FixType fix = 14 [(validate.rules).enum = {defined_only: true}];               // GNSS fix 상태 (Unit:—, Range:defined values)
+
+  enum NetRtkFix { NRTK_UNKNOWN = 0; NRTK_NOT_FIX = 1; NRTK_FIX = 2; }
+  optional NetRtkFix net_rtk_fix = 15 [(validate.rules).enum = {defined_only: true}];    // Network RTK fix (Unit:—, Range:defined values)
+}

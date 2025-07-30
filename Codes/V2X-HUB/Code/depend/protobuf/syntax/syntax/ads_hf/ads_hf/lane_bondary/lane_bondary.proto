@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ADS_HF.LANE_BONDARY;
+
+import "validate/validate.proto";
+import "ads_hf/lane_bondary/dist/dist.proto";
+
+message LaneBondary {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 차선 인지 시각 (Unit:ms, Range:0..2^64-1)
+  optional uint32 lane_boundary_no = 2 [(validate.rules).uint32 = {gte: 1, lte: 128}]; // 차선 번호 (Unit:—, Range:1..128)
+
+  enum PosRef { POS_UNKNOWN=0; LEFT=1; CENTER=2; RIGHT=3; }
+  optional PosRef pos_ref = 3 [(validate.rules).enum = {defined_only: true}]; // 차선 위치 (Unit:—, Range:defined values)
+
+  repeated DIST.Dist dist = 4 [(validate.rules).repeated = {min_items: 1}]; // 차선과의 거리 좌표 (Unit:1mm, Range:—)
+
+  enum Type {
+    TB_UNKNOWN=0; TB_DASHED=1; TB_SOLID=2; TB_DASHED_SOLID=3; TB_DOUBLE_SOLID=4;
+    TB_WHITE_DASHED=5; TB_WHITE_SOLID=6; TB_WHITE_DASHED_SOLID=7; TB_WHITE_DOUBLE_SOLID=8;
+    TB_YELLOW_DASHED=9; TB_EXT_SOLID=10; TB_YELLOW_DASHED_SOLID=11; TB_YELLOW_DOUBLE_SOLID=12;
+    TB_STOP_LINE=13; TB_CROSSWALK=14;
+  }
+  optional Type type = 5 [(validate.rules).enum = {defined_only: true}]; // 차선 유형 (Unit:—, Range:defined values)
+}

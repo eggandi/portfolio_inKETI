@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package COVESA.HUB_HF.TRUCK.VEHICLE.GENERICVEHICLE.ACCELERATION;
+
+message Acceleration {
+	optional float longitudinal = 1; // Vehicle acceleration in X (longitudinal acceleration). (Unit:m/s^2)
+	optional float lateral = 2; // Vehicle acceleration in Y (lateral acceleration). (Unit:m/s^2)
+	optional float vertical = 3; // Vehicle acceleration in Z (vertical acceleration). (Unit:m/s^2)
+}

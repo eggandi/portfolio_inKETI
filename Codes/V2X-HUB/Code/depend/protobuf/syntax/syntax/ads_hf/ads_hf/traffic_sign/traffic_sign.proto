@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package ADS_HF.TRAFFIC_SIGN;
+
+import "validate/validate.proto";
+
+message TrafficSign {
+  optional uint64 timestamp = 1 [(validate.rules).uint64 = {gte: 0}]; // 신호등 인지 시각 (Unit:ms, Range:0..2^64-1)
+  optional uint32 id = 2 [(validate.rules).uint32 = {gte: 1, lte: 255}]; // 신호등 ID (Unit:—, Range:1..255)
+
+  enum Light {
+    LIGHT_UNKNOWN = 0;
+    BLUE          = 1;
+    RED           = 2;
+    YELLOW        = 3;
+    LEFT_ARROW    = 4;
+    RIGHT_ARROW   = 5;
+    UTURN         = 6;
+    FLASH         = 7;
+  }
+  optional Light light = 3 [(validate.rules).enum = {defined_only: true}]; // 신호등 상태 (Unit:—, Range:defined values)
+}

@@ -1,0 +1,263 @@
+//
+// Copyright (c) 2017-2024 SENSORIS Innovation Platform hosted by ERTICO - ITS Europe.
+//
+// This program and the accompanying materials are made available under the terms of the Creative Commons Attribution-NoDerivatives 4.0 International license which accompanies this distribution, and is available at https://creativecommons.org/licenses/by-nd/4.0/legalcode.
+//
+
+// Google Protocol Buffers Version 3.
+syntax = "proto3";
+
+// Package name.
+package sensoris.protobuf.types.collection;
+
+// Options for code generation.
+option cc_enable_arenas = true;
+option java_package = "org.sensoris.types.collection";
+option java_outer_classname = "SensorisCollectionTypes";
+option java_multiple_files = true;
+option go_package = "sensoris.org/specification/types/collection";
+
+// Import Google message types.
+import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
+
+// Import SENSORIS message types.
+import "sensoris/protobuf/types/base.proto";
+import "sensoris/protobuf/types/job.proto";
+
+//
+// Collection extents type.
+//
+
+// The extent of a collection allows to restrict the amount of collected data by various dimensions.
+//
+// If any of the fields is not set, the field shall not be considered as a restricting extent.
+message CollectionExtents {
+  // Count.
+  //
+  // @unit 1
+  // @resolution 1
+  // @range (0, )
+  google.protobuf.Int64Value count = 1;
+
+  // Size of SENSORIS DataMessage.
+  //
+  // @unit Byte
+  // @resolution 1
+  // @range (0, )
+  google.protobuf.Int64Value data_message_size = 2;
+
+  // Length of accumulated SENSORIS DataMessage LocalizationCategory VehiclePositionAndOrientations.
+  //
+  // @unit Meter
+  // @resolution 1
+  // @range (0, )
+  google.protobuf.Int64Value path_length = 3;
+
+  // Duration.
+  //
+  // @unit Second
+  // @resolution 1
+  // @range (0, )
+  google.protobuf.Int64Value duration = 4;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}
+
+//
+// Collection action type.
+//
+
+// The collection action defines what to do during a data collection.
+//
+// It consists of tasks to be performed by the collector and in general defines what sensor data shall be collected.
+//
+// When actual collection happens depends on triggers. Triggers are triggering the real collection.
+message CollectionAction {
+  // Single collection task.
+  message CollectionTask {
+    // Defines exactly one event or event field of SENSORIS DataMessages which shall be collected.
+    message CollectionEventOrEventField {
+      // Requested aggregation of the event_or_event_field_to_collect.
+      //
+      // See also sensoris.protobuf.types.base.StatisticMeasureType.
+      enum AggregationType {
+        // Unknown.
+        UNKNOWN_AGGREGATION_TYPE = 0;
+        // All values shall be used, i.e. no aggregation.
+        ALL = 1;
+        // The minimum value reading between last and current collection shall be used.
+        MINIMUM = 2;
+        // The maximum reading between last and current collection shall be used.
+        MAXIMUM = 3;
+        // The average reading between last and current collection shall be used.
+        AVERAGE = 4;
+        // The median reading between last and current collection shall be used.
+        MEDIAN = 5;
+      }
+
+      // Defines exactly one event or event field to be collected, referenced by it's path in SENSORIS DataMessages.
+      //
+      // The event may be a complete SENSORIS event, e.g. vehicle_speed, or a specific event field of a SENSORIS event, e.g. vehicle_speed > value_and_accuracy > metric_vehicle > x.
+      //
+      // @example A path of 2.2.2.4 references the data_message = 2 > event_group = 2 > localization_category = 2 > vehicle_speed = 4.
+      // @example A path of 2.2.2.4.2.1.1 references the data_message = 2 > event_group = 2 > localization_category = 2 > vehicle_speed = 4 > value_and_accuracy = 2 > metric_vehicle = 1 > x = 1.
+      sensoris.protobuf.types.base.AbsoluteOrExtensionPath event_or_event_field_to_collect = 1;
+
+      // Defines if the event_or_event_field_to_collect is mandatory and has to be provided in order to fulfill the collection task (FALSE) or if the event_or_event_field_to_collect is optional (TRUE) in the resulting requested SENSORIS DataMessage.
+      google.protobuf.BoolValue optional = 2;
+
+      oneof aggregation {
+        // If true, the current value shall be used.
+        google.protobuf.BoolValue current_value = 3;
+
+        // Requested aggregation of the event_or_event_field_to_collect over a past time period.
+        AggregationType aggregation_type = 4;
+
+        // The event_or_event_field_to_collect is requested based on a histogram structure. A histogram is created over a duration of multiple collection events by adding the values (e.g. speed every second) into the persistent histogram.
+        //
+        // Specification of an absolute histogram of int64 values, i.e. bins contain absolute number of total number of elements.
+        sensoris.protobuf.types.job.AbsoluteHistogramSpecification absolute_histogram_specification = 5;
+
+        // The event_or_event_field_to_collect is requested based on a histogram structure. A histogram is created over a duration of multiple collection events by adding the values (e.g. speed every second) into the persistent histogram.
+        //
+        // Specification of a relative histogram of int64 values, i.e. bins contain relative percentage of total number of elements.
+        sensoris.protobuf.types.job.RelativeHistogramSpecification relative_histogram_specification = 6;
+      }
+
+      // For event_or_event_field_to_collect of type int64 the field option exponent as defined in the SENSORIS specification version, see sensoris.protobuf.types.base.exponent, can be overridden by providing the requested exponent to allow for higher or lower resolution of this field.
+      //
+      // If no override is provided, the default exponent value of the SENSORIS specification is used.
+      google.protobuf.Int64Value requested_exponent = 7;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // The collection configuration defines in which instant the actual data collection should happen. It allows also to extend the collection instant to a range via pre- and post-offsets.
+    //
+    // For example collect traffic signs and 50m before and 50 after it for traffic signs. Trigger type should be ON_CHANGE, pre- and post- trigger 50 with TriggerOffset type DISTANCE.
+    //
+    // Collection configuration is applicable to the first field_to_collect since it is a "control" field others are going to be collected at NATIVE_FREQUENCY.
+    message CollectionConfiguration {
+      // The trigger offset can be used to define a pre- and post-offset around a triggered data collection, i.e. it is defined that data collection shall not only contain the data defined by the trigger itself, but also data before or after the trigger.
+      //
+      // @example If a data collection trigger requests detected traffic signs by the camera, it is possible to define e.g. a pre-offset and a post-offset with each 10 vehicle positions before and after the traffic sign event.
+      message TriggerOffset {
+        enum Type {
+          // Unknown.
+          UNKNOWN_TYPE = 0;
+          // The reference unit is the count of sensor data readings before/after the data collection is started/stopped.
+          COUNT = 1;
+          // The reference unit is the distance in meters before/after the data collection is started/stopped.
+          DISTANCE = 2;
+        }
+
+        // Defines which type of metric has to be considered for the data collection offset before/after the data collection is started/ended.
+        Type type = 1;
+
+        // The amount of values before/after data recording.
+        google.protobuf.Int64Value value = 2;
+      }
+
+      // The trigger frequency defines how often sensor data is collected.
+      message TriggerFrequency {
+        // Trigger type.
+        //
+        // - Types ONCE, BY_TIME, and BY_DISTANCE are defined for the entire set of sensor data information specified in the attribute_to_collect list of CollectionAttribute.
+        // - Type ON_CHANGE is only valid for the check of the first element in the event_or_event_field_to_collect list of CollectionEventOrEventField as only this first element will be checked for change.
+        // - Type NATIVE_FREQUENCY provides the collection information when it becomes available based on the in vehicle native frequency.
+        enum Type {
+          // Unknown.
+          UNKNOWN_TYPE = 0;
+          // Only one collection is done. If the data collection is started all defined sensor data values which are available in the memory buffer of the vehicle data collector are stored immediately. If no sensor data value is available, no value is stored.
+          ONCE = 1;
+          // Collection is done when sensor data value has changed. If the data collection is started the first available value is also stored.
+          //
+          // Value in case of ON_CHANGE defines count of changes which triggers e.g. 2 means collect on every second value change.
+          ON_CHANGE = 2;
+          // Time in unit MilliSecond and resolution 1 is used as reference. This is different than the usual SI-unit of time.
+          //
+          // All available sensor data values shall be collected in time intervals of the defined value.
+          BY_TIME = 3;
+          // Distance in unit Meter and resolution 1 is used as reference.
+          //
+          // All available sensor data values shall be collected in distance intervals of the defined value.
+          //
+          // If the data collection is started the first available values are also stored.
+          BY_DISTANCE = 4;
+          // Native frequency of the sensor.
+          //
+          // All available sensor data values shall be collected as they are being produced by the sensors.
+          NATIVE_FREQUENCY = 5;
+        }
+
+        // Type.
+        Type type = 1;
+
+        // Defines the value for the sensor data collection method. The unit of this value is defined by the type data element.
+        //
+        // This value applies only for the types BY_TIME, BY_DISTANCE, and ON_CHANGE. For other collection types this value shall not be interpreted.
+        google.protobuf.Int64Value value = 2;
+      }
+
+      // Defines the pre-offset trigger around a triggered data collection, i.e. which data shall be additionally included in the data collection.
+      TriggerOffset pre_trigger_offset = 1;
+
+      // Defines the post-offset trigger around a triggered data collection, i.e. which data shall be additionally included in the data collection.
+      TriggerOffset post_trigger_offset = 2;
+
+      // The trigger frequency defines how often sensor data is collected.
+      TriggerFrequency trigger_frequency = 3;
+
+      // Proprietary extension.
+      repeated google.protobuf.Any extension = 15;
+    }
+
+    // Defines if the collection task is mandatory and the requested data has to be collected in order to to fulfill the job request (FALSE) or if the collection task is optional (TRUE) and no data has to be collected.
+    //
+    // If the collection task is optional then also all event fields are optional, irrespective if they are set as mandatory.
+    google.protobuf.BoolValue optional = 1;
+
+    // Defines if two consecutive CollectionAction objects can be aggregated by the one CollectionTask if elements in this collection_task overlaps in time.
+    //
+    // This flag shall not be set in more than one CollectionTask objects of the JobRequestMessage.
+    google.protobuf.BoolValue prevent_overlapping_by_time = 2;
+
+    // Defines exactly one event or event field of SENSORIS DataMessages which shall be collected.
+    //
+    // The event may be a complete SENSORIS event, e.g. vehicle_speed, or a specific event field of a SENSORIS event, e.g. vehicle_speed > value_and_accuracy > metric_vehicle > x. If the event field is a specific event field of a SENSORIS event and other event fields are also specific event fields of the same SENSORIS event, then the fields shall be set on the same event.
+    //
+    // @example For the specific event fields vehicle_speed > value_and_accuracy > metric_vehicle > x, vehicle_speed > value_and_accuracy > metric_vehicle > y, and vehicle_speed > value_and_accuracy > metric_vehicle > z only a single SENSORIS event vehicle_speed shall be part of the collected data if they share the same timestamp.
+    repeated CollectionEventOrEventField collection_event_or_event_field = 3;
+
+    // Defines how the specified sensor data shall be collected for all events and event fields defined in collection_event_or_event_field of this CollectionTask. This field is mandatory for data collection.
+    //
+    // Events or event fields with different collection configuration need to be defined in different CollectionTasks. Event or event fields with the same collection configuration can be defined in the same CollectionTask.
+    //
+    // Note: When the collection configuration is missing, it is considered as NATIVE_FREQUENCY triggering. It means it collects all sensor data as it is coming in.
+    CollectionConfiguration collection_configuration = 4;
+
+    // Proprietary extension.
+    repeated google.protobuf.Any extension = 15;
+  }
+
+  // Collection task.
+  repeated CollectionTask collection_task = 1;
+
+  // Defines the minimum expected extents of a SENSORIS DataMessage during data collection.
+  //
+  // If the data message extent value is lower or equal to the requested extent value, the data message shall not be transmitted.
+  //
+  // @example The extent contains a minimum of 20 seconds duration. A message containing 15 seconds of data collection will not be transmitted. The specified minimum extent is overriding any lifetime values. If the minimum extent is not met and e.g. the time to submit or the discard after time is reached, then the message is discarded as it poses no value to the submitter.
+  CollectionExtents min_transmitted_message_extents = 2;
+
+  // Defines the maximum allowed requested extent of a SENSORIS DataMessage during data collection.
+  //
+  // If the data message extent value is greater or equal to the requested extent value, the already collected data shall be put into a SENSORIS DataMessage that could be transmitted to the submitter of the job request, and continue the data collection for the next DataMessage.
+  CollectionExtents max_transmitted_message_extents = 3;
+
+  // Proprietary extension.
+  repeated google.protobuf.Any extension = 15;
+}

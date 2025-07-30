@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\blobs_client_sample.dir/objects.a
+C:\MinGW\mingw64\bin\ar.exe qc CMakeFiles\blobs_client_sample.dir/objects.a @CMakeFiles\blobs_client_sample.dir\objects1.rsp
+C:\MinGW\mingw64\bin\gcc.exe -fPIC -Wl,--start-group -Xlinker -Map=blobs_client_sample.map -Os -Wl,--whole-archive CMakeFiles\blobs_client_sample.dir/objects.a -Wl,--no-whole-archive -o blobs_client_sample.exe -Wl,--out-implib,libblobs_client_sample.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\blobs_client_sample.dir\linkLibs.rsp

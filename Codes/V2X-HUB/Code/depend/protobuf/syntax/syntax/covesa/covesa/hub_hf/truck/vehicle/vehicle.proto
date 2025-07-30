@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "covesa/hub_hf/truck/vehicle/currentlocation/currentlocation.proto";
+import "covesa/hub_hf/truck/vehicle/genericvehicle/genericvehicle.proto";
+
+package COVESA.HUB_HF.TRUCK.VEHICLE;
+
+message Vehicle {
+	repeated COVESA.HUB_HF.TRUCK.VEHICLE.CURRENTLOCATION.Currentlocation currentlocation = 1; // Generic vehicle signals.
+	repeated COVESA.HUB_HF.TRUCK.VEHICLE.GENERICVEHICLE.Genericvehicle genericvehicle = 2; // Generic vehicle signals.
+}

@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC  -g  -shared -Wl,-soname,libmemory_allocation.so -o libmemory_allocation.so CMakeFiles/memory_allocation.dir/src/memory_allocation.c.o   -L/home/root/Project_Relayserver/ouput/lib  -Wl,-rpath,/home/root/Project_Relayserver/ouput/lib -lpthread 

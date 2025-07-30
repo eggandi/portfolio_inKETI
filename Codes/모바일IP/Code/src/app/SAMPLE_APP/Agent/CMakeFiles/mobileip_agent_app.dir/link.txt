@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-gcc CMakeFiles/mobileip_agent_app.dir/src/mobileip_agent_app.c.o -o mobileip_agent_app  -Wl,-rpath,/workspace/v2x-sw -lpthread ../../../lV2XHO_Agent.so ../../../lV2XHO_Router.so 

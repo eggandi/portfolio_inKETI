@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package IVDCT.SYSTEM.STATUS;
+
+enum Status {	// 장치 동작상태
+	SYSTEM_STATUS_UNKNOWN  = 0;	// 알수없음
+  SYSTEM_STATUS_NORMAL   = 1;	// 정상
+  SYSTEM_STATUS_ABNORMAL = 2;	// 비정상
+}
