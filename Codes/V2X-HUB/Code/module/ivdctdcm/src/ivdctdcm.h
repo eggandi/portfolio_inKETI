@@ -37,6 +37,8 @@ extern "C" {
 // 공용 라이브러리 헤더파일
 #include "kvhlog.h"
 #include "kvhuds.h"
+#include "kvhredis.h"
+
 
 /// IVDCT I/F 기본 설정
 #define IVDCTDCM_DEFAULT_IF_DEV_NAME "/dev/ttyFTDI2"
@@ -46,6 +48,8 @@ extern "C" {
 
 #define IVDCTDCMPOROBUFPKT_STX (0xABCD)
 #define IVDCTDCMPOROBUFPKT_ETX (0xDCBA)
+
+#define IVDCTDCM_REDIS_PUBLISH_KEY "IVDCT" ///< IVDCT Redis Publish Key
 
 typedef struct 
 {
@@ -80,6 +84,15 @@ typedef struct
     volatile bool rx_th_running; ///< 수신 쓰레드 동작 여부
   } ivdct_if;
 
+	struct {
+		char server_addr_str[INET_ADDRSTRLEN]; ///< Redis 서버 주소 문자열
+		uint16_t server_port; ///< Redis 서버 포트번호
+		KVHREDISHANDLE h_cmd; ///< Redis 기능 핸들 (PUBLISH 용)
+		KVHREDISKey key_ivdct_protobuf;
+		KVHREDISKey key_ivdct_raw;
+		KVHREDISKey key_ivdct_publish;
+  } redis_if;
+
   struct {
     unsigned int ivdctdcm_rx; ///< IVDCT로부터의 운전자상태데이터 수신 누적횟수
     unsigned int dgm_tx; ///< DGM으로의 운전자상태데이터 송신 누적횟수
@@ -108,6 +121,10 @@ int IVDCTDCM_ProcessPBParseFromArray(IVDCTDCM_PBHandler h, const uint8_t *serial
 size_t IVDCTDCM_ProcessPBSerializeToString(IVDCTDCM_PBHandler h, char **out_buffer);
 int IVDCTDCM_GetPBHandleData(IVDCTDCM_PBHandler h, KVHIVDCTData** out_data);
 
+// ivdctdcm_redis_if.c
+int IVDCTDCM_ProcessRedisSETtoKey(IVDCTDCM_MIB *mib, KVHREDISKey *key, uint8_t *data, size_t data_size);
+int IVDCTDCM_ProcessRedisPUBLISHToKey(IVDCTDCM_MIB *mib, KVHREDISKey *key,  uint8_t *data, size_t data_size);
+int IVDCTDCM_InitRedisIF(IVDCTDCM_MIB *mib);
 
 
 #ifdef __cplusplus

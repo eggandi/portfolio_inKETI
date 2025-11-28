@@ -207,6 +207,16 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: \
  /workspace/kvh/src/common/include/kvhlog.h \
  /workspace/kvh/src/common/include/kvhuds.h \
  /workspace/kvh/src/common/include/kvh_common.h \
+ /workspace/kvh/src/common/include/kvhredis.h \
+ /usr/local/include/openssl/sha.h /usr/local/include/openssl/macros.h \
+ /usr/local/include/openssl/opensslconf.h \
+ /usr/local/include/openssl/configuration.h \
+ /usr/local/include/openssl/opensslv.h /usr/local/include/openssl/e_os2.h \
+ /workspace/kvh/src/depend/hiredis/include/hiredis/hiredis.h \
+ /workspace/kvh/src/depend/hiredis/include/hiredis/read.h \
+ /usr/aarch64-linux-gnu/include/sys/time.h \
+ /workspace/kvh/src/depend/hiredis/include/hiredis/sds.h \
+ /workspace/kvh/src/depend/hiredis/include/hiredis/alloc.h \
  /usr/aarch64-linux-gnu/include/c++/11/iostream \
  /usr/aarch64-linux-gnu/include/c++/11/ostream \
  /usr/aarch64-linux-gnu/include/c++/11/ios \
@@ -419,7 +429,6 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: \
  /workspace/kvh/src/depend/protobuf/output/kvh1a/include/absl/log/log_entry.h \
  /workspace/kvh/src/depend/protobuf/output/kvh1a/include/absl/log/internal/config.h \
  /workspace/kvh/src/depend/protobuf/output/kvh1a/include/absl/time/time.h \
- /usr/aarch64-linux-gnu/include/sys/time.h \
  /usr/aarch64-linux-gnu/include/c++/11/chrono \
  /usr/aarch64-linux-gnu/include/c++/11/ratio \
  /workspace/kvh/src/depend/protobuf/output/kvh1a/include/absl/time/civil_time.h \
@@ -617,8 +626,4 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: \
  /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/lights/lights.pb.h \
  /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/lights/hazard_sig/hazard_sig.pb.h \
  /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/weight/weight.pb.h \
- /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/weight/axle_weight/axle_weight.pb.h \
- /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/diag/diag.pb.validate.h \
- /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.validate.h \
- /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/lights/lights.pb.validate.h \
- /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/weight/weight.pb.validate.h
+ /workspace/kvh/src/depend/protobuf/syntax/src/ivdct/ivdct/weight/axle_weight/axle_weight.pb.h

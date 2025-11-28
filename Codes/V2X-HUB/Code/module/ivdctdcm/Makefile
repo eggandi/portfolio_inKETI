@@ -181,30 +181,6 @@ src/ivdctdcm.c.s:
 	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.s
 .PHONY : src/ivdctdcm.c.s
 
-src/ivdctdcm_dgm_if.o: src/ivdctdcm_dgm_if.c.o
-.PHONY : src/ivdctdcm_dgm_if.o
-
-# target to build an object file
-src/ivdctdcm_dgm_if.c.o:
-	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o
-.PHONY : src/ivdctdcm_dgm_if.c.o
-
-src/ivdctdcm_dgm_if.i: src/ivdctdcm_dgm_if.c.i
-.PHONY : src/ivdctdcm_dgm_if.i
-
-# target to preprocess a source file
-src/ivdctdcm_dgm_if.c.i:
-	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.i
-.PHONY : src/ivdctdcm_dgm_if.c.i
-
-src/ivdctdcm_dgm_if.s: src/ivdctdcm_dgm_if.c.s
-.PHONY : src/ivdctdcm_dgm_if.s
-
-# target to generate assembly for a file
-src/ivdctdcm_dgm_if.c.s:
-	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.s
-.PHONY : src/ivdctdcm_dgm_if.c.s
-
 src/ivdctdcm_input_params.o: src/ivdctdcm_input_params.c.o
 .PHONY : src/ivdctdcm_input_params.o
 
@@ -277,6 +253,30 @@ src/ivdctdcm_pb.cc.s:
 	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.s
 .PHONY : src/ivdctdcm_pb.cc.s
 
+src/ivdctdcm_redis_if.o: src/ivdctdcm_redis_if.c.o
+.PHONY : src/ivdctdcm_redis_if.o
+
+# target to build an object file
+src/ivdctdcm_redis_if.c.o:
+	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o
+.PHONY : src/ivdctdcm_redis_if.c.o
+
+src/ivdctdcm_redis_if.i: src/ivdctdcm_redis_if.c.i
+.PHONY : src/ivdctdcm_redis_if.i
+
+# target to preprocess a source file
+src/ivdctdcm_redis_if.c.i:
+	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.i
+.PHONY : src/ivdctdcm_redis_if.c.i
+
+src/ivdctdcm_redis_if.s: src/ivdctdcm_redis_if.c.s
+.PHONY : src/ivdctdcm_redis_if.s
+
+# target to generate assembly for a file
+src/ivdctdcm_redis_if.c.s:
+	cd /workspace/kvh && $(MAKE) $(MAKESILENT) -f src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.s
+.PHONY : src/ivdctdcm_redis_if.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -292,9 +292,6 @@ help:
 	@echo "... src/ivdctdcm.o"
 	@echo "... src/ivdctdcm.i"
 	@echo "... src/ivdctdcm.s"
-	@echo "... src/ivdctdcm_dgm_if.o"
-	@echo "... src/ivdctdcm_dgm_if.i"
-	@echo "... src/ivdctdcm_dgm_if.s"
 	@echo "... src/ivdctdcm_input_params.o"
 	@echo "... src/ivdctdcm_input_params.i"
 	@echo "... src/ivdctdcm_input_params.s"
@@ -304,6 +301,9 @@ help:
 	@echo "... src/ivdctdcm_pb.o"
 	@echo "... src/ivdctdcm_pb.i"
 	@echo "... src/ivdctdcm_pb.s"
+	@echo "... src/ivdctdcm_redis_if.o"
+	@echo "... src/ivdctdcm_redis_if.i"
+	@echo "... src/ivdctdcm_redis_if.s"
 .PHONY : help
 
 

@@ -16,8 +16,9 @@
  */
 static void IVDCTDCM_SetDefaultInputParameters(IVDCTDCM_MIB *mib)
 {
-	strncpy(mib->dgm_if.uds.s_uds_file_path, KVH_UDS_S_FILE_IVD_IVDCTDCM, KVH_FILE_PATH_MAX_LEN);
-  strncpy(mib->dgm_if.uds.c_uds_file_path, KVH_UDS_C_FILE_IVD_IVDCTDCM, KVH_FILE_PATH_MAX_LEN);
+
+	strncpy(mib->redis_if.server_addr_str, "192.168.137.100", INET_ADDRSTRLEN);
+	mib->redis_if.server_port = 6379; // Redis 기본 포트번호
 	strncpy(mib->ivdct_if.dev_name, IVDCTDCM_DEFAULT_IF_DEV_NAME, sizeof(mib->ivdct_if.dev_name)-1);
 	mib->ivdct_if.baudrate = IVDCTDCM_DEFAULT_IF_BAUDRATE;
   mib->logfile = NULL;
@@ -40,19 +41,19 @@ static int IVDCTDCM_ProcessParsedOption(IVDCTDCM_MIB *mib, int option)
       mib->log_lv = (KVHLOGLevel)strtoul(optarg, NULL, 10);
       break;
     }
-    case 1: { // "suds"
-      strncpy(mib->dgm_if.uds.s_uds_file_path, optarg, KVH_FILE_PATH_MAX_LEN);
+    case 1: { // "redis_server_address"
+      strncpy(mib->redis_if.server_addr_str, optarg, INET_ADDRSTRLEN);
       break;
     }
-    case 2: { // "cuds"
-      strncpy(mib->dgm_if.uds.c_uds_file_path, optarg, KVH_FILE_PATH_MAX_LEN);
+    case 2: { // "redis_server_port"
+      mib->redis_if.server_port = strtoul(optarg, NULL, 10);
       break;
     }
-    case 3: { // "dev"
+    case 3: { // "ivdct_rs232_dev"
       strncpy(mib->ivdct_if.dev_name, optarg, sizeof(mib->ivdct_if.dev_name)-1);
       break;
     }
-    case 4: { // "baudrate"
+    case 4: { // "ivdct_rs232_baudrate"
       mib->ivdct_if.baudrate = strtol(optarg, NULL, 10);
       break;
     }
@@ -69,7 +70,6 @@ static int IVDCTDCM_ProcessParsedOption(IVDCTDCM_MIB *mib, int option)
   return ret;
 }
 
-
 /**
  * @brief 모듈 실행 시 함께 입력된 파라미터들을 파싱하여 설정정보에 저장한다.
  * @param[in] argc 모듈 실행 시 입력되는 명령줄 내 파라미터들의 개수 (모듈 실행파일명 포함)
@@ -83,10 +83,10 @@ int IVDCTDCM_ParsingInputParameters(int argc, char *argv[], IVDCTDCM_MIB *mib)
   int c, option_idx = 0;
   struct option options[] = {
     {"dbg", required_argument, 0, 0/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
-    {"suds", required_argument, 0, 1/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
-    {"cuds", required_argument, 0, 2/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
-    {"dev", required_argument, 0, 3/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
-    {"baudrate", required_argument, 0, 4/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
+    {"redis_server_addr", required_argument, 0, 1/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
+    {"redis_server_port", required_argument, 0, 2/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
+    {"ivdct_rs232_dev", required_argument, 0, 3/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
+    {"ivdct_rs232_baudrate", required_argument, 0, 4/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
     {"logfile", required_argument, 0, 5/*=getopt_long() 호출 시 option_idx 에 반환되는 값*/},
     {0, 0, 0, 0} // 옵션 배열은 {0,0,0,0} 센티넬에 의해 만료된다.
   };
@@ -107,7 +107,7 @@ int IVDCTDCM_ParsingInputParameters(int argc, char *argv[], IVDCTDCM_MIB *mib)
   /*
    * 입력 파라미터를 파싱하여 저장한다.
    */
-  while(1) {
+  while (1) {
     // 옵션 파싱
     c = getopt_long(argc, argv, "", options, &option_idx);
     if (c == -1) {  // 모든 파라미터 파싱 완료

@@ -1,0 +1,2 @@
+aarch64-linux-gnu-ar qc ../../../../output/kvh1a/libkvhredis.a CMakeFiles/kvhredis.dir/src/kvhredis.c.o CMakeFiles/kvhredis.dir/src/kvhredis_key.c.o CMakeFiles/kvhredis.dir/src/kvhredis_rx.c.o CMakeFiles/kvhredis.dir/src/kvhredis_tx.c.o
+aarch64-linux-gnu-ranlib ../../../../output/kvh1a/libkvhredis.a

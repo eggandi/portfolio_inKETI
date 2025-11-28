@@ -1,0 +1,2 @@
+aarch64-linux-gnu-ar qc ../../../../output/kvh1a/libkvhtcp.a CMakeFiles/kvhtcp.dir/src/kvhtcp.c.o
+aarch64-linux-gnu-ranlib ../../../../output/kvh1a/libkvhtcp.a

@@ -28,8 +28,8 @@ static void IVDCTDCM_Usage(const char *mod_filename)
   printf("\n");
 
   printf(" OPTIONS\n");
-  printf("  --suds <file path>          Set UDS server file path. If not specified, set to \"%s\"\n", KVH_UDS_S_FILE_IVD_IVDCTDCM);
-  printf("  --cuds <file path>          Set UDS client file path. If not specified, set to \"%s\"\n", KVH_UDS_C_FILE_IVD_IVDCTDCM);
+	printf("  --redis_host_address		Set Redis server address. If not specified, set to \"192.168.137.100\"\n");
+  printf("  --redis_host_port			Set Redis server port. If not specified, set to %d\n", 6379);
   printf("  --dev <file path>           Set IVDCT I/F serial port device name. If not specified, set to \"%s\"\n", "");
   printf("  --baudrate <file path>      Set IVDCT I/F serial port baudrate. If not specified, set to \"%d\"\n", 1115200);
   printf("  --logfile                   Set log message file. If not specified, set to stderr\n");
@@ -72,12 +72,22 @@ int main(int argc, char *argv[])
   LOG(kKVHLOGLevel_Init, "\n");
   LOG(kKVHLOGLevel_Init, "========= Running IVDCTDCM(IVDCT Data Collection Module)...\n");
   LOG(kKVHLOGLevel_Init, "	Common - dbg: %d\n", mib->log_lv);
-  LOG(kKVHLOGLevel_Init, "	DGM I/F - uds server(DGM): %s, uds client(me): %s\n", mib->dgm_if.uds.s_uds_file_path, mib->dgm_if.uds.c_uds_file_path);
+	LOG(kKVHLOGLevel_Init, "	Redis I/F\n");
+	LOG(kKVHLOGLevel_Init, "  - server addr: %s\n", mib->redis_if.server_addr_str);
+	LOG(kKVHLOGLevel_Init, "  - server port: %d\n", mib->redis_if.server_port);
+	LOG(kKVHLOGLevel_Init, "\n");
   LOG(kKVHLOGLevel_Init, "	IVDCT I/F\n");
   LOG(kKVHLOGLevel_Init, "  - dev name: %s\n", mib->ivdct_if.dev_name);
   LOG(kKVHLOGLevel_Init, "  - baudrate: %d\n", mib->ivdct_if.baudrate);
   LOG(kKVHLOGLevel_Init, "\n");
 
+	/*
+   * IVDCT와의 I/F 기능을 초기화한다.
+   */
+  if (IVDCTDCM_InitRedisIF(mib) < 0) {
+    return -1;
+  }
+	
  /*
    * IVDCT와의 I/F 기능을 초기화한다.
    */
@@ -85,7 +95,8 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  while(1) {
+
+  while (1) {
     sleep(100);
   }
 	

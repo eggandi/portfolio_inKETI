@@ -11,13 +11,16 @@
 
 #define IVDCTDCM_MAX_RX_DATA (3) ///< IVDCT에서 동시에 수신하는 최대 데이터 개수
 
+
 IVDCTDCM_IvdctBasicData g_ivdctdcm_rx_data[IVDCTDCM_MAX_RX_DATA]; ///< IVDCT에서 수신된 데이터
 
 static void * IVDCTDCM_IvdctBasicDataRxThread(void *arg);
 static int IVDCTDCM_ConfigureIVDCTIFSerialPort(int sock, long baudrate);
 static void IVDCTDCM_PrintfIVDCTCTypeData(KVHIVDCTData* d);
 
-
+/*
+ * 바이트 순서 변환 매크로(Big Endian -> Host Endian)
+ */
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
   #define BE32_TO_HOST(x) __builtin_bswap32(x)
   #define BE16_TO_HOST(x) __builtin_bswap16(x)
@@ -72,7 +75,10 @@ static int IVDCTDCM_ConfigureIVDCTIFSerialPort(int sock, long baudrate)
     case 230400:
       newtio.c_cflag |= B230400;
       break;
-			    case 921600 :
+		case 460800:
+      newtio.c_cflag |= B460800;
+      break;
+		case 921600 :
       newtio.c_cflag |= B921600 ;
       break;
     default:
@@ -86,12 +92,21 @@ static int IVDCTDCM_ConfigureIVDCTIFSerialPort(int sock, long baudrate)
   LOG(kKVHLOGLevel_Init, "Success to configure IVDCT I/F serial port\n");
   return 0;
 }
-int IVDCTDCM_ProcessIVDCTData(IVDCTDCM_IvdctBasicData *pkt, uint16_t payload_len) 
+
+/**
+ * @brief IVDCT로부터 수신한 pkt의 payload_len 길이만큼의 데이터를 처리한다.
+ * @param[in] pkt IVDCT로부터 수신한 패킷 포인터
+ * @param[in] payload_len pkt의 payload_len 값
+ * @param[in] mib 모듈 통합관리정보 포인터
+ * @retval 0: 성공
+ * @retval -1: IVDCT 패킷이 유효하지 않음
+ */
+int IVDCTDCM_ProcessIVDCTData(IVDCTDCM_IvdctBasicData *pkt, uint16_t payload_len, IVDCTDCM_MIB *mib) 
 {
 	/*
 	 * IVDCT 패킷을 처리
 	 */
-	if(pkt == NULL || pkt->payload_len == NULL || payload_len < 2) { // IVDCT 패킷이  유효한지 확인
+	if (pkt == NULL || pkt->payload_len == NULL || payload_len < 2) { // IVDCT 패킷이  유효한지 확인
 		LOG(kKVHLOGLevel_Err, "Invalid IVDCT data packet\n");
 		return -1;
 	}
@@ -99,22 +114,26 @@ int IVDCTDCM_ProcessIVDCTData(IVDCTDCM_IvdctBasicData *pkt, uint16_t payload_len
 	 * IVDCT 프로토콜 버퍼 직렬화 데이터 파싱
 	 *  NULL 입력 시 코드 내 전역변수가 핸들러(인스턴스)로 사용된다.
 	 */
-	int ret_pb = IVDCTDCM_ProcessPBParseFromArray(NULL ,pkt->payload, payload_len);
+	int ret_pb = IVDCTDCM_ProcessPBParseFromArray(NULL , pkt->payload, payload_len);
 	if (ret_pb == 0) {
 		LOG(kKVHLOGLevel_InOut, "Parsed Ivdct instance successfully.\n");	
+		KVHREDIS_LIB *lib_cmd = (KVHREDIS_LIB *)mib->redis_if.h_cmd;
+		if (lib_cmd->redis_client.ctx != NULL) { // Redis 서버에 연결된 경우
+				// IVDCT 데이터를 Redis에 저장
+				IVDCTDCM_ProcessRedisSETtoKey(mib, &mib->redis_if.key_ivdct_protobuf, pkt->payload, payload_len);
+				// IVDCT 데이터를 Redis에 PUBLISH
+				IVDCTDCM_ProcessRedisPUBLISHToKey(mib, &mib->redis_if.key_ivdct_publish, pkt->payload, payload_len);
+		}
+		
 		KVHIVDCTData *ivdct_data = NULL; // IVDCT 패킷의 payload(C++)를 저장할 c 타입 포인터 
 		ret_pb = IVDCTDCM_GetPBHandleData(NULL, &ivdct_data);
 		if (ret_pb == 0) {
 			LOG(kKVHLOGLevel_InOut, "IVDCT data handle retrieved successfully.\n");
-			IVDCTDCM_PrintfIVDCTCTypeData(ivdct_data);
-			if (mib->dgm_if.uds_init == false) {
-				continue; // UDS 초기화가 안된 경우, IVDCT 데이터를 DGM으로 전송하지 않는다.
+			//IVDCTDCM_PrintfIVDCTCTypeData(ivdct_data); // IVDCT 데이터 C 타입 구조체에 값 정상적으로 들어갔는지 테스트 프린트 함수
+			if (lib_cmd->redis_client.ctx != NULL) {
+				IVDCTDCM_ProcessRedisSETtoKey(mib, &mib->redis_if.key_ivdct_raw, (uint8_t*)ivdct_data, sizeof(KVHIVDCTData));
 			}
-			/*
-			 * IVDCT 프로토콜 버퍼 인스턴스의 데이터를 C 구조체로 변환하여 핸들러를 통해 가져온다. 
-			 *  NULL 입력 시 코드 내 전역변수가 핸들러로 사용된다.
-			 */ 
-			IVDCTDCM_TransmitIvdctDataToDGM(mib, ivdct_data);
+			
 		} else {
 			LOG(kKVHLOGLevel_Err, "Failed to get IVDCT data handle. Error code: %d\n", ret_pb);
 			return -2;
@@ -123,7 +142,7 @@ int IVDCTDCM_ProcessIVDCTData(IVDCTDCM_IvdctBasicData *pkt, uint16_t payload_len
 		LOG(kKVHLOGLevel_Err, "Failed to parse Ivdct instance from string. Error code: %d\n", ret_pb);
 		return -3;
 	}
-	return 1;
+	return 0;
 }
 /**
  * @brief 시리얼포트를 통해 IVDCT에서 데이터를 수신하는 쓰레드
@@ -138,15 +157,18 @@ static void * IVDCTDCM_IvdctBasicDataRxThread(void *arg)
   mib->ivdct_if.rx_th_running = true;
 
 	char rx_buf[256];
+	uint32_t read_num = 0;
   while (1) {
     // 시리얼포트에서 IVDCT 데이터를 수신한다.
     memset(rx_buf, 0, sizeof(rx_buf));
 		// IVDCT 패킷 수신을 확인하기 위해 STX와 payload 길이 4byte씩 수신
     int ret = read(mib->ivdct_if.sock, rx_buf, 4);
-		if(ret > 0) {
+		// 정상 데이터와 수신 데이터를 비교하기 위해 read_num을 증가시킨다.
+		read_num = (read_num + 1)% 0XFFFFFFFF;
+		if (ret > 0) {
 			// STX 확인
 			uint16_t stx = BE16_TO_HOST(*(uint16_t*)(rx_buf));
-			if(stx == IVDCTDCMPOROBUFPKT_STX)
+			if (stx == IVDCTDCMPOROBUFPKT_STX)
 			{
 				/*
 				 * IVDCT 패킷 처리
@@ -154,12 +176,13 @@ static void * IVDCTDCM_IvdctBasicDataRxThread(void *arg)
 				IVDCTDCM_IvdctBasicData *pkt = (IVDCTDCM_IvdctBasicData *)rx_buf;
 				uint16_t payload_len = BE16_TO_HOST(*(uint16_t*)((pkt->payload_len)));
 				int recv_count = 0;
+				
 				// IVDCT 프로토콜 버퍼 직렬화 데이터 수신
 				double start_time = clock() / CLOCKS_PER_SEC;
 				while (recv_count < payload_len + 2) {
 					recv_count +=  read(mib->ivdct_if.sock, rx_buf + 4 + recv_count, payload_len + 2 - recv_count);
 					// 수신 시간 초과 체크 무한 루프 방지
-					if ((clock() / CLOCKS_PER_SEC) - start_time > 0.5) { // 0.5초 타임아웃
+					if ((clock() / CLOCKS_PER_SEC) - start_time > 0.025) { // 25ms 타임아웃(IVDCT 전송주기(100ms)의 25%)
 						ERR("Fail to read IVDCT data - timeout\n");
 						break;
 					}
@@ -175,9 +198,9 @@ static void * IVDCTDCM_IvdctBasicDataRxThread(void *arg)
 					continue;
 				}
 				// IVDCT 프로토콜 버퍼 직렬화 데이터 파싱
-				if (IVDCTDCM_ProcessIVDCTData(pkt, payload_len)) {
-					mib->io_cnt.ivdctdcm_rx++ % 0XFFFFFFFF;
-					LOG(kKVHLOGLevel_InOut, "Read IVDCT data - recv len: %d, payload len: %d, cnt: %u\n", recv_count + 4, payload_len, mib->io_cnt.ivdctdcm_rx);
+				if (IVDCTDCM_ProcessIVDCTData(pkt, payload_len, mib)) {
+					mib->io_cnt.ivdctdcm_rx = (mib->io_cnt.ivdctdcm_rx + 1)% 0XFFFFFFFF;
+					LOG(kKVHLOGLevel_InOut, "Read IVDCT data - recv len: %d, payload len: %d, cnt: %u/%u\n", recv_count + 4, payload_len, mib->io_cnt.ivdctdcm_rx, read_num);
 				}
 			} else {
 				ERR("Fail to read IVDCT data - STX mismatch: %04X\n", stx);
@@ -238,7 +261,7 @@ int IVDCTDCM_InitIVDCTIF(IVDCTDCM_MIB *mib)
 	IVDCTDCM_CreatePB(NULL);
 
   struct timespec req = { .tv_sec = 0, .tv_nsec = 10000000 }, rem; // 쓰레드가 생성될 때까지 대기한다.
-  while(mib->ivdct_if.rx_th_running == false) {
+  while (mib->ivdct_if.rx_th_running == false) {
     nanosleep(&req, &rem);
   }
 
@@ -248,7 +271,8 @@ int IVDCTDCM_InitIVDCTIF(IVDCTDCM_MIB *mib)
 
 
 /**
- * @brief IVDCT 프로토콜 버퍼 핸들러를 생성한다.
+ * @brief IVDCT C 타입 데이터를 출력한다.
+ * @param[in] d IVDCT C 타입 데이터 포인터
  */
 static void IVDCTDCM_PrintfIVDCTCTypeData(KVHIVDCTData* d)
 {
@@ -301,7 +325,7 @@ static void IVDCTDCM_PrintfIVDCTCTypeData(KVHIVDCTData* d)
 	printf("IVDCT->lights.hazard_sig: %lu\n", d->lights.hazard_sig);
 
 	for (int i = 1; i < 2; ++i) {
-		if(d->weight.axle_weight == NULL)
+		if (d->weight.axle_weight == NULL)
 			break;
 		printf("IVDCT->weight.axle_weight[%d].location_ct: %lu\n", i, d->weight.axle_weight[i].location_ct);
 		printf("IVDCT->weight.axle_weight[%d].location: %ld\n", i, d->weight.axle_weight[i].location);

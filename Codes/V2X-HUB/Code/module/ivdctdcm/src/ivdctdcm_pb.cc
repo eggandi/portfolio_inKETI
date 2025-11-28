@@ -13,10 +13,10 @@
 #include <vector>
 
 #include "ivdct/ivdct.pb.validate.h"  // includes ivdct.pb.h internally
-#include "ivdct/diag/diag.pb.validate.h"
-#include "ivdct/driving/driving.pb.validate.h"
-#include "ivdct/lights/lights.pb.validate.h"
-#include "ivdct/weight/weight.pb.validate.h"
+//#include "ivdct/diag/diag.pb.validate.h"
+//#include "ivdct/driving/driving.pb.validate.h"
+//#include "ivdct/lights/lights.pb.validate.h"
+//#include "ivdct/weight/weight.pb.validate.h"
 
 #include "internal_data_fmt/kvh_internal_data_fmt_ivdct.h"
 
@@ -124,7 +124,7 @@ extern "C"
 	/**
 	 * @brief protobuf 직렬화 메시지를 파싱한 데이터의 validation을 수행
 	 */
-	static int IVDCTDCM_ProcessPBValidate(IVDCTDCM_PBHandler h, IVDCT::Ivdct *ivdct, pgv::ValidationMsg* err)
+	int IVDCTDCM_ProcessPBValidate(IVDCTDCM_PBHandler h, IVDCT::Ivdct *ivdct, pgv::ValidationMsg* err)
 	{
 		// IVDCT 인스턴스의 유효성을 검사한다.
 		// 인스턴스의 종류에 따라 에러 시 반환값 구분 -1 ivdct, -2 g_cpp_ivdctdcm_pb_payload, -3 h
@@ -144,8 +144,9 @@ extern "C"
 			err = &inner_err;
 		}
 		if (!IVDCT::Validate(*ivdct, err)) {
-				std::cerr << "Validation failed: " << err << "\n";
-				return ret;
+				std::cerr << "Validation failed: %s" << err << "\n";
+				ret = 0;
+				return ret;// Validation failed Not Checked
 		}
 
 		return 0;
@@ -282,12 +283,9 @@ extern "C"
 			return -1;
 		}
 
-		// 직렬화된 Ivdct 인스턴스를 출력한다.
-		std::cout << "Serialized Ivdct instance. " << std::endl;
 		// 출력 버퍼가 nullptr이 아니면 직렬화된 문자열을 out_buffer에 할당한다.
 		if (out_buffer != nullptr) {
 			*out_buffer = (char*)malloc(output.size()); // +1 for null terminator
-			printf("Serialized Size:%ld\n", output.size());
 			if (*out_buffer == nullptr) {
 				std::cerr << "Failed to allocate memory for output buffer." << std::endl;
 				return -2; 
@@ -329,10 +327,11 @@ extern "C"
 				return -1;
 			} else {	
 				// 직렬화된 Ivdct 인스턴스를 출력한다.
-				// std::cout << ivdct->DebugString();  
+				//std::cout << ivdct->DebugString();  
 				int ret = IVDCTDCM_ProcessPBValidate(nullptr, ivdct, nullptr);
 				if (ret != 0) 
 				{
+					std::cerr << "Failed to validate Ivdct instance." << std::endl;
 					return ret - 1; // Validation failed
 				}
 			}
@@ -341,118 +340,4 @@ extern "C"
 		return 0;
 	};
 
-
-	/**
-	 * @brief Ivdct 테스트용 메시지를 생성한다.
-	 * @return void
-	 * @note 이 함수는 Protobuf 라이브러리를 초기화하고 Ivdct 핸들러에 데이터를 입력한다.
-	 */
-	void IVDCTDCM_TestSetPBData(IVDCTDCM_PBHandler h) 
-	{
-		IVDCT::Ivdct *ivdct = nullptr;
-		if (h == nullptr)
-		{
-			ivdct = g_cpp_ivdctdcm_pb_payload;
-		} else {
-			ivdct = static_cast<IVDCT::Ivdct*>(h);
-		}		
-
-		// 1) Ivdct 메시지
-    // 2) system 서브메시지
-    {
-        auto* sys = ivdct->mutable_system();
-        // uint64 status_ct = 1
-        sys->set_status_ct(1623855600ULL);
-        // enum .IVDCT.SYSTEM.STATUS.Status status = 2
-        sys->set_status(IVDCT::SYSTEM::STATUS::Status::SYSTEM_STATUS_UNKNOWN);
-    }
-
-    // 3) driving 서브메시지
-    {
-        auto* drv = ivdct->mutable_driving();
-        // speed
-        {
-            auto* spd = drv->mutable_speed();
-            spd->set_wheel_speed_ct(5ULL);
-            spd->set_wheel_speed(72U);
-            spd->set_yawrate_ct(3ULL);
-            spd->set_yawrate(2);
-            spd->set_accel_pedal_pos_ct(4ULL);
-            spd->set_accel_pedal_pos(25U);
-        }
-        // engine
-        {
-            auto* eng = drv->mutable_engine();
-            eng->set_torque_1(1);
-						eng->set_torque_2(1);
-            eng->set_rpm(3500U);
-        }
-        // gear
-        {
-            auto* gear = drv->mutable_gear();
-						gear->set_ratio(10);
-            gear->set_current(10);
-        }
-        // steering_wheel
-        {
-            auto* sw = drv->mutable_steering_wheel();
-            sw->set_angle_ct(2ULL);
-            sw->set_angle(15);
-        }
-        // brake
-        {
-            auto* br = drv->mutable_brake();
-            br->set_pedal_pos(80U);
-						br->set_temp_warning(IVDCT::DRIVING::BRAKE::Temp_warning::BRAKE_TEMP_WARNING_DEACTIVATE_WARNING);
-						br->set_tcs(IVDCT::DRIVING::BRAKE::Tcs::BRAKE_TCS_ON);
-						br->set_abs(IVDCT::DRIVING::BRAKE::Abs::BRAKE_ABS_DEACTIVATE);
-        }
-    }
-
-    // 4) diag 서브메시지
-    {
-        auto* dg = ivdct->mutable_diag();
-        // battery
-        {
-            auto* bat = dg->mutable_battery();
-						bat->set_voltage(12);
-        }
-        // engine
-        {
-            auto* eng = dg->mutable_engine();
-            eng->set_coolant_temp(90);
-        }
-        // fuel
-        {
-            auto* fuel = dg->mutable_fuel();
-            fuel->set_economy(10);
-        }
-    }
-
-    // 5) lights 서브메시지
-    {
-        auto* lt = ivdct->mutable_lights();
-        lt->set_hazard_sig(IVDCT::LIGHTS::HAZARD_SIG::Hazard_sig::LIGHT_HAZARD_SIG_OFF);
-    }
-
-    // 6) weight 서브메시지
-    {
-        auto* wt = ivdct->mutable_weight();
-        // 반복 필드: axle_weight
-        {
-            // 첫 번째 Axle_weight 추가
-            auto* aw1 = wt->add_axle_weight();
-            aw1->set_location_ct(2ULL);
-            aw1->set_location(100);
-            aw1->set_weight_ct(1ULL);
-            aw1->set_weight(800U);
-            // 두 번째 Axle_weight (예시)
-            auto* aw2 = wt->add_axle_weight();
-            aw2->set_location_ct(2ULL);
-            aw2->set_location(200);
-            aw2->set_weight_ct(1ULL);
-            aw2->set_weight(900U);
-        }
-    }
-	};
 }  

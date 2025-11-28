@@ -642,6 +642,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o: src/module/ivdctdc
   /usr/aarch64-linux-gnu/include/getopt.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs-lp64.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs.h \
+  /usr/aarch64-linux-gnu/include/inttypes.h \
   /usr/aarch64-linux-gnu/include/limits.h \
   /usr/aarch64-linux-gnu/include/linux/errno.h \
   /usr/aarch64-linux-gnu/include/linux/limits.h \
@@ -660,6 +661,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o: src/module/ivdctdc
   /usr/aarch64-linux-gnu/include/sys/cdefs.h \
   /usr/aarch64-linux-gnu/include/sys/select.h \
   /usr/aarch64-linux-gnu/include/sys/socket.h \
+  /usr/aarch64-linux-gnu/include/sys/time.h \
   /usr/aarch64-linux-gnu/include/sys/ttydefaults.h \
   /usr/aarch64-linux-gnu/include/sys/types.h \
   /usr/aarch64-linux-gnu/include/termios.h \
@@ -671,6 +673,12 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o: src/module/ivdctdc
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/local/include/openssl/configuration.h \
+  /usr/local/include/openssl/e_os2.h \
+  /usr/local/include/openssl/macros.h \
+  /usr/local/include/openssl/opensslconf.h \
+  /usr/local/include/openssl/opensslv.h \
+  /usr/local/include/openssl/sha.h \
   src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
@@ -685,167 +693,13 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o: src/module/ivdctdc
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
   src/common/include/kvh_common.h \
   src/common/include/kvhlog.h \
+  src/common/include/kvhredis.h \
   src/common/include/kvhuds.h \
   src/common/include/sudo_queue.h \
-  src/module/ivdctdcm/src/ivdctdcm.h
-
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o: src/module/ivdctdcm/src/ivdctdcm_dgm_if.c \
-  /usr/aarch64-linux-gnu/include/alloca.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/bitsperlong.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/errno-base.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/errno.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/posix_types.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/socket.h \
-  /usr/aarch64-linux-gnu/include/asm-generic/sockios.h \
-  /usr/aarch64-linux-gnu/include/asm/bitsperlong.h \
-  /usr/aarch64-linux-gnu/include/asm/errno.h \
-  /usr/aarch64-linux-gnu/include/asm/posix_types.h \
-  /usr/aarch64-linux-gnu/include/asm/socket.h \
-  /usr/aarch64-linux-gnu/include/asm/sockios.h \
-  /usr/aarch64-linux-gnu/include/bits/atomic_wide_counter.h \
-  /usr/aarch64-linux-gnu/include/bits/byteswap.h \
-  /usr/aarch64-linux-gnu/include/bits/confname.h \
-  /usr/aarch64-linux-gnu/include/bits/cpu-set.h \
-  /usr/aarch64-linux-gnu/include/bits/endian.h \
-  /usr/aarch64-linux-gnu/include/bits/endianness.h \
-  /usr/aarch64-linux-gnu/include/bits/environments.h \
-  /usr/aarch64-linux-gnu/include/bits/errno.h \
-  /usr/aarch64-linux-gnu/include/bits/fcntl-linux.h \
-  /usr/aarch64-linux-gnu/include/bits/fcntl.h \
-  /usr/aarch64-linux-gnu/include/bits/floatn-common.h \
-  /usr/aarch64-linux-gnu/include/bits/floatn.h \
-  /usr/aarch64-linux-gnu/include/bits/flt-eval-method.h \
-  /usr/aarch64-linux-gnu/include/bits/fp-fast.h \
-  /usr/aarch64-linux-gnu/include/bits/fp-logb.h \
-  /usr/aarch64-linux-gnu/include/bits/getopt_core.h \
-  /usr/aarch64-linux-gnu/include/bits/getopt_ext.h \
-  /usr/aarch64-linux-gnu/include/bits/getopt_posix.h \
-  /usr/aarch64-linux-gnu/include/bits/in.h \
-  /usr/aarch64-linux-gnu/include/bits/libc-header-start.h \
-  /usr/aarch64-linux-gnu/include/bits/libm-simd-decl-stubs.h \
-  /usr/aarch64-linux-gnu/include/bits/local_lim.h \
-  /usr/aarch64-linux-gnu/include/bits/long-double.h \
-  /usr/aarch64-linux-gnu/include/bits/math-vector.h \
-  /usr/aarch64-linux-gnu/include/bits/mathcalls-helper-functions.h \
-  /usr/aarch64-linux-gnu/include/bits/mathcalls.h \
-  /usr/aarch64-linux-gnu/include/bits/posix1_lim.h \
-  /usr/aarch64-linux-gnu/include/bits/posix2_lim.h \
-  /usr/aarch64-linux-gnu/include/bits/posix_opt.h \
-  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min-dynamic.h \
-  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min.h \
-  /usr/aarch64-linux-gnu/include/bits/pthreadtypes-arch.h \
-  /usr/aarch64-linux-gnu/include/bits/pthreadtypes.h \
-  /usr/aarch64-linux-gnu/include/bits/sched.h \
-  /usr/aarch64-linux-gnu/include/bits/select.h \
-  /usr/aarch64-linux-gnu/include/bits/setjmp.h \
-  /usr/aarch64-linux-gnu/include/bits/sockaddr.h \
-  /usr/aarch64-linux-gnu/include/bits/socket.h \
-  /usr/aarch64-linux-gnu/include/bits/socket_type.h \
-  /usr/aarch64-linux-gnu/include/bits/stat.h \
-  /usr/aarch64-linux-gnu/include/bits/stdint-intn.h \
-  /usr/aarch64-linux-gnu/include/bits/stdint-uintn.h \
-  /usr/aarch64-linux-gnu/include/bits/stdio_lim.h \
-  /usr/aarch64-linux-gnu/include/bits/stdlib-float.h \
-  /usr/aarch64-linux-gnu/include/bits/struct_mutex.h \
-  /usr/aarch64-linux-gnu/include/bits/struct_rwlock.h \
-  /usr/aarch64-linux-gnu/include/bits/struct_stat.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-baud.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-c_cc.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-c_cflag.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-c_iflag.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-c_lflag.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-c_oflag.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-misc.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-struct.h \
-  /usr/aarch64-linux-gnu/include/bits/termios-tcflow.h \
-  /usr/aarch64-linux-gnu/include/bits/termios.h \
-  /usr/aarch64-linux-gnu/include/bits/thread-shared-types.h \
-  /usr/aarch64-linux-gnu/include/bits/time.h \
-  /usr/aarch64-linux-gnu/include/bits/time64.h \
-  /usr/aarch64-linux-gnu/include/bits/timesize.h \
-  /usr/aarch64-linux-gnu/include/bits/types.h \
-  /usr/aarch64-linux-gnu/include/bits/types/FILE.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__FILE.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__fpos64_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__fpos_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__locale_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__mbstate_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/__sigset_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/clock_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/clockid_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/locale_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/sigset_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_FILE.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct___jmp_buf_tag.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_iovec.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_itimerspec.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_osockaddr.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_sched_param.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_timespec.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_timeval.h \
-  /usr/aarch64-linux-gnu/include/bits/types/struct_tm.h \
-  /usr/aarch64-linux-gnu/include/bits/types/time_t.h \
-  /usr/aarch64-linux-gnu/include/bits/types/timer_t.h \
-  /usr/aarch64-linux-gnu/include/bits/typesizes.h \
-  /usr/aarch64-linux-gnu/include/bits/uintn-identity.h \
-  /usr/aarch64-linux-gnu/include/bits/unistd_ext.h \
-  /usr/aarch64-linux-gnu/include/bits/waitflags.h \
-  /usr/aarch64-linux-gnu/include/bits/waitstatus.h \
-  /usr/aarch64-linux-gnu/include/bits/wchar.h \
-  /usr/aarch64-linux-gnu/include/bits/wordsize.h \
-  /usr/aarch64-linux-gnu/include/endian.h \
-  /usr/aarch64-linux-gnu/include/errno.h \
-  /usr/aarch64-linux-gnu/include/fcntl.h \
-  /usr/aarch64-linux-gnu/include/features-time64.h \
-  /usr/aarch64-linux-gnu/include/features.h \
-  /usr/aarch64-linux-gnu/include/getopt.h \
-  /usr/aarch64-linux-gnu/include/gnu/stubs-lp64.h \
-  /usr/aarch64-linux-gnu/include/gnu/stubs.h \
-  /usr/aarch64-linux-gnu/include/limits.h \
-  /usr/aarch64-linux-gnu/include/linux/errno.h \
-  /usr/aarch64-linux-gnu/include/linux/limits.h \
-  /usr/aarch64-linux-gnu/include/linux/posix_types.h \
-  /usr/aarch64-linux-gnu/include/linux/stddef.h \
-  /usr/aarch64-linux-gnu/include/math.h \
-  /usr/aarch64-linux-gnu/include/netinet/in.h \
-  /usr/aarch64-linux-gnu/include/pthread.h \
-  /usr/aarch64-linux-gnu/include/sched.h \
-  /usr/aarch64-linux-gnu/include/stdc-predef.h \
-  /usr/aarch64-linux-gnu/include/stdint.h \
-  /usr/aarch64-linux-gnu/include/stdio.h \
-  /usr/aarch64-linux-gnu/include/stdlib.h \
-  /usr/aarch64-linux-gnu/include/string.h \
-  /usr/aarch64-linux-gnu/include/strings.h \
-  /usr/aarch64-linux-gnu/include/sys/cdefs.h \
-  /usr/aarch64-linux-gnu/include/sys/select.h \
-  /usr/aarch64-linux-gnu/include/sys/socket.h \
-  /usr/aarch64-linux-gnu/include/sys/ttydefaults.h \
-  /usr/aarch64-linux-gnu/include/sys/types.h \
-  /usr/aarch64-linux-gnu/include/termios.h \
-  /usr/aarch64-linux-gnu/include/time.h \
-  /usr/aarch64-linux-gnu/include/unistd.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/limits.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdarg.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdbool.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
-  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
-  src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_dms.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_dtg.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_gnss.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_hmi.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_hub.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_ivdct.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_madm.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_transport.h \
-  src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
-  src/common/include/kvh_common.h \
-  src/common/include/kvhlog.h \
-  src/common/include/kvhuds.h \
-  src/common/include/sudo_queue.h \
+  src/depend/hiredis/include/hiredis/alloc.h \
+  src/depend/hiredis/include/hiredis/hiredis.h \
+  src/depend/hiredis/include/hiredis/read.h \
+  src/depend/hiredis/include/hiredis/sds.h \
   src/module/ivdctdcm/src/ivdctdcm.h
 
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o: src/module/ivdctdcm/src/ivdctdcm_input_params.c \
@@ -960,6 +814,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o: src/m
   /usr/aarch64-linux-gnu/include/getopt.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs-lp64.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs.h \
+  /usr/aarch64-linux-gnu/include/inttypes.h \
   /usr/aarch64-linux-gnu/include/limits.h \
   /usr/aarch64-linux-gnu/include/linux/errno.h \
   /usr/aarch64-linux-gnu/include/linux/limits.h \
@@ -978,6 +833,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o: src/m
   /usr/aarch64-linux-gnu/include/sys/cdefs.h \
   /usr/aarch64-linux-gnu/include/sys/select.h \
   /usr/aarch64-linux-gnu/include/sys/socket.h \
+  /usr/aarch64-linux-gnu/include/sys/time.h \
   /usr/aarch64-linux-gnu/include/sys/ttydefaults.h \
   /usr/aarch64-linux-gnu/include/sys/types.h \
   /usr/aarch64-linux-gnu/include/termios.h \
@@ -989,6 +845,12 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o: src/m
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/local/include/openssl/configuration.h \
+  /usr/local/include/openssl/e_os2.h \
+  /usr/local/include/openssl/macros.h \
+  /usr/local/include/openssl/opensslconf.h \
+  /usr/local/include/openssl/opensslv.h \
+  /usr/local/include/openssl/sha.h \
   src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
@@ -1003,8 +865,13 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o: src/m
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
   src/common/include/kvh_common.h \
   src/common/include/kvhlog.h \
+  src/common/include/kvhredis.h \
   src/common/include/kvhuds.h \
   src/common/include/sudo_queue.h \
+  src/depend/hiredis/include/hiredis/alloc.h \
+  src/depend/hiredis/include/hiredis/hiredis.h \
+  src/depend/hiredis/include/hiredis/read.h \
+  src/depend/hiredis/include/hiredis/sds.h \
   src/module/ivdctdcm/src/ivdctdcm.h
 
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o: src/module/ivdctdcm/src/ivdctdcm_ivdct_if.c \
@@ -1120,6 +987,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o: src/modul
   /usr/aarch64-linux-gnu/include/getopt.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs-lp64.h \
   /usr/aarch64-linux-gnu/include/gnu/stubs.h \
+  /usr/aarch64-linux-gnu/include/inttypes.h \
   /usr/aarch64-linux-gnu/include/limits.h \
   /usr/aarch64-linux-gnu/include/linux/errno.h \
   /usr/aarch64-linux-gnu/include/linux/limits.h \
@@ -1138,6 +1006,7 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o: src/modul
   /usr/aarch64-linux-gnu/include/sys/cdefs.h \
   /usr/aarch64-linux-gnu/include/sys/select.h \
   /usr/aarch64-linux-gnu/include/sys/socket.h \
+  /usr/aarch64-linux-gnu/include/sys/time.h \
   /usr/aarch64-linux-gnu/include/sys/ttydefaults.h \
   /usr/aarch64-linux-gnu/include/sys/types.h \
   /usr/aarch64-linux-gnu/include/termios.h \
@@ -1149,6 +1018,12 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o: src/modul
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/local/include/openssl/configuration.h \
+  /usr/local/include/openssl/e_os2.h \
+  /usr/local/include/openssl/macros.h \
+  /usr/local/include/openssl/opensslconf.h \
+  /usr/local/include/openssl/opensslv.h \
+  /usr/local/include/openssl/sha.h \
   src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
@@ -1163,8 +1038,13 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o: src/modul
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
   src/common/include/kvh_common.h \
   src/common/include/kvhlog.h \
+  src/common/include/kvhredis.h \
   src/common/include/kvhuds.h \
   src/common/include/sudo_queue.h \
+  src/depend/hiredis/include/hiredis/alloc.h \
+  src/depend/hiredis/include/hiredis/hiredis.h \
+  src/depend/hiredis/include/hiredis/read.h \
+  src/depend/hiredis/include/hiredis/sds.h \
   src/module/ivdctdcm/src/ivdctdcm.h
 
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivdctdcm/src/ivdctdcm_pb.cc \
@@ -1558,6 +1438,12 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivd
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
   /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/local/include/openssl/configuration.h \
+  /usr/local/include/openssl/e_os2.h \
+  /usr/local/include/openssl/macros.h \
+  /usr/local/include/openssl/opensslconf.h \
+  /usr/local/include/openssl/opensslv.h \
+  /usr/local/include/openssl/sha.h \
   src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
@@ -1572,8 +1458,13 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivd
   src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
   src/common/include/kvh_common.h \
   src/common/include/kvhlog.h \
+  src/common/include/kvhredis.h \
   src/common/include/kvhuds.h \
   src/common/include/sudo_queue.h \
+  src/depend/hiredis/include/hiredis/alloc.h \
+  src/depend/hiredis/include/hiredis/hiredis.h \
+  src/depend/hiredis/include/hiredis/read.h \
+  src/depend/hiredis/include/hiredis/sds.h \
   src/depend/protobuf/output/kvh1a/include/absl/algorithm/algorithm.h \
   src/depend/protobuf/output/kvh1a/include/absl/algorithm/container.h \
   src/depend/protobuf/output/kvh1a/include/absl/base/attributes.h \
@@ -1766,12 +1657,10 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivd
   src/depend/protobuf/syntax/depend/protoc-gen-validate/validate/validate.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/diag/battery/battery.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/diag/diag.pb.h \
-  src/depend/protobuf/syntax/src/ivdct/ivdct/diag/diag.pb.validate.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/diag/engine/engine.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/diag/fuel/fuel.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/driving/brake/brake.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.h \
-  src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.validate.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/driving/engine/engine.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/driving/gear/gear.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/driving/speed/speed.pb.h \
@@ -1780,13 +1669,183 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivd
   src/depend/protobuf/syntax/src/ivdct/ivdct/ivdct.pb.validate.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/lights/hazard_sig/hazard_sig.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/lights/lights.pb.h \
-  src/depend/protobuf/syntax/src/ivdct/ivdct/lights/lights.pb.validate.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/system/status/status.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/system/system.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/weight/axle_weight/axle_weight.pb.h \
   src/depend/protobuf/syntax/src/ivdct/ivdct/weight/weight.pb.h \
-  src/depend/protobuf/syntax/src/ivdct/ivdct/weight/weight.pb.validate.h \
   src/depend/protobuf/syntax/src/validate/validate.pb.h \
+  src/module/ivdctdcm/src/ivdctdcm.h
+
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o: src/module/ivdctdcm/src/ivdctdcm_redis_if.c \
+  /usr/aarch64-linux-gnu/include/alloca.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/bitsperlong.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/errno-base.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/errno.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/posix_types.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/socket.h \
+  /usr/aarch64-linux-gnu/include/asm-generic/sockios.h \
+  /usr/aarch64-linux-gnu/include/asm/bitsperlong.h \
+  /usr/aarch64-linux-gnu/include/asm/errno.h \
+  /usr/aarch64-linux-gnu/include/asm/posix_types.h \
+  /usr/aarch64-linux-gnu/include/asm/socket.h \
+  /usr/aarch64-linux-gnu/include/asm/sockios.h \
+  /usr/aarch64-linux-gnu/include/bits/atomic_wide_counter.h \
+  /usr/aarch64-linux-gnu/include/bits/byteswap.h \
+  /usr/aarch64-linux-gnu/include/bits/confname.h \
+  /usr/aarch64-linux-gnu/include/bits/cpu-set.h \
+  /usr/aarch64-linux-gnu/include/bits/endian.h \
+  /usr/aarch64-linux-gnu/include/bits/endianness.h \
+  /usr/aarch64-linux-gnu/include/bits/environments.h \
+  /usr/aarch64-linux-gnu/include/bits/errno.h \
+  /usr/aarch64-linux-gnu/include/bits/fcntl-linux.h \
+  /usr/aarch64-linux-gnu/include/bits/fcntl.h \
+  /usr/aarch64-linux-gnu/include/bits/floatn-common.h \
+  /usr/aarch64-linux-gnu/include/bits/floatn.h \
+  /usr/aarch64-linux-gnu/include/bits/flt-eval-method.h \
+  /usr/aarch64-linux-gnu/include/bits/fp-fast.h \
+  /usr/aarch64-linux-gnu/include/bits/fp-logb.h \
+  /usr/aarch64-linux-gnu/include/bits/getopt_core.h \
+  /usr/aarch64-linux-gnu/include/bits/getopt_ext.h \
+  /usr/aarch64-linux-gnu/include/bits/getopt_posix.h \
+  /usr/aarch64-linux-gnu/include/bits/in.h \
+  /usr/aarch64-linux-gnu/include/bits/libc-header-start.h \
+  /usr/aarch64-linux-gnu/include/bits/libm-simd-decl-stubs.h \
+  /usr/aarch64-linux-gnu/include/bits/local_lim.h \
+  /usr/aarch64-linux-gnu/include/bits/long-double.h \
+  /usr/aarch64-linux-gnu/include/bits/math-vector.h \
+  /usr/aarch64-linux-gnu/include/bits/mathcalls-helper-functions.h \
+  /usr/aarch64-linux-gnu/include/bits/mathcalls.h \
+  /usr/aarch64-linux-gnu/include/bits/posix1_lim.h \
+  /usr/aarch64-linux-gnu/include/bits/posix2_lim.h \
+  /usr/aarch64-linux-gnu/include/bits/posix_opt.h \
+  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min-dynamic.h \
+  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min.h \
+  /usr/aarch64-linux-gnu/include/bits/pthreadtypes-arch.h \
+  /usr/aarch64-linux-gnu/include/bits/pthreadtypes.h \
+  /usr/aarch64-linux-gnu/include/bits/sched.h \
+  /usr/aarch64-linux-gnu/include/bits/select.h \
+  /usr/aarch64-linux-gnu/include/bits/setjmp.h \
+  /usr/aarch64-linux-gnu/include/bits/sockaddr.h \
+  /usr/aarch64-linux-gnu/include/bits/socket.h \
+  /usr/aarch64-linux-gnu/include/bits/socket_type.h \
+  /usr/aarch64-linux-gnu/include/bits/stat.h \
+  /usr/aarch64-linux-gnu/include/bits/stdint-intn.h \
+  /usr/aarch64-linux-gnu/include/bits/stdint-uintn.h \
+  /usr/aarch64-linux-gnu/include/bits/stdio_lim.h \
+  /usr/aarch64-linux-gnu/include/bits/stdlib-float.h \
+  /usr/aarch64-linux-gnu/include/bits/struct_mutex.h \
+  /usr/aarch64-linux-gnu/include/bits/struct_rwlock.h \
+  /usr/aarch64-linux-gnu/include/bits/struct_stat.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-baud.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-c_cc.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-c_cflag.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-c_iflag.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-c_lflag.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-c_oflag.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-misc.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-struct.h \
+  /usr/aarch64-linux-gnu/include/bits/termios-tcflow.h \
+  /usr/aarch64-linux-gnu/include/bits/termios.h \
+  /usr/aarch64-linux-gnu/include/bits/thread-shared-types.h \
+  /usr/aarch64-linux-gnu/include/bits/time.h \
+  /usr/aarch64-linux-gnu/include/bits/time64.h \
+  /usr/aarch64-linux-gnu/include/bits/timesize.h \
+  /usr/aarch64-linux-gnu/include/bits/types.h \
+  /usr/aarch64-linux-gnu/include/bits/types/FILE.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__FILE.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__fpos64_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__fpos_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__locale_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__mbstate_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/__sigset_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/clock_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/clockid_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/locale_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/sigset_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_FILE.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct___jmp_buf_tag.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_iovec.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_itimerspec.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_osockaddr.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_sched_param.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_timespec.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_timeval.h \
+  /usr/aarch64-linux-gnu/include/bits/types/struct_tm.h \
+  /usr/aarch64-linux-gnu/include/bits/types/time_t.h \
+  /usr/aarch64-linux-gnu/include/bits/types/timer_t.h \
+  /usr/aarch64-linux-gnu/include/bits/typesizes.h \
+  /usr/aarch64-linux-gnu/include/bits/uintn-identity.h \
+  /usr/aarch64-linux-gnu/include/bits/unistd_ext.h \
+  /usr/aarch64-linux-gnu/include/bits/waitflags.h \
+  /usr/aarch64-linux-gnu/include/bits/waitstatus.h \
+  /usr/aarch64-linux-gnu/include/bits/wchar.h \
+  /usr/aarch64-linux-gnu/include/bits/wordsize.h \
+  /usr/aarch64-linux-gnu/include/endian.h \
+  /usr/aarch64-linux-gnu/include/errno.h \
+  /usr/aarch64-linux-gnu/include/fcntl.h \
+  /usr/aarch64-linux-gnu/include/features-time64.h \
+  /usr/aarch64-linux-gnu/include/features.h \
+  /usr/aarch64-linux-gnu/include/getopt.h \
+  /usr/aarch64-linux-gnu/include/gnu/stubs-lp64.h \
+  /usr/aarch64-linux-gnu/include/gnu/stubs.h \
+  /usr/aarch64-linux-gnu/include/inttypes.h \
+  /usr/aarch64-linux-gnu/include/limits.h \
+  /usr/aarch64-linux-gnu/include/linux/errno.h \
+  /usr/aarch64-linux-gnu/include/linux/limits.h \
+  /usr/aarch64-linux-gnu/include/linux/posix_types.h \
+  /usr/aarch64-linux-gnu/include/linux/stddef.h \
+  /usr/aarch64-linux-gnu/include/math.h \
+  /usr/aarch64-linux-gnu/include/netinet/in.h \
+  /usr/aarch64-linux-gnu/include/pthread.h \
+  /usr/aarch64-linux-gnu/include/sched.h \
+  /usr/aarch64-linux-gnu/include/stdc-predef.h \
+  /usr/aarch64-linux-gnu/include/stdint.h \
+  /usr/aarch64-linux-gnu/include/stdio.h \
+  /usr/aarch64-linux-gnu/include/stdlib.h \
+  /usr/aarch64-linux-gnu/include/string.h \
+  /usr/aarch64-linux-gnu/include/strings.h \
+  /usr/aarch64-linux-gnu/include/sys/cdefs.h \
+  /usr/aarch64-linux-gnu/include/sys/select.h \
+  /usr/aarch64-linux-gnu/include/sys/socket.h \
+  /usr/aarch64-linux-gnu/include/sys/time.h \
+  /usr/aarch64-linux-gnu/include/sys/ttydefaults.h \
+  /usr/aarch64-linux-gnu/include/sys/types.h \
+  /usr/aarch64-linux-gnu/include/termios.h \
+  /usr/aarch64-linux-gnu/include/time.h \
+  /usr/aarch64-linux-gnu/include/unistd.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdarg.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdint.h \
+  /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/local/include/openssl/configuration.h \
+  /usr/local/include/openssl/e_os2.h \
+  /usr/local/include/openssl/macros.h \
+  /usr/local/include/openssl/opensslconf.h \
+  /usr/local/include/openssl/opensslv.h \
+  /usr/local/include/openssl/sha.h \
+  src/common/include/ext_data_fmt/kvh_ext_data_fmt.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_dms.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_dtg.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_gnss.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_hmi.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_hub.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_ivdct.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_madm.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_transport.h \
+  src/common/include/internal_data_fmt/kvh_internal_data_fmt_uds.h \
+  src/common/include/kvh_common.h \
+  src/common/include/kvhlog.h \
+  src/common/include/kvhredis.h \
+  src/common/include/kvhuds.h \
+  src/common/include/sudo_queue.h \
+  src/depend/hiredis/include/hiredis/alloc.h \
+  src/depend/hiredis/include/hiredis/hiredis.h \
+  src/depend/hiredis/include/hiredis/read.h \
+  src/depend/hiredis/include/hiredis/sds.h \
   src/module/ivdctdcm/src/ivdctdcm.h
 
 
@@ -1802,8 +1861,6 @@ src/depend/protobuf/syntax/src/ivdct/ivdct/driving/gear/gear.pb.h:
 
 src/depend/protobuf/syntax/src/ivdct/ivdct/driving/engine/engine.pb.h:
 
-src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.validate.h:
-
 src/depend/protobuf/syntax/src/ivdct/ivdct/ivdct.pb.validate.h:
 
 src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.h:
@@ -1811,8 +1868,6 @@ src/depend/protobuf/syntax/src/ivdct/ivdct/driving/driving.pb.h:
 src/depend/protobuf/syntax/src/ivdct/ivdct/driving/brake/brake.pb.h:
 
 src/depend/protobuf/syntax/src/ivdct/ivdct/diag/fuel/fuel.pb.h:
-
-src/depend/protobuf/syntax/src/ivdct/ivdct/diag/diag.pb.validate.h:
 
 src/depend/protobuf/syntax/src/ivdct/ivdct/diag/diag.pb.h:
 
@@ -1842,6 +1897,10 @@ src/module/ivdctdcm/src/ivdctdcm_ivdct_if.c:
 
 src/module/ivdctdcm/src/ivdctdcm.h:
 
+src/depend/hiredis/include/hiredis/sds.h:
+
+src/depend/hiredis/include/hiredis/read.h:
+
 src/common/include/kvh_common.h:
 
 src/common/include/internal_data_fmt/kvh_internal_data_fmt_transport.h:
@@ -1860,7 +1919,15 @@ src/common/include/internal_data_fmt/kvh_internal_data_fmt_ads.h:
 
 src/common/include/internal_data_fmt/kvh_internal_data_fmt.h:
 
+src/depend/hiredis/include/hiredis/alloc.h:
+
 src/common/include/ext_data_fmt/kvh_ext_data_fmt.h:
+
+/usr/local/include/openssl/sha.h:
+
+/usr/local/include/openssl/opensslv.h:
+
+/usr/local/include/openssl/e_os2.h:
 
 /usr/lib/gcc-cross/aarch64-linux-gnu/11/include/stdbool.h:
 
@@ -1869,6 +1936,8 @@ src/common/include/ext_data_fmt/kvh_ext_data_fmt.h:
 /usr/aarch64-linux-gnu/include/netinet/in.h:
 
 /usr/aarch64-linux-gnu/include/linux/posix_types.h:
+
+/usr/aarch64-linux-gnu/include/inttypes.h:
 
 /usr/aarch64-linux-gnu/include/fcntl.h:
 
@@ -1881,8 +1950,6 @@ src/depend/protobuf/syntax/src/ivdct/ivdct/diag/engine/engine.pb.h:
 /usr/aarch64-linux-gnu/include/bits/termios-c_oflag.h:
 
 /usr/aarch64-linux-gnu/include/bits/termios-c_iflag.h:
-
-src/depend/protobuf/syntax/src/ivdct/ivdct/weight/weight.pb.validate.h:
 
 /usr/aarch64-linux-gnu/include/bits/termios-c_cflag.h:
 
@@ -2096,6 +2163,8 @@ src/depend/protobuf/output/kvh1a/include/absl/strings/internal/str_format/conste
 
 /usr/aarch64-linux-gnu/include/c++/11/bits/forward_list.h:
 
+src/module/ivdctdcm/src/ivdctdcm_redis_if.c:
+
 src/depend/protobuf/output/kvh1a/include/absl/container/inlined_vector.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/bits/concept_check.h:
@@ -2123,8 +2192,6 @@ src/depend/protobuf/output/kvh1a/include/absl/container/internal/common_policy_t
 src/depend/protobuf/output/kvh1a/include/google/protobuf/generated_message_tctable_decl.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/cstddef:
-
-src/depend/protobuf/syntax/src/ivdct/ivdct/lights/lights.pb.validate.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/list:
 
@@ -2234,6 +2301,8 @@ src/depend/protobuf/output/kvh1a/include/absl/base/const_init.h:
 
 /usr/aarch64-linux-gnu/include/gnu/stubs.h:
 
+src/depend/hiredis/include/hiredis/hiredis.h:
+
 /usr/aarch64-linux-gnu/include/c++/11/exception:
 
 src/depend/protobuf/output/kvh1a/include/google/protobuf/port_def.inc:
@@ -2314,6 +2383,8 @@ src/depend/protobuf/output/kvh1a/include/google/protobuf/internal_visibility.h:
 
 src/depend/protobuf/output/kvh1a/include/absl/strings/internal/str_format/bind.h:
 
+/usr/local/include/openssl/opensslconf.h:
+
 src/depend/protobuf/output/kvh1a/include/absl/container/internal/common.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/bits/range_access.h:
@@ -2323,8 +2394,6 @@ src/depend/protobuf/output/kvh1a/include/absl/container/internal/common.h:
 src/depend/protobuf/output/kvh1a/include/google/protobuf/port_undef.inc:
 
 /usr/aarch64-linux-gnu/include/bits/types/clock_t.h:
-
-src/module/ivdctdcm/src/ivdctdcm_dgm_if.c:
 
 /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/opt_random.h:
 
@@ -2367,6 +2436,8 @@ src/depend/protobuf/output/kvh1a/include/absl/time/civil_time.h:
 /usr/aarch64-linux-gnu/include/bits/pthread_stack_min-dynamic.h:
 
 /usr/aarch64-linux-gnu/include/bits/posix1_lim.h:
+
+/usr/local/include/openssl/configuration.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/bits/cxxabi_forced.h:
 
@@ -2489,6 +2560,8 @@ src/depend/protobuf/output/kvh1a/include/absl/container/internal/compressed_tupl
 /usr/aarch64-linux-gnu/include/c++/11/bits/shared_ptr_base.h:
 
 src/depend/protobuf/output/kvh1a/include/google/protobuf/serial_arena.h:
+
+src/common/include/kvhredis.h:
 
 /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/ctype_inline.h:
 
@@ -2703,6 +2776,8 @@ src/depend/protobuf/output/kvh1a/include/absl/base/internal/raw_logging.h:
 /usr/aarch64-linux-gnu/include/stdint.h:
 
 src/depend/protobuf/output/kvh1a/include/absl/log/internal/proto.h:
+
+/usr/local/include/openssl/macros.h:
 
 /usr/aarch64-linux-gnu/include/string.h:
 

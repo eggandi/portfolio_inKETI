@@ -114,24 +114,10 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.s"
 	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_ivdct_if.c -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.s
 
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/flags.make
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o: src/module/ivdctdcm/src/ivdctdcm_dgm_if.c
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/kvh/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o"
-	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o -MF CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o.d -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o -c /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_dgm_if.c
-
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.i"
-	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_dgm_if.c > CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.i
-
-src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.s"
-	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_dgm_if.c -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.s
-
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/flags.make
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivdctdcm/src/ivdctdcm_pb.cc
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/kvh/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/kvh/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o"
 	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o -MF CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o.d -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o -c /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_pb.cc
 
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.i: cmake_force
@@ -141,6 +127,20 @@ src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.i: cmake_force
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.s"
 	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_pb.cc -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.s
+
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/flags.make
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o: src/module/ivdctdcm/src/ivdctdcm_redis_if.c
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/kvh/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o"
+	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o -MF CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o.d -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o -c /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_redis_if.c
+
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.i"
+	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_redis_if.c > CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.i
+
+src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.s"
+	cd /workspace/kvh/src/module/ivdctdcm && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /workspace/kvh/src/module/ivdctdcm/src/ivdctdcm_redis_if.c -o CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.s
 
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/__/__/depend/protobuf/syntax/src/validate/validate.pb.cc.o: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/flags.make
 src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/__/__/depend/protobuf/syntax/src/validate/validate.pb.cc.o: src/depend/protobuf/syntax/src/validate/validate.pb.cc
@@ -161,8 +161,8 @@ ivdctdcm_OBJECTS = \
 "CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o" \
 "CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o" \
 "CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o" \
-"CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o" \
 "CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o" \
+"CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o" \
 "CMakeFiles/ivdctdcm.dir/__/__/depend/protobuf/syntax/src/validate/validate.pb.cc.o"
 
 # External object files for target ivdctdcm
@@ -171,11 +171,12 @@ ivdctdcm_EXTERNAL_OBJECTS =
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm.c.o
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_input_params.c.o
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_ivdct_if.c.o
-src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_dgm_if.c.o
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_pb.cc.o
+src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/src/ivdctdcm_redis_if.c.o
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/__/__/depend/protobuf/syntax/src/validate/validate.pb.cc.o
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/build.make
 src/module/ivdctdcm/ivdctdcm: output/kvh1a/libkvhlog.a
+src/module/ivdctdcm/ivdctdcm: output/kvh1a/libkvhredis.a
 src/module/ivdctdcm/ivdctdcm: src/module/ivdctdcm/CMakeFiles/ivdctdcm.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/workspace/kvh/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable ivdctdcm"
 	cd /workspace/kvh/src/module/ivdctdcm && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ivdctdcm.dir/link.txt --verbose=$(VERBOSE)

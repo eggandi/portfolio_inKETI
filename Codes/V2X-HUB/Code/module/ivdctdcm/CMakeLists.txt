@@ -31,18 +31,24 @@ foreach(protobuf_lib ${PROTOBUF_LIB_FILES})
   target_link_libraries(${TARGET_MODULE} PRIVATE ${LIB_NAME})
 endforeach()
 
+target_include_directories(${TARGET_MODULE} PRIVATE /usr/local/include)
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/common/include)
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/protobuf/syntax/src/)
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/protobuf/syntax/src/${TARGET_SYNTAX})
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/protobuf/syntax/depend/protoc-gen-validate)
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/z/include)
-target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/z/lib)
 target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/re2/include)
-target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/re2/lib)
+target_include_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/hiredis/include)
 target_include_directories(${TARGET_MODULE} PRIVATE src)
+target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/z/lib)
+target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/re2/lib)
+target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/hiredis/lib)
+target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/src/depend/v2x-sw/lib/${TARGET_PLATFORM})
 target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/output/${TARGET_BUILD}/lib)
 target_link_directories(${TARGET_MODULE} PRIVATE ${PROJECT_ROOT}/output/${TARGET_BUILD})
-target_link_libraries(${TARGET_MODULE} PRIVATE kvhlog)
+target_link_libraries(${TARGET_MODULE} PRIVATE kvhlog kvhredis)
+# Redis 라이브러리
+target_link_libraries(${TARGET_MODULE} PRIVATE m hiredis crypto pthread rt)
 # 프로토버퍼 syntax 라이브러리
 target_link_libraries(${TARGET_MODULE} PRIVATE protobuf_hub_ivdct z re2)
 target_link_options(${TARGET_MODULE} PRIVATE -Wl,--hash-style=gnu -Wl,--as-needed)
@@ -53,8 +59,9 @@ SET(validate_path ${PROJECT_ROOT}/src/depend/protobuf/syntax/src)
 target_sources(${TARGET_MODULE} PRIVATE src/ivdctdcm.c
 																				src/ivdctdcm_input_params.c
 																				src/ivdctdcm_ivdct_if.c
-																				src/ivdctdcm_dgm_if.c
+																				#src/ivdctdcm_dgm_if.c
 																				src/ivdctdcm_pb.cc
+																				src/ivdctdcm_redis_if.c
 																				${validate_path}/validate/validate.pb.cc
 )
 
